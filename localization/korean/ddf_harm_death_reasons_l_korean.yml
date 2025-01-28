@@ -1,0 +1,9 @@
+﻿l_korean:
+ death_sids: "어린 나이에 [CHARACTER.GetHerHis] 수면 중에 갑작스럽게 사망"
+ death_typhoid: "[GetTrait('typhoid').GetName( CHARACTER.Self )]에 의해 사망"
+ death_fell_to_death: "[CHARACTER.GetHerHis] 죽음에 이름"
+ death_malaria: "[GetTrait('malaria').GetName( CHARACTER.Self )]에 의해 사망"
+ death_murdered_by_crazed_peasant: "공격하는 농민에 의해 살해"
+ death_heart_attack_ddf: "갑작스러운 심장마비로 인해 사망"
+ death_immolation: "붉은 드래곤의 공격에 의해 사망!"
+ death_flu: "[GetTrait('flu').GetName( CHARACTER.Self )]에 인해 사망"

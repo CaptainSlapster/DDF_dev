@@ -1,0 +1,11 @@
+﻿l_korean:
+ ddf_coughing_fit: "기침 발작"
+ ddf_coughing_fit_desc: "특정 질병을 전염시킬 가능성이 더 높아집니다!"
+ ddf_feverish: "발열"
+ ddf_feverish_desc: "발열이 느껴집니다"
+ ddf_itchy_scabby: "피부 발진"
+ ddf_itchy_scabby_desc: "피부 조각이 벗겨지고 있습니다"
+ ddf_pus_boils: "종기"
+ ddf_pus_boils_desc: "종기가 고름으로 찼습니다. 터진다면 전염성이 증가합니다!"
+ ddf_variolation: "인두 접종"
+ ddf_variolation_desc: "다른 이로부터 온 소량의 질병이 내 피부 아래에 주입되었습니다."
