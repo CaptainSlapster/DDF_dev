@@ -1,0 +1,2199 @@
+﻿namespace = ddf_health
+
+scripted_trigger ddf_health_event_is_worried_trigger = {
+	OR = {
+		ai_compassion >= medium_positive_ai_value
+		dread_modified_ai_boldness = {
+			dreaded_character = $CHARACTER$
+			value <= medium_negative_ai_value
+		}
+		has_relation_friend = $CHARACTER$
+		has_relation_lover = $CHARACTER$
+		opinion = {
+			target = $CHARACTER$
+			value >= high_positive_opinion
+		}
+	}
+	$CHARACTER$.health < fine_health
+}
+
+##Character gets a coughing fit##
+ddf_health.0002 = {
+    hidden = yes
+
+    trigger = {
+        NOT = {has_character_modifier = ddf_coughing_fit}
+        OR = {
+            has_trait = ill
+            has_trait = pneumonic
+            has_trait = typhus
+            has_trait = measles
+            has_trait = leper
+            has_trait = consumption
+			has_trait = typhoid
+			has_trait = diphtheria
+        }
+    }
+    immediate = {
+        send_interface_toast = {
+			type = event_court_physician_bad
+			title = ddf_health.0002.desc
+
+            add_character_modifier = {
+                modifier = ddf_coughing_fit
+                months = 3
+            }
+        }
+    }
+}
+
+#Contract Malaria#
+ddf_health.0003 = {
+	type = character_event
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					involved_activity ?= { has_activity_type = activity_pilgrimage }
+				}
+				desc = pilgrimage.0041.t
+			}
+			triggered_desc = {
+				trigger = { is_travelling = yes }
+				desc = health.travel.t
+			}
+			desc = ddf_health.0003.t
+		}
+	}
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					involved_activity ?= { has_activity_type = activity_pilgrimage }
+				}
+				desc = pilgrimage.0041.desc
+			}
+			triggered_desc = {
+				trigger = {
+					trigger_if = {
+						limit = { exists = involved_activity }
+						NOT = {
+							involved_activity = { has_activity_type = activity_pilgrimage }
+						}
+					}
+					trigger_else = { always = yes }
+				}
+				desc = ddf_health.0003.desc
+			}
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					court_physician_available_trigger = no
+				}
+				desc = ddf_health.0003.nophysician.desc
+			}
+			triggered_desc = {
+				trigger = {
+					court_physician_available_trigger = yes
+				}
+				desc = ddf_health.0003.court_physician.desc
+			}
+		}
+	}
+	theme = healthcare
+	override_background = {
+		trigger = { is_travelling = yes }
+		reference = terrain_travel
+	}
+	override_background = {
+		trigger = { is_travelling = no }
+		reference = bedchamber
+	}
+	left_portrait = {
+		character = root
+		animation = sick
+	}
+	right_portrait = {
+		trigger = {
+			trigger_if = {
+				limit = { is_travelling = yes }
+				current_travel_plan = {
+					any_entourage_character = {
+						has_court_position = court_physician_court_position
+					}
+				}
+			}
+		}
+		character = scope:physician
+		triggered_animation = {
+			trigger = { scope:physician = { ddf_health_event_is_worried_trigger = { CHARACTER = root } } }
+			animation = worry
+		}
+		triggered_animation = {
+			trigger = { scope:physician = { ai_rationality >= 0 } } #Don't look rational if you're not
+			animation = personality_rational
+		}
+		animation = idle
+	}
+
+	trigger = {
+		can_contract_disease_trigger = { DISEASE = malaria }
+	}
+	
+	weight_multiplier = {
+		base = 1
+
+		modifier = {
+			is_adult = no
+			factor = 1.5
+		}
+		modifier = {
+			has_character_modifier = drained_by_mosquitoes_modifier
+			factor = 15 
+		}
+		modifier = {
+			health <= fine_health
+			factor = 1.1
+		}
+		modifier = {
+			health <= poor_health
+			factor = 1.1
+		}
+			
+		# Difficulty and Game Rules make the generic 'Ill' slightly more common
+		modifier = { # Difficulty
+			is_ai = no
+			has_game_rule = easy_difficulty
+			factor = 1.1
+		}
+		modifier = {
+			is_ai = no
+			has_game_rule = very_easy_difficulty
+			factor = 1.5
+		}
+		modifier = {
+			is_ai = yes
+			has_game_rule = easy_difficulty
+			any_parent = {
+				is_ai = no
+			}
+			factor = 1.1
+		}
+		modifier = {
+			is_ai = no
+			has_game_rule = very_easy_difficulty
+			any_parent = {
+				is_ai = no
+			}
+			factor = 1.5
+		}
+		modifier = { # Game Rule
+			has_game_rule = fewer_minor_disease_frequency
+			factor = 1.2
+		}
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_illness"
+		save_court_physician_as_effect = { SCOPE_NAME = physician }
+		contract_disease_effect = { DISEASE = malaria TREATMENT_EVENT = no } #Adds the trait, sends event "health.2201" to those who care if health is brought too low
+	}
+	###NO COURT PHYSICIAN OPTIONS###
+	#Find physician
+	option = {
+		trigger = {
+			# can't hire a court physician while you're traveling
+			is_travelling = no
+			NOT = { exists = scope:physician }
+			is_playable_character = yes
+		}
+		name = health.3101.e
+		find_court_physician_effect = yes
+		ai_chance = { base = 5 }
+	}
+	#OK
+	option = {
+		trigger = {
+			exists = scope:physician
+			liege_picks_treatment_trigger = yes
+		}
+		name = ddf_health.0003.a
+		ai_chance = { base = 1 }
+	}
+	### TRAVEL- GO HOME
+	option = {
+		name = health.travel.option.home
+		name = {
+			trigger = {
+				involved_activity ?= { has_activity_type = activity_pilgrimage }
+			}
+			text = pilgrimage.0041.b
+		}
+		flavor = health.travel.option.home.flavor 
+		trigger = {
+			is_travelling = yes
+			current_travel_plan = {
+				travel_plan_owner = root
+			}
+			involved_activity ?= {
+				NOR = {
+					has_activity_type = activity_tour
+					is_required_special_guest = root
+				}
+			}
+		}
+		#Go back home, damnit
+		if = {
+			limit = { 
+				involved_activity ?= { has_activity_type = activity_pilgrimage }
+			}
+			#Removed in the on_travel_plan_complete on_action
+			set_variable = {
+				name = pilgrimage_invalidated_illness
+				value = involved_activity.activity_location
+			}
+		}
+		#current_travel_plan = { cancel_travel_plan = yes }
+		ai_chance = { # Adventurers never cancel
+			base = 1
+			modifier = {
+				is_landless_adventurer = yes
+				factor = 0
+			}
+		}
+	}
+	###COURT PHYSICIAN OPTIONS###
+	#Safe treatment
+	option = {
+		trigger = {
+			exists = scope:physician
+			liege_picks_treatment_trigger = no
+			court_physician_available_when_traveling_trigger = yes
+		}
+		name = health.3101.a
+		safe_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root }
+		ai_chance = { base = 10 }
+	}
+	#Risky treatment
+	option = {
+		trigger = {
+			exists = scope:physician
+			liege_picks_treatment_trigger = no
+			court_physician_available_when_traveling_trigger = yes
+		}
+		name = health.3101.b
+		risky_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root }
+		ai_chance = { base = 1 }
+	}
+	#Mystic treatment
+	option = {
+		trigger = {
+			court_physician_available_trigger = yes
+			liege_picks_treatment_trigger = no
+			scope:physician = { has_trait = lifestyle_mystic }
+			court_physician_available_when_traveling_trigger = yes
+		}
+		name = health.3101.c
+		mystic_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root }
+		ai_chance = {
+			base = 0.5
+			modifier = {
+				add = -0.5
+				ai_zeal >= 0
+			}
+		}
+	}
+	#No treatment
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = {
+							involved_activity ?= { has_activity_type = activity_pilgrimage }
+						}
+						desc = pilgrimage.0041.a
+					}
+					triggered_desc = {
+						trigger = { is_travelling = yes }
+						desc = health.travel.option.continue
+					}
+					desc = health.3101.d
+				}
+			}
+		}
+		if = {
+			limit = {
+				involved_activity ?= { has_activity_type = activity_pilgrimage }
+			}
+			custom_tooltip = pilgrimage.0041.a.tt
+		}
+		if = {
+			limit = {
+				exists = scope:physician
+				liege_picks_treatment_trigger = no
+				court_physician_available_when_traveling_trigger = yes
+			}
+			no_disease_treatment_effect = yes
+		}
+		if = {
+			limit = {
+				has_global_variable = tutorial_completed
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_global_variable = tutorial_completed
+					}
+					add_character_flag = force_court_positions_tutorial
+				}
+			}
+		}
+		ai_chance = { base = 0 }
+	}
+	
+}
+
+#contract typhoid
+ddf_health.0005 = {
+	type = character_event
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					involved_activity ?= { has_activity_type = activity_pilgrimage }
+				}
+				desc = pilgrimage.0041.t
+			}
+			triggered_desc = {
+				trigger = { is_travelling = yes }
+				desc = health.travel.t
+			}
+			desc = ddf_health.0005.t
+		}
+	}
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					involved_activity ?= { has_activity_type = activity_pilgrimage }
+				}
+				desc = pilgrimage.0041.desc
+			}
+			triggered_desc = {
+				trigger = {
+					trigger_if = {
+						limit = { exists = involved_activity }
+						NOT = {
+							involved_activity = { has_activity_type = activity_pilgrimage }
+						}
+					}
+					trigger_else = { always = yes }
+				}
+				desc = ddf_health.0005.desc
+			}
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					court_physician_available_trigger = no
+				}
+				desc = ddf_health.0005.nophysician.desc
+			}
+			triggered_desc = {
+				trigger = {
+					court_physician_available_trigger = yes
+				}
+				desc = ddf_health.0005.court_physician.desc
+			}
+		}
+	}
+	theme = healthcare
+	override_background = {
+		trigger = { is_travelling = yes }
+		reference = terrain_travel
+	}
+	override_background = {
+		trigger = { is_travelling = no }
+		reference = bedchamber
+	}
+	left_portrait = {
+		character = root
+		animation = sick
+	}
+	right_portrait = {
+		trigger = {
+			trigger_if = {
+				limit = { is_travelling = yes }
+				current_travel_plan = {
+					any_entourage_character = {
+						has_court_position = court_physician_court_position
+					}
+				}
+			}
+		}
+		character = scope:physician
+		triggered_animation = {
+			trigger = { scope:physician = { ddf_health_event_is_worried_trigger = { CHARACTER = root } } }
+			animation = worry
+		}
+		triggered_animation = {
+			trigger = { scope:physician = { ai_rationality >= 0 } } #Don't look rational if you're not
+			animation = personality_rational
+		}
+		animation = idle
+	}
+
+	trigger = {
+		can_contract_disease_trigger = { DISEASE = typhoid }
+	}
+	
+	weight_multiplier = {
+		base = 1
+
+		modifier = {
+			is_adult = no
+			factor = 1.8 # was 1.5
+		}
+		modifier = {
+			health <= fine_health
+			factor = 1.1
+		}
+		modifier = {
+			health <= poor_health
+			factor = 1.3 # was 1.1
+		}
+			
+		# Difficulty and Game Rules make the generic 'Ill' slightly more common
+		modifier = { # Difficulty
+			is_ai = no
+			has_game_rule = easy_difficulty
+			factor = 1.1
+		}
+		modifier = {
+			is_ai = no
+			has_game_rule = very_easy_difficulty
+			factor = 1.5
+		}
+		modifier = {
+			is_ai = yes
+			has_game_rule = easy_difficulty
+			any_parent = {
+				is_ai = no
+			}
+			factor = 1.1
+		}
+		modifier = {
+			is_ai = no
+			has_game_rule = very_easy_difficulty
+			any_parent = {
+				is_ai = no
+			}
+			factor = 1.5
+		}
+		modifier = { # Game Rule
+			has_game_rule = fewer_minor_disease_frequency
+			factor = 1.2
+		}
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_illness"
+		save_court_physician_as_effect = { SCOPE_NAME = physician }
+		contract_disease_effect = { DISEASE = typhoid TREATMENT_EVENT = yes } #Adds the trait, sends event "health.2201" to those who care if health is brought too low
+	}
+	###NO COURT PHYSICIAN OPTIONS###
+	#Find physician
+	option = {
+		trigger = {
+			# can't hire a court physician while you're traveling
+			is_travelling = no
+			NOT = { exists = scope:physician }
+			is_playable_character = yes
+		}
+		name = health.3101.e
+		find_court_physician_effect = yes
+		ai_chance = { base = 5 }
+	}
+	#OK
+	option = {
+		trigger = {
+			exists = scope:physician
+			liege_picks_treatment_trigger = yes
+		}
+		name = ddf_health.0005.a
+		ai_chance = { base = 1 }
+	}
+	### TRAVEL- GO HOME
+	option = {
+		name = health.travel.option.home
+		name = {
+			trigger = {
+				involved_activity ?= { has_activity_type = activity_pilgrimage }
+			}
+			text = pilgrimage.0041.b
+		}
+		flavor = health.travel.option.home.flavor 
+		trigger = {
+			is_travelling = yes
+			current_travel_plan = {
+				travel_plan_owner = root
+			}
+			involved_activity ?= {
+				NOR = {
+					has_activity_type = activity_tour
+					is_required_special_guest = root
+				}
+			}
+		}
+		#Go back home, damnit
+		if = {
+			limit = { 
+				involved_activity ?= { has_activity_type = activity_pilgrimage }
+			}
+			#Removed in the on_travel_plan_complete on_action
+			set_variable = {
+				name = pilgrimage_invalidated_illness
+				value = involved_activity.activity_location
+			}
+		}
+		#current_travel_plan = { cancel_travel_plan = yes }
+		ai_chance = { # Adventurers never cancel
+			base = 1
+			modifier = {
+				is_landless_adventurer = yes
+				factor = 0
+			}
+		}
+	}
+	###COURT PHYSICIAN OPTIONS###
+	#Safe treatment
+	option = {
+		trigger = {
+			exists = scope:physician
+			liege_picks_treatment_trigger = no
+			court_physician_available_when_traveling_trigger = yes
+		}
+		name = health.3101.a
+		safe_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root }
+		ai_chance = { base = 10 }
+	}
+	#Risky treatment
+	option = {
+		trigger = {
+			exists = scope:physician
+			liege_picks_treatment_trigger = no
+			court_physician_available_when_traveling_trigger = yes
+		}
+		name = health.3101.b
+		risky_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root }
+		ai_chance = { base = 1 }
+	}
+	#Mystic treatment
+	option = {
+		trigger = {
+			court_physician_available_trigger = yes
+			liege_picks_treatment_trigger = no
+			scope:physician = { has_trait = lifestyle_mystic }
+			court_physician_available_when_traveling_trigger = yes
+		}
+		name = health.3101.c
+		mystic_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root }
+		ai_chance = {
+			base = 0.5
+			modifier = {
+				add = -0.5
+				ai_zeal >= 0
+			}
+		}
+	}
+	#No treatment
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = {
+							involved_activity ?= { has_activity_type = activity_pilgrimage }
+						}
+						desc = pilgrimage.0041.a
+					}
+					triggered_desc = {
+						trigger = { is_travelling = yes }
+						desc = health.travel.option.continue
+					}
+					desc = health.3101.d
+				}
+			}
+		}
+		if = {
+			limit = {
+				involved_activity ?= { has_activity_type = activity_pilgrimage }
+			}
+			custom_tooltip = pilgrimage.0041.a.tt
+		}
+		if = {
+			limit = {
+				exists = scope:physician
+				liege_picks_treatment_trigger = no
+				court_physician_available_when_traveling_trigger = yes
+			}
+			no_disease_treatment_effect = yes
+		}
+		if = {
+			limit = {
+				has_global_variable = tutorial_completed
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_global_variable = tutorial_completed
+					}
+					add_character_flag = force_court_positions_tutorial
+				}
+			}
+		}
+		ai_chance = { base = 0 }
+	}
+	
+}
+
+#recover from typhoid
+ddf_health.0006 = {
+	type = character_event
+	title = ddf_health.0006.t
+	desc = ddf_health.0006.desc
+	theme = recovery
+	override_background = {
+		trigger = { is_travelling = yes }
+		reference = terrain
+	}
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+
+	trigger = {
+		has_trait = typhoid
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_peace_ensues"
+		hidden_effect = {
+			recover_from_disease_effect = { DISEASE = typhoid } #Removes the trait, sends event "health.2202" to those who care & liege/host/imprisoner, adds immunity flag
+			remove_disease_treatment_effect = yes
+		}
+	}
+
+	option = {
+		name = ddf_health.0006.a
+	#		custom_tooltip = ddf_health.0006.a.tt
+		show_as_tooltip = { #show the trait actually shows up in the tooltip
+			remove_trait_force_tooltip = typhoid
+		}
+	}
+
+}
+
+#typhoid contagion
+ddf_health.0007 = {
+	hidden = yes
+
+	trigger = {
+		has_trait = typhoid
+	}
+
+	immediate = {
+		save_scope_as = disease_spreader
+
+		save_health_court_owner_effect = { SCOPE_NAME = contagion_court_owner }
+
+		if = {
+			limit = { exists = scope:contagion_court_owner }
+
+			scope:contagion_court_owner = {
+				save_court_physician_as_effect = { SCOPE_NAME = physician }
+			}
+
+			#Add everyone in the same court (ruler, prisoners, guests) and friendly scheme targets/owners to list
+			create_contagion_list_effect = { SICK_CHARACTER = root CONTAGION_COURT_OWNER = scope:contagion_court_owner }
+
+			random_list = {
+				20 = { #Contagion successful
+					random_in_list = {
+						list = contagion_list
+						weight = {
+							base = 75
+							modifier = { #Proximity increases likelihood of contagion
+								is_imprisoned = yes
+								root = { is_imprisoned = yes }
+								add = 125
+							}
+							modifier = { #Proximity increases likelihood of contagion
+								is_imprisoned = no
+								root = { is_imprisoned = no }
+								add = 125
+							}
+							modifier = {
+								add = -50
+								has_perk = wash_your_hands_perk
+							}
+							modifier = {
+								add = -50
+								AND = {
+									OR = {
+										liege ?= {
+											any_court_position_holder ?= {
+												type = wet_nurse_court_position
+												NOT = { has_trait = typhoid }
+												has_relation_nursed_child = root
+											}
+										}
+										root = {
+											any_court_position_holder ?= {
+												type = wet_nurse_court_position
+												NOT = { has_trait = typhoid }
+												has_relation_nursed_child = root
+											}
+										}
+									}
+									root = { is_adult = no }
+								}
+							}
+						}
+						contract_disease_notify_effect = { DISEASE = typhoid }
+					}
+				}
+				0 = { #Contagion prevented by physician
+					modifier = {
+						has_good_disease_treatment_trigger = yes
+						add = 80
+					}
+					#No contagion this time!
+				}
+			}
+		}
+
+		#Next contagion
+		trigger_event = {
+			id = ddf_health.0007
+			days = { typhoid_contagion_min typhoid_contagion_max }
+		}
+	}
+}
+
+
+#contract diphtheria
+ddf_health.0015 = {
+	type = character_event
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					involved_activity ?= { has_activity_type = activity_pilgrimage }
+				}
+				desc = pilgrimage.0041.t
+			}
+			triggered_desc = {
+				trigger = { is_travelling = yes }
+				desc = health.travel.t
+			}
+			desc = ddf_health.0015.t
+		}
+	}
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					involved_activity ?= { has_activity_type = activity_pilgrimage }
+				}
+				desc = pilgrimage.0041.desc
+			}
+			triggered_desc = {
+				trigger = {
+					trigger_if = {
+						limit = { exists = involved_activity }
+						NOT = {
+							involved_activity = { has_activity_type = activity_pilgrimage }
+						}
+					}
+					trigger_else = { always = yes }
+				}
+				desc = ddf_health.0015.desc
+			}
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					court_physician_available_trigger = no
+				}
+				desc = ddf_health.0015.nophysician.desc
+			}
+			triggered_desc = {
+				trigger = {
+					court_physician_available_trigger = yes
+				}
+				desc = ddf_health.0015.court_physician.desc
+			}
+		}
+	}
+	theme = healthcare
+	override_background = {
+		trigger = { is_travelling = yes }
+		reference = terrain_travel
+	}
+	override_background = {
+		trigger = { is_travelling = no }
+		reference = bedchamber
+	}
+	left_portrait = {
+		character = root
+		animation = sick
+	}
+	right_portrait = {
+		trigger = {
+			trigger_if = {
+				limit = { is_travelling = yes }
+				current_travel_plan = {
+					any_entourage_character = {
+						has_court_position = court_physician_court_position
+					}
+				}
+			}
+		}
+		character = scope:physician
+		triggered_animation = {
+			trigger = { scope:physician = { ddf_health_event_is_worried_trigger = { CHARACTER = root } } }
+			animation = worry
+		}
+		triggered_animation = {
+			trigger = { scope:physician = { ai_rationality >= 0 } } #Don't look rational if you're not
+			animation = personality_rational
+		}
+		animation = idle
+	}
+
+	trigger = {
+		can_contract_disease_trigger = { DISEASE = diphtheria }
+	}
+	
+	weight_multiplier = {
+		base = 1
+
+		modifier = {
+			is_adult = no
+			factor = 1.8 # was 1.5
+		}
+		modifier = {
+			health <= fine_health
+			factor = 1.1
+		}
+		modifier = {
+			health <= poor_health
+			factor = 1.3 # was 1.1
+		}
+			
+		# Difficulty and Game Rules make the generic 'Ill' slightly more common
+		modifier = { # Difficulty
+			is_ai = no
+			has_game_rule = easy_difficulty
+			factor = 1.1
+		}
+		modifier = {
+			is_ai = no
+			has_game_rule = very_easy_difficulty
+			factor = 1.5
+		}
+		modifier = {
+			is_ai = yes
+			has_game_rule = easy_difficulty
+			any_parent = {
+				is_ai = no
+			}
+			factor = 1.1
+		}
+		modifier = {
+			is_ai = no
+			has_game_rule = very_easy_difficulty
+			any_parent = {
+				is_ai = no
+			}
+			factor = 1.5
+		}
+		modifier = { # Game Rule
+			has_game_rule = fewer_minor_disease_frequency
+			factor = 1.2
+		}
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_illness"
+		save_court_physician_as_effect = { SCOPE_NAME = physician }
+		contract_disease_effect = { DISEASE = diphtheria TREATMENT_EVENT = yes } #Adds the trait, sends event "health.2201" to those who care if health is brought too low
+	}
+	###NO COURT PHYSICIAN OPTIONS###
+	#Find physician
+	option = {
+		trigger = {
+			# can't hire a court physician while you're traveling
+			is_travelling = no
+			NOT = { exists = scope:physician }
+			is_playable_character = yes
+		}
+		name = health.3101.e
+		find_court_physician_effect = yes
+		ai_chance = { base = 5 }
+	}
+	#OK
+	option = {
+		trigger = {
+			exists = scope:physician
+			liege_picks_treatment_trigger = yes
+		}
+		name = ddf_health.0015.a
+		ai_chance = { base = 1 }
+	}
+	### TRAVEL- GO HOME
+	option = {
+		name = health.travel.option.home
+		name = {
+			trigger = {
+				involved_activity ?= { has_activity_type = activity_pilgrimage }
+			}
+			text = pilgrimage.0041.b
+		}
+		flavor = health.travel.option.home.flavor 
+		trigger = {
+			is_travelling = yes
+			current_travel_plan = {
+				travel_plan_owner = root
+			}
+			involved_activity ?= {
+				NOR = {
+					has_activity_type = activity_tour
+					is_required_special_guest = root
+				}
+			}
+		}
+		#Go back home, damnit
+		if = {
+			limit = { 
+				involved_activity ?= { has_activity_type = activity_pilgrimage }
+			}
+			#Removed in the on_travel_plan_complete on_action
+			set_variable = {
+				name = pilgrimage_invalidated_illness
+				value = involved_activity.activity_location
+			}
+		}
+		#current_travel_plan = { cancel_travel_plan = yes }
+		ai_chance = { # Adventurers never cancel
+			base = 1
+			modifier = {
+				is_landless_adventurer = yes
+				factor = 0
+			}
+		}
+	}
+	###COURT PHYSICIAN OPTIONS###
+	#Safe treatment
+	option = {
+		trigger = {
+			exists = scope:physician
+			liege_picks_treatment_trigger = no
+			court_physician_available_when_traveling_trigger = yes
+		}
+		name = health.3101.a
+		safe_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root }
+		ai_chance = { base = 10 }
+	}
+	#Risky treatment
+	option = {
+		trigger = {
+			exists = scope:physician
+			liege_picks_treatment_trigger = no
+			court_physician_available_when_traveling_trigger = yes
+		}
+		name = health.3101.b
+		risky_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root }
+		ai_chance = { base = 1 }
+	}
+	#Mystic treatment
+	option = {
+		trigger = {
+			court_physician_available_trigger = yes
+			liege_picks_treatment_trigger = no
+			scope:physician = { has_trait = lifestyle_mystic }
+			court_physician_available_when_traveling_trigger = yes
+		}
+		name = health.3101.c
+		mystic_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root }
+		ai_chance = {
+			base = 0.5
+			modifier = {
+				add = -0.5
+				ai_zeal >= 0
+			}
+		}
+	}
+	#No treatment
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = {
+							involved_activity ?= { has_activity_type = activity_pilgrimage }
+						}
+						desc = pilgrimage.0041.a
+					}
+					triggered_desc = {
+						trigger = { is_travelling = yes }
+						desc = health.travel.option.continue
+					}
+					desc = health.3101.d
+				}
+			}
+		}
+		if = {
+			limit = {
+				involved_activity ?= { has_activity_type = activity_pilgrimage }
+			}
+			custom_tooltip = pilgrimage.0041.a.tt
+		}
+		if = {
+			limit = {
+				exists = scope:physician
+				liege_picks_treatment_trigger = no
+				court_physician_available_when_traveling_trigger = yes
+			}
+			no_disease_treatment_effect = yes
+		}
+		if = {
+			limit = {
+				has_global_variable = tutorial_completed
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_global_variable = tutorial_completed
+					}
+					add_character_flag = force_court_positions_tutorial
+				}
+			}
+		}
+		ai_chance = { base = 0 }
+	}
+	
+}
+
+#recover from diphtheria
+ddf_health.0016 = {
+	type = character_event
+	title = ddf_health.0016.t
+	desc = ddf_health.0016.desc
+	theme = recovery
+	override_background = {
+		trigger = { is_travelling = yes }
+		reference = terrain
+	}
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+
+	trigger = {
+		has_trait = diphtheria
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_peace_ensues"
+		hidden_effect = {
+			recover_from_disease_effect = { DISEASE = diphtheria } #Removes the trait, sends event "health.2202" to those who care & liege/host/imprisoner, adds immunity flag
+			remove_disease_treatment_effect = yes
+		}
+	}
+
+	option = {
+		name = ddf_health.0016.a
+	#		custom_tooltip = ddf_health.0006.a.tt
+		show_as_tooltip = { #show the trait actually shows up in the tooltip
+			remove_trait_force_tooltip = diphtheria
+		}
+	}
+
+}
+
+#diphtheria contagion
+ddf_health.0017 = {
+	hidden = yes
+
+	trigger = {
+		has_trait = diphtheria
+	}
+
+	immediate = {
+		save_scope_as = disease_spreader
+
+		save_health_court_owner_effect = { SCOPE_NAME = contagion_court_owner }
+
+		if = {
+			limit = { exists = scope:contagion_court_owner }
+
+			scope:contagion_court_owner = {
+				save_court_physician_as_effect = { SCOPE_NAME = physician }
+			}
+
+			#Add everyone in the same court (ruler, prisoners, guests) and friendly scheme targets/owners to list
+			create_contagion_list_effect = { SICK_CHARACTER = root CONTAGION_COURT_OWNER = scope:contagion_court_owner }
+
+			random_list = {
+				20 = { #Contagion successful
+					random_in_list = {
+						list = contagion_list
+						weight = {
+							base = 75
+							modifier = { #Proximity increases likelihood of contagion
+								is_imprisoned = yes
+								root = { is_imprisoned = yes }
+								add = 125
+							}
+							modifier = { #Proximity increases likelihood of contagion
+								is_imprisoned = no
+								root = { is_imprisoned = no }
+								add = 125
+							}
+							modifier = {
+								add = -50
+								has_perk = wash_your_hands_perk
+							}
+							modifier = {
+								add = -50
+								AND = {
+									OR = {
+										liege ?= {
+											any_court_position_holder ?= {
+												type = wet_nurse_court_position
+												NOT = { has_trait = diphtheria }
+												has_relation_nursed_child = root
+											}
+										}
+										root = {
+											any_court_position_holder ?= {
+												type = wet_nurse_court_position
+												NOT = { has_trait = diphtheria }
+												has_relation_nursed_child = root
+											}
+										}
+									}
+									root = { is_adult = no }
+								}
+							}
+						}
+						contract_disease_notify_effect = { DISEASE = diphtheria }
+					}
+				}
+				0 = { #Contagion prevented by physician
+					modifier = {
+						has_good_disease_treatment_trigger = yes
+						add = 80
+					}
+					#No contagion this time!
+				}
+			}
+		}
+
+		#Next contagion
+		trigger_event = {
+			id = ddf_health.0017
+			days = { diphtheria_contagion_min diphtheria_contagion_max }
+		}
+	}
+}
+
+
+
+#contract influenza
+ddf_health.0012 = {
+	type = character_event
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					involved_activity ?= { has_activity_type = activity_pilgrimage }
+				}
+				desc = pilgrimage.0041.t
+			}
+			triggered_desc = {
+				trigger = { is_travelling = yes }
+				desc = health.travel.t
+			}
+			desc = ddf_health.0012.t
+		}
+	}
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					involved_activity ?= { has_activity_type = activity_pilgrimage }
+				}
+				desc = pilgrimage.0041.desc
+			}
+			triggered_desc = {
+				trigger = {
+					trigger_if = {
+						limit = { exists = involved_activity }
+						NOT = {
+							involved_activity = { has_activity_type = activity_pilgrimage }
+						}
+					}
+					trigger_else = { always = yes }
+				}
+				desc = ddf_health.0012.desc
+			}
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					court_physician_available_trigger = no
+				}
+				desc = ddf_health.0012.nophysician.desc
+			}
+			triggered_desc = {
+				trigger = {
+					court_physician_available_trigger = yes
+				}
+				desc = ddf_health.0012.court_physician.desc
+			}
+		}
+	}
+	theme = healthcare
+	override_background = {
+		trigger = { is_travelling = yes }
+		reference = terrain_travel
+	}
+	override_background = {
+		trigger = { is_travelling = no }
+		reference = bedchamber
+	}
+	left_portrait = {
+		character = root
+		animation = sick
+	}
+	right_portrait = {
+		trigger = {
+			trigger_if = {
+				limit = { is_travelling = yes }
+				current_travel_plan = {
+					any_entourage_character = {
+						has_court_position = court_physician_court_position
+					}
+				}
+			}
+		}
+		character = scope:physician
+		triggered_animation = {
+			trigger = { scope:physician = { ddf_health_event_is_worried_trigger = { CHARACTER = root } } }
+			animation = worry
+		}
+		triggered_animation = {
+			trigger = { scope:physician = { ai_rationality >= 0 } } #Don't look rational if you're not
+			animation = personality_rational
+		}
+		animation = idle
+	}
+
+	trigger = {
+		can_contract_disease_trigger = { DISEASE = flu }
+	}
+	
+	weight_multiplier = {
+		base = 1
+
+		modifier = {
+			is_adult = no
+			factor = 1.8 # was 1.5
+		}
+		modifier = {
+			health <= fine_health
+			factor = 1.1
+		}
+		modifier = {
+			health <= poor_health
+			factor = 1.3 # was 1.1
+		}
+			
+		# Difficulty and Game Rules make the generic 'Ill' slightly more common
+		modifier = { # Difficulty
+			is_ai = no
+			has_game_rule = easy_difficulty
+			factor = 1.1
+		}
+		modifier = {
+			is_ai = no
+			has_game_rule = very_easy_difficulty
+			factor = 1.5
+		}
+		modifier = {
+			is_ai = yes
+			has_game_rule = easy_difficulty
+			any_parent = {
+				is_ai = no
+			}
+			factor = 1.1
+		}
+		modifier = {
+			is_ai = no
+			has_game_rule = very_easy_difficulty
+			any_parent = {
+				is_ai = no
+			}
+			factor = 1.5
+		}
+		modifier = { # Game Rule
+			has_game_rule = fewer_minor_disease_frequency
+			factor = 1.2
+		}
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_illness"
+		save_court_physician_as_effect = { SCOPE_NAME = physician }
+		contract_disease_effect = { DISEASE = flu TREATMENT_EVENT = yes } #Adds the trait, sends event "health.2201" to those who care if health is brought too low
+	}
+	###NO COURT PHYSICIAN OPTIONS###
+	#Find physician
+	option = {
+		trigger = {
+			# can't hire a court physician while you're traveling
+			is_travelling = no
+			NOT = { exists = scope:physician }
+			is_playable_character = yes
+		}
+		name = health.3101.e
+		find_court_physician_effect = yes
+		ai_chance = { base = 5 }
+	}
+	#OK
+	option = {
+		trigger = {
+			exists = scope:physician
+			liege_picks_treatment_trigger = yes
+		}
+		name = ddf_health.0012.a
+		ai_chance = { base = 1 }
+	}
+	### TRAVEL- GO HOME
+	option = {
+		name = health.travel.option.home
+		name = {
+			trigger = {
+				involved_activity ?= { has_activity_type = activity_pilgrimage }
+			}
+			text = pilgrimage.0041.b
+		}
+		flavor = health.travel.option.home.flavor 
+		trigger = {
+			is_travelling = yes
+			current_travel_plan = {
+				travel_plan_owner = root
+			}
+			involved_activity ?= {
+				NOR = {
+					has_activity_type = activity_tour
+					is_required_special_guest = root
+				}
+			}
+		}
+		#Go back home, damnit
+		if = {
+			limit = { 
+				involved_activity ?= { has_activity_type = activity_pilgrimage }
+			}
+			#Removed in the on_travel_plan_complete on_action
+			set_variable = {
+				name = pilgrimage_invalidated_illness
+				value = involved_activity.activity_location
+			}
+		}
+		#current_travel_plan = { cancel_travel_plan = yes }
+		ai_chance = { # Adventurers never cancel
+			base = 1
+			modifier = {
+				is_landless_adventurer = yes
+				factor = 0
+			}
+		}
+	}
+	###COURT PHYSICIAN OPTIONS###
+	#Safe treatment
+	option = {
+		trigger = {
+			exists = scope:physician
+			liege_picks_treatment_trigger = no
+			court_physician_available_when_traveling_trigger = yes
+		}
+		name = health.3101.a
+		safe_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root }
+		ai_chance = { base = 10 }
+	}
+	#Risky treatment
+	option = {
+		trigger = {
+			exists = scope:physician
+			liege_picks_treatment_trigger = no
+			court_physician_available_when_traveling_trigger = yes
+		}
+		name = health.3101.b
+		risky_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root }
+		ai_chance = { base = 1 }
+	}
+	#Mystic treatment
+	option = {
+		trigger = {
+			court_physician_available_trigger = yes
+			liege_picks_treatment_trigger = no
+			scope:physician = { has_trait = lifestyle_mystic }
+			court_physician_available_when_traveling_trigger = yes
+		}
+		name = health.3101.c
+		mystic_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root }
+		ai_chance = {
+			base = 0.5
+			modifier = {
+				add = -0.5
+				ai_zeal >= 0
+			}
+		}
+	}
+	#No treatment
+	option = {
+		name = {
+			text = {
+				first_valid = {
+					triggered_desc = {
+						trigger = {
+							involved_activity ?= { has_activity_type = activity_pilgrimage }
+						}
+						desc = pilgrimage.0041.a
+					}
+					triggered_desc = {
+						trigger = { is_travelling = yes }
+						desc = health.travel.option.continue
+					}
+					desc = health.3101.d
+				}
+			}
+		}
+		if = {
+			limit = {
+				involved_activity ?= { has_activity_type = activity_pilgrimage }
+			}
+			custom_tooltip = pilgrimage.0041.a.tt
+		}
+		if = {
+			limit = {
+				exists = scope:physician
+				liege_picks_treatment_trigger = no
+				court_physician_available_when_traveling_trigger = yes
+			}
+			no_disease_treatment_effect = yes
+		}
+		if = {
+			limit = {
+				has_global_variable = tutorial_completed
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_global_variable = tutorial_completed
+					}
+					add_character_flag = force_court_positions_tutorial
+				}
+			}
+		}
+		ai_chance = { base = 0 }
+	}
+	
+}
+
+#recover from influenza
+ddf_health.0013 = {
+	type = character_event
+	title = ddf_health.0013.t
+	desc = ddf_health.0013.desc
+	theme = recovery
+	override_background = {
+		trigger = { is_travelling = yes }
+		reference = terrain
+	}
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+
+	trigger = {
+		has_trait = flu
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_peace_ensues"
+		hidden_effect = {
+			recover_from_disease_effect = { DISEASE = flu } #Removes the trait, sends event "health.2202" to those who care & liege/host/imprisoner, adds immunity flag
+			remove_disease_treatment_effect = yes
+		}
+	}
+
+	option = {
+		name = ddf_health.0013.a
+	#		custom_tooltip = ddf_health.0006.a.tt
+		show_as_tooltip = { #show the trait actually shows up in the tooltip
+			remove_trait_force_tooltip = flu
+		}
+	}
+
+}
+
+#influenza contagion
+ddf_health.0014 = {
+	hidden = yes
+
+	trigger = {
+		has_trait = flu
+	}
+
+	immediate = {
+		save_scope_as = disease_spreader
+
+		save_health_court_owner_effect = { SCOPE_NAME = contagion_court_owner }
+
+		if = {
+			limit = { exists = scope:contagion_court_owner }
+
+			scope:contagion_court_owner = {
+				save_court_physician_as_effect = { SCOPE_NAME = physician }
+			}
+
+			#Add everyone in the same court (ruler, prisoners, guests) and friendly scheme targets/owners to list
+			create_contagion_list_effect = { SICK_CHARACTER = root CONTAGION_COURT_OWNER = scope:contagion_court_owner }
+
+			random_list = {
+				20 = { #Contagion successful
+					random_in_list = {
+						list = contagion_list
+						weight = {
+							base = 75
+							modifier = { #Proximity increases likelihood of contagion
+								is_imprisoned = yes
+								root = { is_imprisoned = yes }
+								add = 125
+							}
+							modifier = { #Proximity increases likelihood of contagion
+								is_imprisoned = no
+								root = { is_imprisoned = no }
+								add = 125
+							}
+							modifier = {
+								add = -50
+								has_perk = wash_your_hands_perk
+							}
+							modifier = {
+								add = -50
+								AND = {
+									OR = {
+										liege ?= {
+											any_court_position_holder ?= {
+												type = wet_nurse_court_position
+												NOT = { has_trait = flu }
+												has_relation_nursed_child = root
+											}
+										}
+										root = {
+											any_court_position_holder ?= {
+												type = wet_nurse_court_position
+												NOT = { has_trait = flu }
+												has_relation_nursed_child = root
+											}
+										}
+									}
+									root = { is_adult = no }
+								}
+							}
+						}
+						contract_disease_notify_effect = { DISEASE = flu }
+					}
+				}
+				0 = { #Contagion prevented by physician
+					modifier = {
+						has_good_disease_treatment_trigger = yes
+						add = 80
+					}
+					#No contagion this time!
+				}
+			}
+		}
+
+		#Next contagion
+		trigger_event = {
+			id = ddf_health.0014
+			days = { flu_contagion_min flu_contagion_max }
+		}
+	}
+}
+
+
+
+
+#Character gets pus filled boils
+ddf_health.0008 = {
+    hidden = yes
+
+    trigger = {
+        NOT = {has_character_modifier = ddf_pus_boils}
+        OR = {
+			has_trait = smallpox
+			has_trait = bubonic_plague
+        }
+    }
+    immediate = {
+        send_interface_toast = {
+			type = event_court_physician_bad
+			title = ddf_health.0008.desc
+
+			#Keep it short. They'll either be dead or be okay
+            add_character_modifier = {
+                modifier = ddf_pus_boils
+                months = 4
+            }
+        }
+    }
+}
+
+#Character gets feverish
+ddf_health.0009 = {
+    hidden = yes
+
+    trigger = {
+        NOT = {has_character_modifier = ddf_feverish}
+        has_contagious_disease_trigger = yes
+    }
+    immediate = {
+        send_interface_toast = {
+			type = event_court_physician_bad
+			title = ddf_health.0009.desc
+
+			#Keep it short. They'll either be dead or be okay
+            add_character_modifier = {
+                modifier = ddf_feverish
+                months = 4
+            }
+        }
+    }
+}
+
+#Character gets itchy rash
+ddf_health.0010 = {
+    hidden = yes
+
+    trigger = {
+        NOT = {has_character_modifier = ddf_itchy_scabby}
+        OR = {
+			has_trait = typhoid
+			has_trait = smallpox
+			has_trait = bubonic_plague
+			has_trait = malaria
+			has_trait = scaly
+			has_trait = typhus
+			has_trait = diphtheria
+        }
+    }
+    immediate = {
+        send_interface_toast = {
+			type = event_court_physician_bad
+			title = ddf_health.0010.desc
+
+			#Keep it short. They'll either be dead or be okay
+            add_character_modifier = {
+                modifier = ddf_itchy_scabby
+                months = 4
+            }
+        }
+    }
+}
+
+#Character gets "Vaccinated"
+#Decision only
+ddf_health.0011 = {
+	hidden = yes
+	theme = healthcare
+    trigger = {
+        NOT = {has_character_modifier = ddf_variolation}
+		NOT = {has_any_disease_trigger = yes}
+    }
+
+    immediate = {
+		random_list = {
+			15 = {
+				modifier = {
+					exists = scope:physician
+					add = 15 
+				}
+				send_interface_toast = {
+					type = event_court_physician_good
+					title = ddf_health.0011.t
+					add_character_modifier = {
+						modifier = ddf_variolation
+						months = 24
+					}
+					grant_random_immunity = yes
+				}
+			}
+
+			45 = {
+				modifier = {
+					has_trait = whole_of_body 
+					add = -10
+				}
+				trigger_event = {
+					on_action = ddf_event_disease_pulse
+				}
+			}		
+
+		}
+
+    }
+	
+}
+
+
+##General DDF Disease notify##
+####################################
+# SOMEONE IMPORTANT TO YOU IS SICK # Mathilda Bjarnehed
+####################################
+
+#Someone important to you is sick. If you're their liege and you have a court physician, you may chose their treatment.
+#Triggered by the contract_disease_effect
+ddf_health.2201 = {
+	type = character_event
+	title = health.2201.t
+	desc = {
+		desc = health.2201.start.desc
+		triggered_desc = {
+			trigger = { scope:disease_type = flag:ill }
+			desc = disease_ill_article
+		}
+		first_valid = { #Disease type
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:typhoid }
+				desc = disease_ergotism
+			}
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:malaria }
+				desc = disease_ergotism
+			}
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:diphtheria }
+				desc = disease_ergotism
+			}
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:flu }
+				desc = disease_ergotism
+			}
+						
+			desc = missing_illness
+		}
+		first_valid = {
+			#triggered_desc = { #Normally not bad, now worried
+			#	trigger = {
+			#		OR = {
+			#			scope:disease_type = flag:ill
+			#			scope:disease_type = flag:gout_ridden
+			#			scope:disease_type = flag:lovers_pox
+			#			scope:disease_type = flag:early_great_pox
+			#		}
+			#	}
+			#	desc = health.2201.minor_disease.desc
+			#}
+			#triggered_desc = { #Leprosy
+			#	trigger = { scope:disease_type = flag:leper }
+			#	desc = health.2201.leprosy.desc
+			#}
+			#triggered_desc = { #Lethal
+			#	trigger = {
+			#		OR = {
+			#			scope:disease_type = flag:cancer
+			#			scope:disease_type = flag:bubonic_plague
+			#		}
+			#	}
+			#	desc = health.2201.lethal_disease.desc
+			#}
+			desc = health.2201.major_disease.desc #Ther rest, dangerous stuff but with a ~50%+ chance of survival
+		}
+		triggered_desc = {
+			trigger = {
+				root_picks_treatment_for_sick_character_trigger = yes
+				court_physician_available_trigger = yes
+			}
+			desc = {
+				first_valid = {
+					triggered_desc = {
+					    trigger = {
+							scope:sick_character = scope:physician
+					    }
+					    desc = health.2201.court_physician.desc_sick_physician
+					}
+					desc = health.2201.court_physician.desc
+				}
+			}
+		}
+	}
+	theme = healthcare
+	override_background = {
+		trigger = { scope:sick_character ?= { is_travelling = yes } exists = scope:background_terrain_scope }
+		reference = terrain_scope
+	}
+	override_background = {
+		trigger = { scope:sick_character ?= { is_travelling = no } }
+		reference = bedchamber
+	}
+	left_portrait = {
+		character = scope:sick_character
+		animation = sick
+	}
+	#Show physician portrait if you're picking the sick character's treatment
+	right_portrait = {
+		trigger = {
+			root_picks_treatment_for_sick_character_trigger = yes
+			NOT = { scope:sick_character = scope:physician }
+		}
+		character = scope:physician
+		triggered_animation = {
+			trigger = { scope:physician = { ddf_health_event_is_worried_trigger = { CHARACTER = scope:sick_character } } }
+			animation = worry
+		}
+		animation = personality_rational
+	}
+
+	trigger = {
+		scope:sick_character = {
+			is_alive = yes
+			trigger_if = {
+				limit = { is_imprisoned = yes }
+				is_imprisoned_by = root
+			}
+		}
+	}
+
+	immediate = {
+		show_as_tooltip = {
+			if = {
+				limit = { scope:disease_type = flag:typhoid }
+				scope:sick_character = { add_trait_force_tooltip = typhoid }
+			}
+			else_if = {
+				limit = { scope:disease_type = flag:malaria }
+				scope:sick_character = { add_trait_force_tooltip = malaria }
+			}
+			else_if = {
+				limit = { scope:disease_type = flag:flu }
+				scope:sick_character = { add_trait_force_tooltip = flu }
+			}
+			else_if = {
+				limit = { scope:disease_type = flag:diphtheria }
+				scope:sick_character = { add_trait_force_tooltip = diphtheria }
+			}
+		}
+
+		save_court_physician_as_effect = { SCOPE_NAME = physician }
+		scope:sick_character.location ?= { save_scope_as = background_terrain_scope }
+	}
+
+	###COURT PHYSICIAN OPTIONS###
+	#Safe
+	option = {
+		trigger = {
+			root_picks_treatment_for_sick_character_trigger = yes
+			court_physician_available_trigger = yes
+		}
+		name = health.3102.a
+		safe_disease_treatment_effect = { PATIENT = scope:sick_character TREATMENT_PICKER = root }
+		ai_chance = { base = 10 }
+	}
+
+	#Risky
+	option = {
+		trigger = {
+			root_picks_treatment_for_sick_character_trigger = yes
+			court_physician_available_trigger = yes
+		}
+		name = health.3102.b
+		risky_disease_treatment_effect = { PATIENT = scope:sick_character TREATMENT_PICKER = root }
+		ai_chance = { base = 1 }
+	}
+	
+	#Mystic
+	option = {
+		trigger = {
+			root_picks_treatment_for_sick_character_trigger = yes
+			court_physician_available_trigger = yes
+			scope:physician = { has_trait = lifestyle_mystic }
+		}
+		name = {
+			trigger = { scope:sick_character = scope:physician }
+			text = health.3102.c_sick_physician
+		}
+		name = health.3102.c
+		mystic_disease_treatment_effect = { PATIENT = scope:sick_character TREATMENT_PICKER = root }
+		ai_chance = {
+			base = 0.5
+			modifier = {
+				add = -0.5
+				ai_zeal >= 0
+			}
+		}
+	}
+
+	#No treatment
+	option = {
+		trigger = {
+			root_picks_treatment_for_sick_character_trigger = yes
+			court_physician_available_trigger = yes
+		}
+		name = health.3102.d
+		deny_treatment_effect = { PATIENT = scope:sick_character TREATMENT_PICKER = root }
+		ai_chance = { base = 0 }
+	}
+
+	#Let them pick
+	option = {
+		trigger = {
+			root_picks_treatment_for_sick_character_trigger = yes
+			court_physician_available_trigger = yes
+		}
+		name = {
+			trigger = {
+				OR = {
+					scope:sick_character = { is_adult = yes }
+					NOT = { scope:sick_character = scope:physician }
+				}
+			}
+			text = health.3102.e_adult
+		}
+		name = {
+			trigger = {
+				OR = {
+					scope:sick_character = { is_adult = no }
+					scope:sick_character = scope:physician
+				}
+			}
+			text = health.3102.e_child
+		}
+		scope:sick_character = { pick_own_disease_treatment_effect = yes }	
+		ai_chance = { base = 0 }
+	}
+
+	###NO COURT PHYSICIAN OPTIONS###
+	#Find physician
+	option = {
+		trigger = {
+			court_physician_available_trigger = no
+			root_picks_treatment_for_sick_character_trigger = yes
+		}
+		name = {
+			trigger = {
+				NOR = {
+					has_character_flag = seeking_epidemic_treatment
+					has_character_flag = searching_for_physician
+				}
+			}
+			text = health.3101.e
+		}
+		name = {
+			trigger = {
+				OR = {
+					has_character_flag = seeking_epidemic_treatment
+					has_character_flag = searching_for_physician
+				}
+			}
+			text = health.3101.e.already_looking
+		}
+		if = {
+			limit = {
+				NOR = {
+					has_character_flag = seeking_epidemic_treatment
+					has_character_flag = searching_for_physician
+				}
+			}
+			find_court_physician_effect = yes
+		}
+		else = {
+			custom_tooltip = health_3101_already_looking_tt
+		}
+		ai_chance = { base = 1 }
+	}
+
+	#Nothing to do
+	option = {
+		trigger = {
+			NAND = {
+				root_picks_treatment_for_sick_character_trigger = yes
+				court_physician_available_trigger = yes
+			}
+			NOR = {
+				has_character_flag = seeking_epidemic_treatment
+				has_character_flag = searching_for_physician
+			}
+		}
+		name = health.2201.a
+		ai_chance = { base = 10 }
+	}
+}
+
+
+ddf_health.3101 = {
+	type = character_event
+	title = health.3101.t
+	desc = {
+		desc = health.3101.start.desc
+		first_valid = { #Disease type
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:typhoid }
+				desc = disease_typhoid
+			}
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:malaria }
+				desc = disease_malaria
+			}
+			desc = missing_illness
+		}
+		random_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						OR = {
+							scope:disease_type = flag:ill
+							health >= death_chance_starts_health
+						}
+						scope:physician = {
+							NOR = {
+								has_trait = lifestyle_physician
+								has_trait = lifestyle_mystic
+							}
+						}
+					}
+				}
+				desc = health.3101.safe_recommendation.desc
+			}
+			triggered_desc = {
+				trigger = {
+					OR = {
+						health < death_chance_starts_health
+						scope:physician = {
+							NOR = {
+								has_trait = lifestyle_physician
+								has_trait = lifestyle_mystic
+							}
+						}
+					}
+					NOT = { has_trait = lifestyle_mystic }
+				}
+				desc = health.3101.risky_recommendation.desc
+			}
+			triggered_desc = {
+				trigger = {
+					scope:physician = { has_trait = lifestyle_mystic }
+				}
+				desc = health.3101.mystic_recommendation.desc
+			}
+		}
+		desc = health.3101.end.desc
+	}
+	theme = healthcare
+	override_background = {
+		trigger = { scope:physician ?= { is_travelling = yes } exists = scope:background_terrain_scope }
+		reference = terrain_scope
+	}
+	left_portrait = {
+		character = root
+		triggered_animation = {
+			trigger = { 
+				OR = {
+					has_trait = typhoid
+					has_trait = malaria
+				}
+			}
+			animation = shiver
+		}
+		animation = worry
+	}
+
+	right_portrait = {
+		character = scope:physician
+		triggered_animation = {
+			trigger = { scope:physician = { ddf_health_event_is_worried_trigger = { CHARACTER = root } } }
+			animation = worry
+		}
+		triggered_animation = {
+			trigger = { scope:physician = { ai_rationality >= 0 } } #Don't look rational if you're not
+			animation = personality_rational
+		}
+		animation = physician
+	}
+	
+	trigger = {
+		has_treatable_disease_trigger = yes
+		court_physician_available_trigger = yes
+	}
+
+	weight_multiplier = {
+		base = 1
+	}
+
+	immediate = {
+		hidden_effect = {
+			save_court_physician_as_effect = { SCOPE_NAME = physician }
+			set_worst_disease_effect = yes
+		}
+		scope:physician.location ?= { save_scope_as = background_terrain_scope }
+	}
+
+	#Safe
+	option = {
+		name = health.3101.a
+		safe_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root }
+		ai_chance = { base = 10 }
+	}
+
+	#Risky
+	option = {
+		name = health.3101.b
+		risky_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root }
+		ai_chance = { base = 1 }
+	}
+	
+	#Mystic
+	option = {
+		trigger = {
+			scope:physician = { has_trait = lifestyle_mystic }
+		}
+		name = health.3101.c
+		mystic_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root }
+		ai_chance = {
+			base = 0.5
+			modifier = {
+				add = -0.5
+				ai_zeal >= 0
+			}
+		}
+	}
+
+	#No treatment
+	option = {
+		name = health.3101.d
+		no_disease_treatment_effect = yes
+		ai_chance = { base = 0 }
+	}
+}
+
+

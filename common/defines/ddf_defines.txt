@@ -1,0 +1,32 @@
+﻿NCharacter = {
+    #reduced slightly. It is possible to have up to 10 kids, but the average was around 5-7 per woman
+    #not including the complications
+    RANDOM_CHARACTER_MIN_FERTILITY = 0 #chance of fertility just being nothing
+	RANDOM_CHARACTER_MAX_FERTILITY = 0.65   #0.45
+
+
+    BASE_FERTILITY = 0.65 # bumped up slightly from 0.5
+}
+
+NOldAge = {
+ 
+    LOWER_HEALTH_START_AGE = 20 #reduced from 25
+   
+}
+
+NChildbirth = {
+
+    BASE_NR_OF_CHILDREN_PER_COUPLE = { 1 1 3 4 6 6 }
+	CHANCE_OF_LOWERED_CHILD_LIMIT = 0.45	# Was 0.5
+
+    NEWBORN_HEALTH_BASE = 3.45 #reduced from 4.5 
+	NEWBORN_HEALTH_SPAN = 0.3
+
+    MOTHER_FERTILITY_REDUCTION_PER_PREVIOUS_CHILD = 0.07
+    FERTILITY_CHANCE_MULTIPLIER = 5 #slightly  buffed up
+
+    MIN_FERTILITY_CHANCE = 1
+	MAX_FERTILITY_CHANCE = 27 #25
+
+    EXTRA_FERTILITY_FOR_FIRST_RULER_CHILD = 0.3 #reduced
+}

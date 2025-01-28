@@ -1,0 +1,50 @@
+﻿l_english:
+ 
+ building_type_city_market_01: "City Markets"
+ building_type_city_market_01_desc: "The city provides plenty of opportunity for the growth of wealth."
+
+ building_city_market_01: "Fair"
+ building_city_market_01_desc: "A collective of small temporary tents with vendors that sell all types of wares, for those who have the coin."
+
+ building_city_market_02: "Trader"
+ building_city_market_02_desc: "A small building that has been taken up by merchants to sell their finest goods."
+ 
+ building_city_market_03: "Market"
+ building_city_market_03_desc: "A local market that provides delicious food and the finest handcrafted wares."
+
+ building_city_market_04: "Forum"
+ building_city_market_04_desc: "A city street full of local artisans and those from afar that wish to sell their finest embroideries."
+
+ building_city_market_05: "Grand Forum"
+ building_city_market_05_desc: "A multi-block market, where many different types of people come to make their fortune. Merchants, Artisans, Lords and Ladies come to trade their finest goods."
+
+ building_city_market_06: "Merchant's Quarter"
+ building_city_market_06_desc: "A small subdivision of the city has been carved out for the thriving economy."
+
+ building_city_market_07: "Exchange"
+ building_city_market_07_desc: "A medium subdivision of the city to allow the influx of trade and purchases."
+
+ building_city_market_08: "Grand Exchange"
+ building_city_market_08_desc: "A large, densely populated center where trade and bartering is common place."
+
+
+ building_type_pesthouse_01: "Pest House"
+ building_type_pesthouse_01_desc: "Whenever the humors are unbalanced, Local lords can call for a doctor to treat patients."
+
+ building_pesthouse_01: "Doctor's Corner"
+ building_pesthouse_01_desc: "A corner on the street where a doctor works from. The doctor provides support by helping balance the patient's humors and perform variolation."
+
+ building_pesthouse_02: "Doctor's Villa"
+ building_pesthouse_02_desc: "A villa on the street where a doctor works from. The doctor provides support by helping balance the patient's humors and perform variolation."
+
+ building_pesthouse_03: "Primitive Hospital"
+ building_pesthouse_03_desc: "A Small, but experimental place where the common peasantry go to with aches and pain."
+
+building_type_animal_pens_01: "Animal Pens"
+building_type_animal_pens_01_desc: "A small plot of land with fencing for livestock."
+
+building_animal_pens_01: "Animal Pens"
+building_animal_pens_01_desc: "A small plot of land with fencing for livestock."
+
+building_animal_pens_02: "Chicken coop"
+building_animal_pens_02_desc: "An additional chicken coop to provide food for the village."

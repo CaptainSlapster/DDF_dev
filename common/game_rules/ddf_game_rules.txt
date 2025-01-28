@@ -1,0 +1,43 @@
+﻿
+
+
+fantasy_settings = {
+
+    default = no_fantasy_settings
+
+	categories = {
+		difficulty health historicity
+	}
+    no_fantasy_settings = {}
+    enable_fantasy_settings = {}
+}
+
+
+ddf_extra_plague_frequency = {
+    default = normal_plague_frequency
+	categories = {
+		difficulty health historicity
+	}
+    normal_plague_frequency = {}
+    extra_plague_frequency = {}
+    super_plague_frequency = {}
+}
+
+ddf_forever_black_death = {
+    default = normal_black_death
+	categories = {
+		difficulty health historicity
+	}
+    normal_black_death = {}
+    eternal_black_death = {}
+}
+
+ddf_longer_lasting_plagues = {
+    default = normal_lasting_plagues
+	categories = {
+		difficulty health historicity
+	}
+    normal_lasting_plagues = {}
+    increased_plague_duration = {}
+    extreme_plague_duration = {}
+}

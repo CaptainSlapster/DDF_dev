@@ -1,0 +1,149 @@
+﻿
+typhoid = {
+	typhoid = {
+        trigger = {
+			should_show_disturbing_portrait_modifiers = yes
+		}
+		traits = {
+			typhoid
+		}
+
+		dna_modifiers = {
+			human = {
+				morph = {
+					mode = add
+					gene = gene_illness
+					value = 1.0
+					template = illness
+				}
+				color = {
+					gene = skin_color
+					mode = modify
+					x = 0.0
+					y = -0.1
+				}
+				accessory = {
+					mode = modify
+					gene = eye_accessory
+					template = bloodshot_eyes
+					value = 0.5
+				}
+			}
+		}
+	}
+
+}
+
+diphtheria = {
+	diphtheria = {
+        trigger = {
+			should_show_disturbing_portrait_modifiers = yes
+		}
+		traits = {
+			diphtheria
+		}
+
+		dna_modifiers = {
+			human = {
+				morph = {
+					mode = add
+					gene = gene_illness
+					value = 1.0
+					template = illness
+				}
+				color = {
+					gene = skin_color
+					mode = modify
+					x = 0.0
+					y = -0.1
+				}
+				accessory = {
+					mode = modify
+					gene = eye_accessory
+					template = bloodshot_eyes
+					value = 0.5
+				}
+			}
+		}
+	}
+
+}
+
+flu = {
+	flu = {
+        trigger = {
+			should_show_disturbing_portrait_modifiers = yes
+		}
+		traits = {
+			flu
+		}
+
+		dna_modifiers = {
+			human = {
+				morph = {
+					mode = add
+					gene = gene_illness
+					value = 1.0
+					template = illness
+				}
+				color = {
+					gene = skin_color
+					mode = modify
+					x = 0.0
+					y = -0.1
+				}
+				accessory = {
+					mode = modify
+					gene = eye_accessory
+					template = bloodshot_eyes
+					value = 0.5
+				}
+			}
+		}
+	}
+
+}
+
+
+malaria = {
+	malaria = {
+		traits = {
+			malaria
+		}
+
+		dna_modifiers = {
+			human = {
+				morph = {
+					mode = add
+					gene = gene_illness
+					value = 1.0
+					template = illness
+				}
+				color = {
+					gene = skin_color
+					mode = modify
+					x = 0.0
+					y = -0.2
+				}
+				accessory = {
+					mode = modify
+					gene = eye_accessory
+					template = bloodshot_eyes
+					value = 0.5
+				}
+			}
+		}
+	}
+	replace_non_distrubing_traits = {
+		base = illness
+		trigger = {
+			should_show_disturbing_portrait_modifiers = no
+		}
+		traits = {
+			bubonic_plague
+			smallpox
+			great_pox
+			lovers_pox
+		}
+	}
+}

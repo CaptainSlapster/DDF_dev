@@ -1,0 +1,4 @@
+﻿
+plague = {
+	sort_order = 10
+}

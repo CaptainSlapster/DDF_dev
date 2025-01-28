@@ -1,0 +1,45 @@
+﻿
+
+##Test##
+##You'll have a coughing fit for 3 months##
+ddf_coughing_fit = {
+    icon = health_negative
+}
+#smallpox and bubonic_plague
+ddf_pus_boils = {
+    icon = health_negative
+    health = -0.75
+    attraction_opinion = -15
+}
+#This will be for whatever gives a fever
+ddf_feverish = {
+    icon = health_negative
+    health = -0.15
+    prowess = -2 
+}
+#More or less for malaria#
+ddf_itchy_scabby = {
+    icon = health_negative
+    health = -0.15
+    attraction_opinion = -5
+}
+
+ddf_variolation = {
+    icon = health_positive
+	negate_health_penalty_add = 0.5
+
+}
+
+
+ddf_smallpox_immune = {
+    icon = health_positive  
+}
+ddf_typhoid_immune = {
+    icon = health_positive  
+}
+ddf_flu_immune = {
+    icon = health_positive  
+}
+ddf_measles_immune= {
+    icon = health_positive  
+}

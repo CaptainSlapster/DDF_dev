@@ -1,0 +1,31 @@
+﻿l_english:
+
+ ##################################################
+ # # DDF Misc Keys
+ #
+ #
+ #
+ ddf_harm.0002.t: "$harm.0001.t.pre_title$: An ache in my chest"
+ ddf_harm.0002.desc: "My chest, it aches with pain and I feel a tingle in my arm.\n\n As I kneel in pain I can see a shadowy figure in the doorway.. Has my time come? \n\n "Help me.." I call out only to see and hear nobody come to my aid.."
+ ddf_harm.0002.a: "Help.. me.."
+ ddf_harm.0002.a.tt.success: "The ache is relieved. for now."
+
+ ddf_harm.0003.t: "$harm.0001.t.pre_title$: Sudden death!"
+ ddf_harm.0003.death_by_sids: "Died suddenly with no signs."
+
+ ddf_harm.0004.t: "Not the stairs!"
+ ddf_harm.0004.desc: "As the day ends I must retreat to my chambers.\n\n Suddenly I slip on a step and begin to fall!"
+ ddf_harm.0004.a: "This is gonna hurt.."
+ ddf_harm.0004.b: "My time has come!"
+ ddf_harm.0004.b.tt.death: "Fell down the stairs!"
+ ddf_harm.0004.a.tt.success: "You've managed to catch yourself"
+
+ ddf_harm.0005.t: "Crazed Attacker!"
+ ddf_harm.0005.desc: "Whilst walking through the market I notice a figure running towards me.\n\n The figure drew a weapon and yells "Death to the nobility!"\n\n I froze, but I know if I don't do something this maybe my final moment!"
+ ddf_harm.0005.a: "You want a fight? Come get it!"
+ ddf_harm.0005.a.tt.success: "You manage to run away"
+ ddf_harm.0005.b: "Make a run for it!"
+
+ 
+ ddf_harm.0005.a.tt.duel_begins: "#X @warning_icon! You immediately engage [attacker.GetFirstName] in a duel to the [character_death_death|E]#!"
+

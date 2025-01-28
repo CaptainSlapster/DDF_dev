@@ -1,0 +1,36 @@
+﻿l_english:
+
+rule_fantasy_settings: "DDF: Fantasy Epidemics (Experimental)"
+rule_ddf_extra_plague_frequency: "DDF: Plague Frequency"
+rule_ddf_longer_lasting_plagues: "DDF: Plague Duration"
+rule_ddf_forever_black_death: "DDF: Eternal Black Death"
+
+
+#Plague Frequency
+setting_normal_plague_frequency: "Vanilla Frequency"
+setting_normal_plague_frequency_desc: "Vanilla plague frequency"
+setting_extra_plague_frequency: "Increased Plague Frequency"
+setting_extra_plague_frequency_desc: "Plagues occur more often (This stacks with the vanilla settings)"
+setting_super_plague_frequency: "Extreme Plague Frequency"
+setting_super_plague_frequency_desc: "Plagues occur much more often (This stacks with the vanilla settings)"
+#Plague Duration
+setting_normal_lasting_plagues: "Vanilla Duration"
+setting_normal_lasting_plagues_desc: "Vanilla style plague durations"
+setting_increased_plague_duration: "Increased Plague Duration"
+setting_increased_plague_duration_desc: "Increased time plagues are active"
+setting_extreme_plague_duration: "Long-lasting Plagues"
+setting_extreme_plague_duration_desc: "Much longer time plagues are active"
+
+#Eternal Black Death
+setting_normal_black_death: "Vanilla Black Death Settings"
+setting_normal_black_death_desc: "Vanilla style Bubonic Plague"
+setting_eternal_black_death: "Eternal Black Death"
+setting_eternal_black_death_desc: "Start the game with the Bubonic Plague and have it stay forever!"
+
+
+##FANTASY#
+setting_no_fantasy_settings: "No Fantasy Epidemics"
+setting_no_fantasy_settings_desc: "You will not have any fantasy epidemics"
+
+setting_enable_fantasy_settings: "Fantasy Epidemics Enabled"
+setting_enable_fantasy_settings_desc: "You will have fantasy epidemics (Experimental, Don't use on an actual save.)\n The only fantasy epidemic is a "dragon attack"."

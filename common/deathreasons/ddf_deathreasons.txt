@@ -1,0 +1,42 @@
+﻿death_sids = {
+	icon = "death_unknown.dds"
+}
+
+
+death_typhoid = {
+	epidemic = typhoid
+	priority = 60
+	icon = "death_disease.dds"
+}
+death_flu = {
+	epidemic = flu
+	priority = 60
+	icon = "death_disease.dds"
+}
+death_malaria = {
+	epidemic = malaria
+	priority = 60
+	icon = "death_disease.dds"
+}
+
+death_fell_to_death = {
+	icon = "death_natural.dds"
+}
+death_murdered_by_crazed_peasant = {
+	icon = "death_murder.dds"
+}
+
+death_heart_attack_ddf = {
+	icon = "death_natural.dds"
+	priority = 50
+}
+
+
+#Fantasy#
+
+
+death_immolation = {
+	epidemic = immolation
+	priority = 60
+	icon = "death_disease.dds"
+}

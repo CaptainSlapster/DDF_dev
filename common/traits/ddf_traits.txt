@@ -1,0 +1,821 @@
+﻿##Changing this slightly to reduce more health##
+sickly = {
+	maximum_age = 6
+	child_health = -2.9 #was -2.5
+
+	category = health
+
+	dread_baseline_add = -20
+	dread_loss_mult = 1
+	
+	shown_in_ruler_designer = no
+
+	flag = illness
+	flag = debilitating_illness
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_sickly_desc
+			}
+			desc = trait_sickly_character_desc
+		}
+	}
+
+	ai_energy = -30
+}
+
+ill = {
+	##
+	#DDF, Made worse
+	##
+	opposites = {
+		pneumonic
+	}
+	
+	health = -1.7 #was -1
+	elderly_health = -2.5 #was -1 ofc it'll kill elderly people faster/easier
+	prowess = -4
+	fertility = -0.2
+
+	category = health
+
+	dread_baseline_add = -10
+	dread_loss_mult = 1
+	
+	ruler_designer_cost = 0
+
+	flag = illness
+	flag = debilitating_illness
+	flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_ill_desc
+			}
+			desc = trait_ill_character_desc
+		}
+	}
+
+	ai_energy = -25
+}
+
+flu = {
+	opposites = {
+		pneumonic
+	}
+	
+	health = -2.3
+	elderly_health = -2.3
+	prowess = -4
+	fertility = -0.2
+	shown_in_ruler_designer = no
+	category = health
+
+	dread_baseline_add = -10
+	dread_loss_mult = 1
+	
+	ruler_designer_cost = 0
+
+	flag = illness
+	flag = debilitating_illness
+	flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_flu_desc
+			}
+			desc = trait_flu_character_desc
+		}
+	}
+
+	ai_energy = -30
+}
+
+pneumonic = {
+	##
+	#This would be bad 
+	##
+	opposites = {
+		ill
+		flu
+	}
+	
+	diplomacy = -2
+	stewardship = -2
+	martial = -2
+	intrigue = -2
+	learning = -2
+	health = -3.2 # was -3
+	elderly_health = -3.5 #was -2 yea you'll die with this
+	prowess = -8
+	fertility = -0.5
+
+	category = health
+
+	dread_baseline_add = -10
+	dread_loss_mult = 1
+	
+	ruler_designer_cost = 0
+
+	flag = illness
+	flag = debilitating_illness
+	flag = blocks_getting_non_epidemic_disease
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_pneumonic_desc
+			}
+			desc = trait_pneumonic_character_desc
+		}
+	}
+
+	ai_energy = -50
+}
+
+
+##
+#DDF Changed traits
+##
+
+gout_ridden = {
+	diplomacy = -2
+	martial = -1
+	prowess = -2
+	health = -1.3 # was 1
+	
+	dread_baseline_add = -5
+	category = health
+	attraction_opinion = -15
+	
+	ruler_designer_cost = -5
+
+	flag = illness
+	flag = debilitating_illness
+	flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_gout_ridden_desc
+			}
+			desc = trait_gout_ridden_character_desc
+		}
+	}
+
+	ai_energy = -15
+}
+
+consumption = { # Tuberculosis
+	diplomacy = -2
+	stewardship = -1
+	intrigue = -2
+	prowess = -2
+	health = -3.2 #2.5
+	child_health = -1.5 #1 
+	elderly_health = -3 #2
+	category = health
+
+	dread_baseline_add = -10
+	dread_loss_mult = 1
+
+	attraction_opinion = -10
+	
+	ruler_designer_cost = 0
+
+	flag = illness
+	flag = debilitating_illness
+	flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_consumption_desc
+			}
+			desc = trait_consumption_character_desc
+		}
+	}
+
+	ai_energy = -50
+}
+
+cancer = {
+	health = -3.2 # 3
+	elderly_health = -2.5 #2
+	fertility = -0.20
+	category = health
+
+	dread_baseline_add = -15
+	dread_loss_mult = 1
+	
+	ruler_designer_cost = -10
+
+	flag = illness
+	flag = debilitating_illness
+	flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_cancer_desc
+			}
+			desc = trait_cancer_character_desc
+		}
+	}
+
+	ai_energy = -25
+}
+
+typhus = {
+	diplomacy = -1
+	stewardship = -2
+	intrigue = -1
+	learning = -2
+	prowess = -4
+	health = -4.8 #4.5
+	elderly_health = -2.5 # 1
+	fertility = -0.2
+
+	category = health
+
+	dread_baseline_add = -15
+	dread_loss_mult = 1
+
+	attraction_opinion = -10
+	
+	ruler_designer_cost = 0
+
+	flag = illness
+	flag = debilitating_illness
+	flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_typhus_desc
+			}
+			desc = trait_typhus_character_desc
+		}
+	}
+
+	ai_energy = -50
+}
+
+bubonic_plague = {
+	diplomacy = -2
+	martial = -3
+	stewardship = -2
+	intrigue = -3
+	learning = -2
+	prowess = -10
+	health = -7
+	elderly_health = -3 #2
+	fertility = -0.50
+
+	category = health
+	
+	dread_baseline_add = -30
+	dread_loss_mult = 1
+
+	attraction_opinion = -30
+	
+	shown_in_ruler_designer = no
+
+	flag = illness
+	flag = debilitating_illness
+	flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_bubonic_plague_desc
+			}
+			desc = trait_bubonic_plague_character_desc
+		}
+	}
+
+	ai_energy = -75
+}
+
+smallpox = {
+	diplomacy = -2
+	stewardship = -1
+	learning = -2
+	prowess = -10
+	health = -4.8 #4.5
+	elderly_health = -2.5 #1.5
+	fertility = -0.25
+
+	category = health
+	
+	dread_baseline_add = -15
+	dread_loss_mult = 1
+
+	attraction_opinion = -10
+	
+	ruler_designer_cost = 0
+
+	flag = illness
+	flag = debilitating_illness
+	flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_smallpox_desc
+			}
+			desc = trait_smallpox_character_desc
+		}
+	}
+
+	ai_energy = -75
+}
+
+measles = {
+	diplomacy = -2
+	stewardship = -1
+	intrigue = -1
+	learning = -2
+	prowess = -4
+	health = -3.6 #3
+	child_health = -3.5 #3
+
+	category = health
+	
+	dread_baseline_add = -5
+
+	attraction_opinion = -10
+	
+	ruler_designer_cost = 0
+
+	flag = illness
+	flag = debilitating_illness
+	flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_measles_desc
+			}
+			desc = trait_measles_character_desc
+		}
+	}
+
+	ai_energy = -75
+}
+
+dysentery = { # Bloody Flux
+	#
+	#Typically you'll die of dehydration sooo..
+	#
+	diplomacy = -2
+	martial = -1
+	intrigue = -2
+	prowess = -8
+	health = -4.1 #3.5
+	elderly_health = -2.5 #2
+
+	category = health
+	
+	dread_baseline_add = -50
+
+	attraction_opinion = -5
+	
+	ruler_designer_cost = 0
+
+	flag = illness
+	flag = debilitating_illness
+	flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_dysentery_desc
+			}
+			desc = trait_dysentery_character_desc
+		}
+	}
+
+	ai_energy = -75
+}
+
+ergotism = { # Holy Fire
+	diplomacy = -6
+	stewardship = -1
+	intrigue = -2
+	learning = -2
+	health = -3.7 #3.5
+
+	category = health
+	
+	dread_baseline_add = -25
+
+	attraction_opinion = -10
+	
+	ruler_designer_cost = 0
+
+	flag = illness
+	flag = debilitating_illness
+	flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_ergotism_desc
+			}
+			desc = trait_ergotism_character_desc
+		}
+	}
+
+	ai_energy = -75
+}
+
+leper = {
+	health = -1.9 #1.5 You can still live as a leper, but i made it harder on the body
+	prowess = -8
+	fertility = -0.95
+	category = health
+
+	dread_baseline_add = -20
+	dread_loss_mult = 1
+
+	attraction_opinion = -35
+	general_opinion = -10
+	
+	ruler_designer_cost = -30
+
+	flag = illness
+	flag = debilitating_illness
+	flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_leper_desc
+			}
+			desc = trait_leper_character_desc
+		}
+	}
+
+	ai_energy = -15
+}
+
+
+##Newly added traits for the epidemics##
+malaria = {
+	diplomacy = -1
+	stewardship = -1
+	learning = -2
+	prowess = -10
+	health = -2.8 ##Lowered the health hit since this doesn't go away :(##
+	elderly_health = -2.5
+	child_health = -2.5
+	fertility = -0.25
+
+	category = health
+	
+	dread_baseline_add = -10
+	dread_loss_mult = 1
+
+	attraction_opinion = -10
+	
+	ruler_designer_cost = 0
+
+	flag = illness
+	flag = debilitating_illness
+	#flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_malaria_desc
+			}
+			desc = trait_malaria_character_desc
+		}
+	}
+
+	ai_energy = -75
+}
+
+diphtheria = {
+	prowess = -12
+	health = -2.0
+	elderly_health = -1
+	child_health = -1
+	fertility = -0.45
+	shown_in_ruler_designer = no
+	category = health
+	
+	dread_baseline_add = 10
+
+	attraction_opinion = -15
+	
+	ruler_designer_cost = 0
+
+	flag = illness
+	flag = debilitating_illness
+	flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_diphtheria_desc
+			}
+			desc = trait_diphtheria_character_desc
+		}
+	}
+
+	ai_energy = -75
+}
+
+typhoid = {
+	#too feverish
+	prowess = -20
+	health = -3.5
+	elderly_health = -2.5
+	child_health = -2.8
+	fertility = -0.1
+
+	category = health
+	
+	ruler_designer_cost = 0
+
+	flag = illness
+	flag = debilitating_illness
+	flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_typhoid_desc
+			}
+			desc = trait_typhoid_character_desc
+		}
+	}
+
+	ai_energy = -75
+}
+
+# 'Wounded'
+wounded_1 = {
+	martial = -1
+	intrigue = -1
+	health = -1.3
+	prowess = -2
+	category = health
+
+	dread_baseline_add = -10
+	dread_loss_mult = 1
+
+	disables_combat_leadership = yes
+	
+	shown_in_ruler_designer = no
+
+	flag = no_message
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_wounded_1_desc
+			}
+			desc = trait_wounded_1_character_desc
+		}
+	}
+
+	ai_energy = -20
+
+	group = wounded
+	level = 1
+}
+
+# 'Severly Injured'
+wounded_2 = {
+	martial = -2
+	intrigue = -2
+	health = -2.5
+	prowess = -4
+	fertility = -0.25
+	category = health
+
+	dread_baseline_add = -15
+	dread_loss_mult = 1
+	
+	attraction_opinion = -10
+
+	disables_combat_leadership = yes
+	
+	shown_in_ruler_designer = no
+
+	flag = no_message
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_wounded_2_desc
+			}
+			desc = trait_wounded_2_character_desc
+		}
+	}
+
+	ai_energy = -30
+	
+	group = wounded
+	level = 2
+}
+
+# 'Near Death'
+wounded_3 = {
+	martial = -4
+	intrigue = -4
+	health = -4.3
+	prowess = -8
+	fertility = -0.75
+	category = health
+
+	dread_baseline_add = -20
+	dread_loss_mult = 1
+
+	attraction_opinion = -20
+	
+	disables_combat_leadership = yes
+	
+	shown_in_ruler_designer = no
+
+	flag = no_message
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_wounded_3_desc
+			}
+			desc = trait_wounded_3_character_desc
+		}
+	}
+
+	ai_energy = -40
+	
+	group = wounded
+	level = 3
+}
+
+
+
+
+##Fertility traits###
+
+##Normal infertility##
+infertile = {
+	physical = yes
+	fertility = -0.5
+	opposites = {
+		fecund
+	}
+	
+	ruler_designer_cost = 0
+
+	group = infertility_group
+	level = 1
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_infertile_male
+			}
+			triggered_desc = {
+				trigger = { is_female = yes }
+				desc = trait_infertile_female
+			}
+			desc = trait_infertile_male
+		}
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_infertile_desc
+			}
+			triggered_desc = {
+				trigger = { is_female = yes }
+				desc = trait_infertile_female_desc
+			}
+			desc = trait_infertile_male_desc
+		}
+	}
+	
+	#inherit_chance = 50
+	genetic = yes
+	enables_inbred = yes
+	birth = 0.5
+	random_creation = 0.5
+}
+infertile_2 = {
+	physical = yes
+	fertility = -1.0
+	opposites = {
+		infertile
+		fecund
+	}
+	ruler_designer_cost = 0
+
+	group = infertility_group
+	level = 2
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_infertile_2_male
+			}
+			triggered_desc = {
+				trigger = { is_female = yes }
+				desc = trait_infertile_2_female
+			}
+			desc = trait_infertile_2_male
+		}
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_infertile_2_desc
+			}
+			triggered_desc = {
+				trigger = { is_female = yes }
+				desc = trait_infertile_2_female_desc
+			}
+			desc = trait_infertile_2_male_desc
+		}
+	}
+	
+	#inherit_chance = 50
+	genetic = yes
+	enables_inbred = yes
+	birth = 0.10
+	random_creation = 0.10
+}

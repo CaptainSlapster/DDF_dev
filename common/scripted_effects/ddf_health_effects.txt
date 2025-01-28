@@ -1,0 +1,1413 @@
+﻿
+contract_disease_effect = {
+	if = { #Is the disease valid?
+		limit = { can_contract_disease_trigger = { DISEASE = $DISEASE$ } }
+
+		hidden_effect = {
+			#SET SCOPES
+			save_scope_as = sick_character
+
+			save_scope_value_as = {
+				name = disease_type
+				value = flag:$DISEASE$
+			}
+
+			save_temporary_scope_value_as = {
+				name = treatment_event
+				value = flag:$TREATMENT_EVENT$
+			}
+
+			if = {
+				limit = { #Should I get early great pox instead of great pox?
+					scope:disease_type = flag:great_pox
+					NOR = {
+						has_trait = lovers_pox
+						has_trait = early_great_pox
+					}
+				}
+				save_scope_value_as = {
+					name = disease_type
+					value = flag:early_great_pox
+				}
+			}
+
+			#Data collection
+			disease_data_save_contraction_effect = { DISEASE = $DISEASE$ }
+
+
+			#TREATMENT EVENT
+			if = {
+				limit = {
+					scope:treatment_event = flag:yes
+				}
+
+				trigger_event = {
+					id = health.3100
+					days = 5
+				}
+			}
+			else_if = {
+				limit = { scope:treatment_event = flag:no } #This is just here to stop errors
+			}
+		}
+
+
+		#NON-CONTAGIOUS DISEASES
+		if = {
+			limit = {
+				OR = {
+					scope:disease_type = flag:ill
+					scope:disease_type = flag:pneumonic
+					scope:disease_type = flag:gout_ridden
+					scope:disease_type = flag:leper
+					scope:disease_type = flag:cancer
+					scope:disease_type = flag:ergotism
+					scope:disease_type = flag:malaria
+
+					scope:disease_type = flag:immolation
+
+				}
+			}
+
+			if = { #Removes ill if progressing to pneumonia
+				limit = {
+					scope:disease_type = flag:pneumonic
+					has_trait = ill
+				}
+				remove_trait = ill
+			}
+
+			add_trait_force_tooltip = $DISEASE$
+		}
+		
+		#CONTAGIOUS DISEASES
+		if = {
+			limit = {
+				OR = {
+					scope:disease_type = flag:smallpox
+					scope:disease_type = flag:measles
+					scope:disease_type = flag:dysentery
+					scope:disease_type = flag:bubonic_plague
+					scope:disease_type = flag:typhus
+					scope:disease_type = flag:consumption
+					scope:disease_type = flag:typhoid
+					scope:disease_type = flag:flu
+					scope:disease_type = flag:diphtheria
+					
+				}
+			}
+
+			add_trait_force_tooltip = $DISEASE$
+		}
+
+		#STD DISEASES
+		else_if = { #Lover's pox
+			limit = { scope:disease_type = flag:lovers_pox }
+			add_trait_force_tooltip = lovers_pox
+
+			hidden_effect = {
+				#Trigger regular contagion checks
+				trigger_event = {
+					id = health.1200
+					days = { 60 1000 } #This first one can happen quite fast, the following checks are delayed 250-10000 days depending on traits
+				}
+			}
+		}
+		else_if = { #Early great pox
+			limit = { scope:disease_type = flag:early_great_pox }
+			add_trait_force_tooltip = early_great_pox
+			
+			hidden_effect = {
+				trigger_event = {
+					id = health.1013 #Reveals the true disease
+					days = { 90 150 }
+				}
+			}
+		}
+		else_if = { #Great pox
+			limit = {  scope:disease_type = flag:great_pox }
+
+			hidden_effect = {
+				remove_trait = lovers_pox #If you get Great Pox and already have lover's pox, we pretend that lover's pox was the first symptoms
+				remove_trait = early_great_pox
+			}
+			add_trait_force_tooltip = great_pox
+
+			hidden_effect = {
+				#Trigger regular contagion checks
+				trigger_event = {
+					id = health.1201
+					days = { 250 1500 } #This first one can happen quite fast, the following checks are delayed 350-10000 days depending on traits
+				}
+			}
+		}
+
+		#RECOVERY
+		if = { #Ill
+			limit = { scope:disease_type = flag:ill }
+			trigger_event = {
+				id = health.1101
+				days = { ill_recovery_min ill_recovery_max }
+			}
+		}
+		else_if = { #Pneumonic
+			limit = { scope:disease_type = flag:pneumonic }
+			trigger_event = {
+				id = health.1102
+				days = { pneumonic_recovery_min pneumonic_recovery_max }
+			}
+		}
+		else_if = { #Gout
+			limit = { scope:disease_type = flag:gout_ridden }
+			random = {
+				chance = 25
+				modifier = {
+					has_trait = gluttonous
+					add = -15
+				}
+				modifier = {
+					has_trait = temperate
+					add = 15
+				}
+				trigger_event = {
+					id = health.1103
+					days = { gout_ridden_recovery_min gout_ridden_recovery_max } #1 to 30 years
+				}
+			}
+		}
+		else_if = { #Typhus
+			limit = { scope:disease_type = flag:typhus }
+			trigger_event = {
+				id = health.1105
+				days = { 45 150 }
+			}
+		}
+		else_if = { #Consumption
+			limit = { scope:disease_type = flag:consumption }
+			trigger_event = {
+				id = health.1106
+				days = { 365 2190 } #1 to 6 years
+			}
+		}
+		else_if = { #Cancer
+			limit = { scope:disease_type = flag:cancer }
+			random = {
+				chance = 1
+				trigger_event = {
+					id = health.1107
+					days = { 365 3650 } #1 to 10 years
+				}
+			}
+		}
+		else_if = { #Great pox
+			limit = {
+				OR = {
+					scope:disease_type = flag:early_great_pox
+					scope:disease_type = flag:great_pox
+				}
+			}
+			trigger_event = {
+				id = health.1109
+				days = { 730 5475 } #2 to 15 years (note that early pox progresses into great pox in 60-150 days and great pox leads to lunacy after 5 to 15 years)
+			}
+		}
+		else_if = { #Smallpox
+			limit = { scope:disease_type = flag:smallpox }
+			trigger_event = {
+				id = health.1110
+				days = { smallpox_min_recovery_time smallpox_max_recovery_time }
+			}
+		}
+		else_if = { #Bubonic Plague
+			limit = { scope:disease_type = flag:bubonic_plague }
+			trigger_event = {
+				id = health.1111
+				days = { bubonic_plague_min_recovery_time bubonic_plague_max_recovery_time }
+			}
+		}
+		else_if = { #Measles
+			limit = { scope:disease_type = flag:measles }
+			trigger_event = {
+				id = health.1112
+				days = { measles_min_recovery_time measles_max_recovery_time }
+			}
+		}
+		else_if = { #Dysentery
+			limit = { scope:disease_type = flag:dysentery }
+			trigger_event = {
+				id = health.1113
+				days = { dysentery_min_recovery_time dysentery_max_recovery_time }
+			}
+		}
+		else_if = { #Ergotism
+			limit = { scope:disease_type = flag:ergotism }
+			trigger_event = {
+				id = health.1114
+				days = { ergotism_min_recovery_time ergotism_max_recovery_time }
+			}
+		}
+		else_if = { #Typhoid
+			limit = { scope:disease_type = flag:typhoid }
+			trigger_event = {
+				id = ddf_health.0006
+				days = { typhoid_min_recovery_time typhoid_max_recovery_time }
+			}
+		}
+		else_if = { #flu
+			limit = { scope:disease_type = flag:flu }
+			trigger_event = {
+				id = ddf_health.0013
+				days = { flu_min_recovery_time flu_max_recovery_time }
+			}
+		}
+		else_if = { #diphtheria
+		limit = { scope:disease_type = flag:diphtheria }
+		trigger_event = {
+			id = ddf_health.0016
+			days = { diphtheria_min_recovery_time diphtheria_max_recovery_time }
+		}
+	}
+
+		#No recovery for leper and lover's pox
+
+
+		#EPILEPSY RISK
+		if = {
+			limit = { scope:disease_type = flag:ill }
+			epilepsy_fever_risk_effect = { CHANCE = 1 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					scope:disease_type = flag:pneumonic
+					scope:disease_type = flag:typhus
+					scope:disease_type = flag:consumption
+					scope:disease_type = flag:measles
+					scope:disease_type = flag:dysentery
+					scope:disease_type = flag:smallpox
+					scope:disease_type = flag:bubonic_plague
+					scope:disease_type = flag:typhoid
+					scope:disease_type = flag:flu
+					scope:disease_type = flag:diphtheria
+				}
+			}
+			epilepsy_fever_risk_effect = { CHANCE = 5 }
+		}
+
+		#NOTIFICATIONS: CONTAGIOUS DISEASE, FAMILY & SEX PARTNER STD, NOTIFICATIONS & LIEGE TREATMENT EVENTS
+
+		#List creation:
+		#Imprisoner/court owner if contagious
+		if = {
+			limit = {
+				OR = {
+					scope:disease_type = flag:smallpox
+					scope:disease_type = flag:bubonic_plague
+					scope:disease_type = flag:measles
+					scope:disease_type = flag:dysentery
+					scope:disease_type = flag:typhus
+					scope:disease_type = flag:consumption
+					scope:disease_type = flag:typhoid
+					scope:disease_type = flag:flu
+					scope:disease_type = flag:diphtheria
+				}
+				is_ruler = no
+				has_health_court_owner_trigger = yes #Imprisoner or court owner
+			}
+			save_health_court_owner_effect = { SCOPE_NAME = health_court_owner }#Imprisoner or court owner
+
+			scope:health_court_owner = {
+				add_to_temporary_list = disase_notification_list
+			}
+		}
+		#Sex partners if STD
+		if = {
+			limit = {
+				OR = {
+					scope:disease_type = flag:lovers_pox
+					scope:disease_type = flag:early_great_pox
+					scope:disease_type = flag:great_pox
+				}
+			}
+			every_consort = {
+				add_to_temporary_list = disase_notification_list
+			}
+			every_relation = {
+				type = lover
+				add_to_temporary_list = disase_notification_list
+			}
+		}
+		#Family if the disease is somewhat dangerous
+		if = {
+			limit = {
+				sick_enough_for_relative_to_care_trigger = yes
+			}
+			every_parent = {
+				limit = {
+					is_playable_character = yes
+				}
+				add_to_temporary_list = disase_notification_list
+			}
+			every_spouse = {
+				limit = {
+					is_playable_character = yes
+				}
+				add_to_temporary_list = disase_notification_list
+			}
+			every_heir_title = {
+				limit = {
+					exists = holder
+				}
+				holder = {
+					if = {
+						limit = {
+							player_heir = scope:sick_character
+						}
+						add_to_temporary_list = disase_notification_list
+					}
+				}
+			}
+		}
+
+		#Go through list and send notifications
+		every_in_list = {
+			list = disase_notification_list
+
+			#Send a STD warning event
+			if = {
+				limit = {
+					OR = {
+						scope:disease_type = flag:lovers_pox
+						scope:disease_type = flag:early_great_pox
+						scope:disease_type = flag:great_pox
+					}
+					OR = {
+						is_consort_of = scope:sick_character
+						has_relation_lover = scope:sick_character
+					}
+				}
+				scope:sick_character = { save_scope_as = std_partner }
+				if = {
+					limit = { scope:disease_type = flag:great_pox }
+					trigger_event = {
+						id = health.2002 #Partner has great pox
+						days = { 7 14 }
+					}
+				}
+				else = {
+					trigger_event = {
+						id = health.2001 #Partner has lover's pox/early great great pox
+						days = { 7 14 }
+					}
+				}
+			}
+			#Send a notification/treatment event to family
+			else_if = {
+				limit = {
+					OR = {
+						#It's a player heir
+						trigger_if = {
+							limit = { exists = player_heir }
+							player_heir = scope:sick_character
+						}
+						#Or a child/spouse who is really sick or this character has to pick their treatment
+						AND = {
+							is_spouse_of = scope:sick_character #we only send you your spouse and primary heir to avoid event spam with plagues
+							OR = {
+								#The sick character is dying
+								health < death_chance_dying_health
+								#This character gets to pick sick character's treatment
+								trigger_if = {
+									limit = { exists = scope:sick_character.liege }
+									this = scope:sick_character.liege
+									scope:sick_character = { liege_picks_treatment_trigger = yes }
+								}
+							}
+						}
+					}
+				}
+				if = {
+					limit ={
+						has_ddf_disease_trigger = yes
+					}
+					trigger_event = {
+						id = ddf_health.2201
+						days = 3
+					}
+				}
+				else = {
+					trigger_event = {
+						id = health.2201 #Important character is sick
+						days = 3
+					}
+				}
+				#set a variable, so you are sure to get a follow-up
+				if = {
+					limit = { is_ai = no }
+					scope:sick_character = {
+						add_to_variable_list = {
+							name = recovery_event_receivers
+							target = prev
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					exists = scope:epidemic
+					is_target_in_variable_list = {
+						name = notified_of_epidemics
+						target = scope:epidemic
+					}
+				}
+				# Don't get spammed by courtiers and guests falling sick during epidemics
+			}
+			#Send a feed message
+			else = {	
+				send_interface_message = {
+					type = msg_disease_contraction
+					left_icon = scope:sick_character
+					localization_values = {
+						disease_trait = trait:$DISEASE$
+						message_receiver = this
+					}
+					show_as_tooltip = {
+						scope:sick_character = {	
+							if = {
+								limit = { scope:disease_type = flag:early_great_pox }
+								add_trait_force_tooltip = early_great_pox
+							}
+							else = {
+								add_trait_force_tooltip = $DISEASE$
+							}
+						}
+					}
+				}
+				if = {
+					limit = { is_ai = no }
+					add_to_variable_list = {
+						name = notified_of_epidemics
+						target = scope:epidemic
+					}
+				}
+			}
+		}
+	}
+	hidden_effect = {
+		if = {
+			limit = {
+				exists = scope:epidemic
+			}
+			give_epidemic_immunity = { EPIDEMIC = scope:epidemic }
+			# Give appropriate memory
+			if = {
+				limit = {
+					scope:disease_type = flag:bubonic_plague
+				}
+				create_character_memory = {
+					type = ce1_contracted_black_death
+				}
+			}
+			else = {
+				create_character_memory = {
+					type = ce1_contracted_epidemic
+				}
+				scope:new_memory = {
+					if = {
+						limit = {
+							NOT = { exists = var:epidemic_infected }
+						}
+						set_variable = {
+							name = epidemic_infected
+							value = scope:epidemic.epidemic_type.epidemic_trait
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+contract_disease_notify_effect = {
+	save_scope_value_as = {
+		name = disease_type
+		value = flag:$DISEASE$
+	}
+	
+	#Ill
+	if = {
+		limit = { scope:disease_type = flag:ill }
+		trigger_event = { id = health.1001 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:pneumonic }
+		trigger_event = { id = health.1002 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:gout_ridden }
+		trigger_event = { id = health.1003 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:leper }
+		trigger_event = { id = health.1004 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:typhus }
+		trigger_event = { id = health.1005 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:consumption }
+		trigger_event = { id = health.1006 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:cancer }
+		trigger_event = { id = health.1007 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:lovers_pox }
+		trigger_event = { id = health.1008 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:great_pox }
+		trigger_event = { id = health.1009 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:smallpox }
+		trigger_event = { id = health.1010 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:measles }
+		trigger_event = { id = health.1015 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:dysentery }
+		trigger_event = { id = health.1016 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:ergotism }
+		trigger_event = { id = health.1017 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:bubonic_plague }
+		trigger_event = { id = health.1011 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:typhoid }
+		trigger_event = { id = ddf_health.0005 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:malaria }
+		trigger_event = { id = ddf_health.0003 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:flu }
+		trigger_event = { id = ddf_health.0012 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:diphtheria }
+		trigger_event = { id = ddf_health.0015 days = { 5 15 } }
+	}
+	
+	else_if = {
+		limit = { scope:disease_type = flag:immolation }
+		trigger_event = { id = ddf_fantasy_health.0001 days = { 5 15 } }
+	}
+}
+
+recover_from_disease_effect = {
+	hidden_effect = {
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:$DISEASE$
+		}
+
+		if = {
+			limit = {
+				has_trait = early_great_pox
+				scope:disease_type = flag:great_pox
+			}
+			save_scope_value_as = {
+				name = disease_type
+				value = flag:early_great_pox
+			}
+		}	
+	}
+
+	if = { #They actually have the disease you want to remove
+		limit = { has_trait = $DISEASE$ }
+
+		save_scope_as = sick_character
+
+		#Notifications (first, because some notifications need to check health which are changed when traits are removed)
+		hidden_effect = {
+
+			#IMPORTANT CHARACTER (add to list)
+			if = {
+				limit = { #The disease has to be somewhat dangerous
+					OR = {
+						health < death_chance_dying_health
+						NOR = {
+							scope:disease_type = flag:ill
+							scope:disease_type = flag:gout_ridden
+							scope:disease_type = flag:lovers_pox
+							scope:disease_type = flag:early_great_pox
+
+							scope:disease_type = flag:typhoid
+							scope:disease_type = flag:flu
+							scope:disease_type = flag:diphtheria
+							
+						}
+					}
+				}
+				every_parent = {
+					limit = { is_playable_character = yes }
+					add_to_temporary_list = disase_notification_list
+				}
+				every_child = {
+					limit = { is_playable_character = yes }
+					add_to_temporary_list = disase_notification_list
+				}
+				every_spouse = {
+					limit = {
+						is_playable_character = yes
+						NOT = { is_in_list = disase_notification_list }
+					}
+					add_to_temporary_list = disase_notification_list
+				}
+				every_heir_title = {
+					limit = {
+						exists = holder
+					}
+					holder = {
+						if = {
+							limit = {
+								exists = player_heir
+								player_heir = scope:sick_character
+								NOT = { is_in_list = disase_notification_list }
+							}
+							add_to_temporary_list = disase_notification_list
+						}
+					}
+				}
+			}
+
+			#PARTNERS WHO WANT TO KNOW ABOUT STDS (add to list)
+			if = {
+				limit = {
+					OR = {
+						scope:disease_type = flag:great_pox
+						scope:disease_type = flag:lovers_pox
+						scope:disease_type = flag:early_great_pox
+					}
+				}
+				every_relation = {
+					type = lover
+					limit = {
+						is_playable_character = yes
+						NOT = { is_in_list = disase_notification_list }
+					}
+					add_to_temporary_list = disase_notification_list
+				}
+				every_concubine = {
+					limit = {
+						is_playable_character = yes
+						NOT = { is_in_list = disase_notification_list }
+					}
+					add_to_temporary_list = disase_notification_list
+				}
+			}
+
+			#IMPOTANT CHARACTER NOTIFICATION EVENT
+			every_parent = {
+				limit = {
+					inform_about_relative_recovery_trigger = yes
+				}
+				add_to_temporary_list = disase_notification_list
+			}
+			every_spouse = {
+				limit = {
+					inform_about_relative_recovery_trigger = yes
+					NOT = { is_in_list = disase_notification_list }
+				}
+				add_to_temporary_list = disase_notification_list
+			}
+			every_heir_title = {
+				limit = {
+					exists = holder
+				}
+				holder = {
+					if = {
+						limit = {
+							player_heir = scope:sick_character
+							inform_about_relative_recovery_trigger = yes
+							NOT = { is_in_list = disase_notification_list }
+						}
+						add_to_temporary_list = disase_notification_list
+					}
+				}
+			}
+
+			#Go through list and send notifications
+			every_in_list = {
+				list = disase_notification_list
+				
+				if = {
+					limit = {
+						OR = {
+							#This character received an event when
+							scope:sick_character = {
+								is_target_in_variable_list = {
+									name = recovery_event_receivers
+									target = prev
+								}
+							}
+							#It's your player heir
+							trigger_if = {
+								limit = { exists = player_heir }
+								player_heir = scope:sick_character
+							}
+						}
+					}
+					trigger_event = health.2202
+				}
+				else = {
+					save_scope_as = message_receiver
+					send_interface_message = {
+						type = msg_disease_recovery
+						left_icon = scope:sick_character
+						title = disease_recovery_feed_message.t
+						show_as_tooltip = {
+							scope:sick_character = {	
+								if = {
+									limit = { scope:disease_type = flag:early_great_pox }
+									remove_trait_force_tooltip = early_great_pox
+								}
+								else = {
+									remove_trait_force_tooltip = $DISEASE$
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		clear_variable_list = recovery_event_receivers
+
+		#TRAIT REMOVAL
+		remove_trait = $DISEASE$
+
+		#IMMUNITY
+		hidden_effect = {
+			if = {
+				limit = { scope:disease_type = flag:smallpox }
+				add_character_flag = disease_immunity_smallpox
+			}
+			else_if = {
+				limit = { scope:disease_type = flag:measles }
+				add_character_flag = disease_immunity_measles
+			}
+			else_if = {
+				limit = { scope:disease_type = flag:bubonic_plague }
+				add_character_flag = disease_immunity_bubonic_plague
+			}
+			else_if = {
+				limit = { scope:disease_type = flag:typhoid }
+				add_character_flag = disease_immunity_typhoid
+			}
+			else_if = {
+				limit = { scope:disease_type = flag:flu }
+				add_character_flag = disease_immunity_flu
+			}
+			else_if = {
+				limit = { scope:disease_type = flag:diphtheria }
+				add_character_flag = disease_immunity_diphtheria
+			}
+			
+		}
+	}
+}
+
+recover_from_disease_notify_effect = {
+	save_scope_value_as = {
+		name = disease_type
+		value = flag:$DISEASE$
+	}
+	
+	if = {
+		limit = { scope:disease_type = flag:ill }
+		trigger_event = { id = health.1101 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:pneumonic }
+		trigger_event = { id = health.1102 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:gout_ridden }
+		trigger_event = { id = health.1103 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:typhus }
+		trigger_event = { id = health.1105 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:consumption }
+		trigger_event = { id = health.1106 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:cancer }
+		trigger_event = { id = health.1107 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:great_pox }
+		trigger_event = { id = health.1109 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:smallpox }
+		trigger_event = { id = health.1110 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:bubonic_plague }
+		trigger_event = { id = health.1111 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:typhoid }
+		trigger_event = { id = ddf_health.0006 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:flu }
+		trigger_event = { id = ddf_health.0013 days = { 5 15 } }
+	}
+	else_if = {
+		limit = { scope:disease_type = flag:diphtheria }
+		trigger_event = { id = ddf_health.0016 days = { 5 15 } }
+	}
+	
+}
+
+set_worst_disease_effect = {
+	if = {
+		limit = { has_trait = bubonic_plague }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:bubonic_plague
+		}
+	}
+	else_if = {
+		limit = { has_trait = cancer }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:cancer
+		}
+	}
+	else_if = {
+		limit = { has_trait = smallpox }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:smallpox
+		}
+	}
+	else_if = {
+		limit = { has_trait = measles }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:measles
+		}
+	}
+	else_if = {
+		limit = { has_trait = dysentery }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:dysentery
+		}
+	}
+	else_if = {
+		limit = { has_trait = ergotism }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:ergotism
+		}
+	}
+	else_if = {
+		limit = { has_trait = consumption }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:consumption
+		}
+	}
+	else_if = {
+		limit = { has_trait = typhus }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:typhus
+		}
+	}
+	else_if = {
+		limit = { has_trait = great_pox }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:great_pox
+		}
+	}
+	else_if = {
+		limit = { has_trait = pneumonic }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:pneumonic
+		}
+	}
+	else_if = {
+		limit = { has_trait = leper }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:leper
+		}
+	}
+	else_if = {
+		limit = { has_trait = gout_ridden }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:gout_ridden
+		}
+	}
+	else_if = {
+		limit = { has_trait = ill }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:ill
+		}
+	}
+	else_if = {
+		limit = { has_trait = typhoid }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:typhoid
+		}
+	}
+	else_if = {
+		limit = { has_trait = malaria }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:malaria
+		}
+	}
+	else_if = {
+		limit = { has_trait = flu }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:flu
+		}
+	}
+	else_if = {
+		limit = { has_trait = diphtheria}
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:diphtheria	
+		}
+	}
+	else_if = {
+		limit = { has_trait = immolation }
+		save_scope_value_as = {
+			name = disease_type
+			value = flag:immolation
+		}
+	}
+}
+
+
+add_disease_treatment_modifier_effect = {	
+	#Treatment length depends on whether the disease has a short or long duration
+	#Successful treatments come in two strengths per treatment type, low for diseases with low health penalty and high for diseases with high health penalty
+	#Negative treatments only have one strength per treatment type
+	#Successful safe treatments remove most of the penalty for low -health diseases but only 1/2-1/4 of penalty for high -health diseases
+	#Successful risky/mystic treatments remove almost all of the penalty for all diseases (with plague being the main exception, that penalty is roughly halved)
+	#Safe treatment:success
+
+	save_temporary_scope_value_as = {
+		name = treatment_result_treatment
+		value = flag:$TREATMENT$
+	}
+	save_temporary_scope_value_as = {
+		name = treatment_result_outcome
+		value = flag:$OUTCOME$
+	}
+
+	#SAFE TREATMENT: SUCCESS
+	if = {
+		limit = {
+			scope:treatment_result_treatment = flag:safe
+			scope:treatment_result_outcome = flag:success
+		}
+		if = {
+			limit = {
+				has_short_disease_type_trigger = yes
+				has_high_health_penalty_disease_type_trigger = yes
+			}
+			add_character_modifier = { modifier = safe_disease_treatment_success_high_modifier days = disease_treatment_short_duration }
+		}
+		else_if = {
+			limit = {
+				has_short_disease_type_trigger = no
+				has_high_health_penalty_disease_type_trigger = yes
+			}
+			add_character_modifier = { modifier = safe_disease_treatment_success_high_modifier days = disease_treatment_long_duration }
+		}
+		else_if = {
+			limit = {
+				has_short_disease_type_trigger = yes
+				has_high_health_penalty_disease_type_trigger = no
+			}
+			add_character_modifier = { modifier = safe_disease_treatment_success_low_modifier days = disease_treatment_short_duration }
+		}
+		else_if = {
+			limit = {
+				has_short_disease_type_trigger = no
+				has_high_health_penalty_disease_type_trigger = no
+			}
+			add_character_modifier = { modifier = safe_disease_treatment_success_low_modifier days = disease_treatment_long_duration }
+		}
+	}
+	#SAFE TREATMENT: FAILURE
+	else_if = {
+		limit = {
+			scope:treatment_result_treatment = flag:safe
+			scope:treatment_result_outcome = flag:failure
+		}
+		if = {
+			limit = { has_short_disease_type_trigger = yes }
+			add_character_modifier = { modifier = safe_disease_treatment_failure_modifier days = disease_treatment_short_duration }
+		}
+		else_if = {
+			limit = { has_short_disease_type_trigger = no }
+			add_character_modifier = { modifier = safe_disease_treatment_failure_modifier days = disease_treatment_long_duration }
+		}
+	}
+	#RISKY & MYSTIC TREATMENT: CRITICAL SUCCESS
+	else_if = {
+		limit = {
+			OR = {
+				scope:treatment_result_treatment = flag:risky
+				scope:treatment_result_treatment = flag:mystic #A succcessful mystic treatment shouldn't be noticeable from the outside, so using same modifiers
+			}
+			scope:treatment_result_outcome = flag:critical_success
+		}
+
+		#General cooldown
+		add_character_flag = {
+			flag = contraction_cooldown_general
+			years = 2
+		}
+
+		if = {
+			limit = { scope:disease_type = flag:consumption }
+			remove_trait_force_tooltip = consumption
+			add_character_flag = { flag = contraction_cooldown_consumption years = 20 }
+		}
+		else_if = {
+			limit = { scope:disease_type = flag:cancer }
+			remove_trait_force_tooltip = cancer
+			add_character_flag = { flag = contraction_cooldown_cancer years = 20 }
+		}
+		else_if = {
+			limit = { scope:disease_type = flag:great_pox }
+			remove_trait_force_tooltip = great_pox
+			add_character_flag = { flag = contraction_cooldown_great_pox years = 20 }
+		}
+		else_if = {
+			limit = { scope:disease_type = flag:gout_ridden }
+			remove_trait_force_tooltip = gout_ridden
+			add_character_flag = { flag = contraction_cooldown_gout_ridden years = 20 }
+		}
+		else_if = {
+			limit = { scope:disease_type = flag:ill }
+			remove_trait_force_tooltip = ill
+			#No cooldown, common disease
+		}
+		else_if = {
+			limit = { scope:disease_type = flag:pneumonic }
+			remove_trait_force_tooltip = pneumonic
+			add_character_flag = { flag = contraction_cooldown_pneumonic years = 20 }
+		}
+		else_if = {
+			limit = { scope:disease_type = flag:typhus }
+			remove_trait_force_tooltip = typhus
+			add_character_flag = { flag = contraction_cooldown_typhus years = 20 }
+		}
+		else_if = {
+			limit = { scope:disease_type = flag:measles }
+			remove_trait_force_tooltip = measles
+			#No cooldown, immunity
+		}
+		else_if = {
+			limit = { scope:disease_type = flag:dysentery }
+			remove_trait_force_tooltip = dysentery
+			add_character_flag = { flag = contraction_cooldown_dysentery years = 20 }
+		}
+		else_if = {
+			limit = { scope:disease_type = flag:ergotism }
+			remove_trait_force_tooltip = ergotism
+			add_character_flag = { flag = contraction_cooldown_ergotism years = 20 }
+		}
+		else_if = {
+			limit = { scope:disease_type = flag:smallpox }
+			remove_trait_force_tooltip = smallpox
+			#No cooldown, immunity
+		}
+		else_if = {
+			limit = { scope:disease_type = flag:bubonic_plague }
+			remove_trait_force_tooltip = bubonic_plague
+			#No cooldown, immunity
+		}
+		else_if = {
+			limit = { scope:disease_type = flag:malaria }
+			remove_trait_force_tooltip = malaria
+			#No cooldown, immunity
+		}
+		else_if = {
+			limit = { scope:disease_type = flag:typhoid }
+			remove_trait_force_tooltip = typhoid
+			#No cooldown, immunity
+		}
+		else_if = {
+			limit = { scope:disease_type = flag:flu }
+			remove_trait_force_tooltip = flu
+			#No cooldown, immunity
+		}
+		else_if = {
+			limit = { scope:disease_type = flag:diphtheria }
+			remove_trait_force_tooltip = diphtheria
+			#No cooldown, immunity
+		}
+		
+		else_if = {
+			limit = { scope:disease_type = flag:immolation }
+			remove_trait_force_tooltip = immolation
+			#No cooldown, immunity
+		}
+	}
+
+	#RISKY & MYSTIC TREATMENT: SUCCESS
+	else_if = {
+		limit = {
+			OR = {
+				scope:treatment_result_treatment = flag:risky
+				scope:treatment_result_treatment = flag:mystic #A succcessful mystic treatment shouldn't be noticeable from the outside, so using same modifiers
+			}
+			scope:treatment_result_outcome = flag:success
+		}
+		if = {
+			limit = {
+				has_short_disease_type_trigger = yes
+				has_high_health_penalty_disease_type_trigger = yes
+			}
+			add_character_modifier = { modifier = risky_disease_treatment_success_high_modifier days = disease_treatment_short_duration }
+		}
+		else_if = {
+			limit = {
+				has_short_disease_type_trigger = no
+				has_high_health_penalty_disease_type_trigger = yes
+			}
+			add_character_modifier = { modifier = risky_disease_treatment_success_high_modifier days = disease_treatment_long_duration }
+		}
+		else_if = {
+			limit = {
+				has_short_disease_type_trigger = yes
+				has_high_health_penalty_disease_type_trigger = no
+			}
+			add_character_modifier = { modifier = risky_disease_treatment_success_low_modifier days = disease_treatment_short_duration }
+		}
+		else_if = {
+			limit = {
+				has_short_disease_type_trigger = no
+				has_high_health_penalty_disease_type_trigger = no
+			}
+			add_character_modifier = { modifier = risky_disease_treatment_success_low_modifier days = disease_treatment_long_duration }
+		}
+	}
+	# RISKY TREATMENT FAILURE
+	else_if = {
+		limit = {
+			scope:treatment_result_treatment = flag:risky
+			scope:treatment_result_outcome = flag:failure
+		}
+		if = {
+			limit = { has_short_disease_type_trigger = yes }
+			add_character_modifier = { modifier = risky_disease_treatment_failure_modifier days = disease_treatment_short_duration }
+		}
+		else_if = {
+			limit = { has_short_disease_type_trigger = no }
+			add_character_modifier = { modifier = risky_disease_treatment_failure_modifier days = disease_treatment_long_duration }
+		}
+	}
+}
+
+pick_own_disease_treatment_effect = {
+	if = {
+		limit = { is_adult = yes }
+		custom_tooltip = pick_own_treatment_effect.adult.tt
+	}
+	else = {
+		custom_tooltip = pick_own_treatment_effect.child.tt
+	}
+
+	hidden_effect = {
+		if = {
+			limit = {
+				has_ddf_disease_trigger = yes
+			}
+			trigger_event = {
+				id = ddf_health.3101
+				days = { 5 10 }
+			}
+		}
+		else = {
+			trigger_event = {
+				id = health.3101
+				days = { 5 10 }
+			}	
+		}
+	}
+}
+decide_who_picks_disease_treatment_effect = {
+	if = {
+		limit = {
+			liege_picks_treatment_trigger = yes
+		}
+		liege = {
+			trigger_event = {
+				id = health.3102 #Liege decides
+				days = { physician_treatment_delay_subject_min physician_treatment_delay_subject_max }
+			}
+		}
+	}
+	else = {
+		if = {
+			limit = {
+				has_ddf_disease_trigger = yes
+			}
+			trigger_event = {
+				id = ddf_health.3101 #I decide
+				days = { physician_treatment_delay_ruler_min physician_treatment_delay_ruler_max }
+			}
+		}
+		else = {
+			trigger_event = {
+				id = health.3101 #I decide
+				days = { physician_treatment_delay_ruler_min physician_treatment_delay_ruler_max }
+			}
+		}
+	}
+}
+
+
+set_court_physician_effect = {
+	$PHYSICIAN$ = {
+		if = {
+			limit = { 
+				NOT = { liege = $EMPLOYER$ }
+			}
+			$EMPLOYER$ = { add_courtier = $PHYSICIAN$ }
+		}
+	}
+	$EMPLOYER$ = {
+		#Replace existing court physician if one exists
+		if = {
+			limit = {
+				employs_court_position = court_physician_court_position
+				any_court_position_holder = {
+					type = court_physician_court_position
+					count > 0
+				}
+			}
+			every_court_position_holder = {
+				type = court_physician_court_position
+				save_temporary_scope_as = old_physician
+
+				$EMPLOYER$ = {
+					replace_court_position = {
+						recipient = $PHYSICIAN$
+						holder = scope:old_physician
+						court_position = court_physician_court_position
+					}
+					reverse_add_opinion = {
+						target = scope:old_physician
+						modifier = disappointed_opinion
+						opinion = -15
+					}
+					reverse_add_opinion = {
+						target = $PHYSICIAN$
+						modifier = hired_me_opinion
+					}
+				}
+			}
+		}
+		#Else just straight up appoint
+		else = {
+			appoint_court_position = {
+				recipient = $PHYSICIAN$
+				court_position = court_physician_court_position
+			}
+			reverse_add_opinion = {
+				target = $PHYSICIAN$
+				modifier = hired_me_opinion
+			}
+		}
+	
+		#Trigger treatments if needed
+		hidden_effect = {
+			if = {
+				limit = {
+					has_treatable_disease_trigger = yes
+					has_recent_treatment_trigger = no
+				}
+				save_scope_as = sick_character
+				if = {
+					limit = {
+						has_ddf_disease_trigger = yes
+					}
+					trigger_event = {
+						id = ddf_health.3101
+						days = { physician_treatment_delay_ruler_min physician_treatment_delay_ruler_max }
+					}
+				}
+				else = {
+					trigger_event = {
+						id = health.3101
+						days = { physician_treatment_delay_ruler_min physician_treatment_delay_ruler_max }
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_recent_wound_treatment_trigger = no
+					has_wounds_trigger = yes
+				}
+				save_scope_as = sick_character
+				trigger_event = {
+					id = health.4001
+					days = { physician_treatment_delay_ruler_min physician_treatment_delay_ruler_max }
+				}
+			}
+			every_courtier_or_guest = {
+				if = {
+					limit = {
+						has_treatable_disease_trigger = yes
+						has_recent_treatment_trigger = no
+					}
+					set_worst_disease_effect = yes
+					save_scope_as = sick_character
+					decide_who_picks_disease_treatment_effect = yes #Sends health.3101 to them or 3102 to liege (you)
+				}
+				else_if = {
+					limit = {
+						has_recent_wound_treatment_trigger = no
+						has_wounds_trigger = yes
+					}
+					save_scope_as = sick_character
+					decide_who_picks_wound_treatment_effect = yes
+				}
+			}
+		}
+	}
+}

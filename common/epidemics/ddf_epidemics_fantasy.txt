@@ -1,0 +1,257 @@
+﻿@default_tile_multiplier = 0.009702
+
+@construction_decrease_min = 0.1
+@construction_decrease_mid = 0.15
+@construction_decrease_max = 0.25
+
+@tax_decrease_min = -0.1
+@tax_decrease_mid = -0.15
+@tax_decrease_max = -0.25
+######
+#
+# *DDF* Honestly I want to reduce the amount of epidemics, but make
+#		them more impactful on the world via spread and death, etc.
+######
+
+
+immolation = {
+	trait = immolation
+	color = { 88 12 31 }
+	priority = 3
+
+	shader_data = {
+		strength = 0.8
+		edge_fade = 0.25
+		tile_multiplier = 0.004702
+		texture_index = 0
+		channel = alpha
+	}
+
+	name = {
+		first_valid = {
+			desc = trait_immolation
+		}
+	}
+	
+	on_start = {
+		# LEGITIMACY LOSS FROM EPIDEMIC OUTBREAK
+		epidemic_outbreak_legitimacy_effect = { PROVINCE = root.outbreak_province }
+	}
+
+	on_monthly = {
+		trigger_event = {
+			on_action = epidemic_ongoing_events
+		}
+	}
+
+	character_infection_chance = {
+		value = character_chance_of_being_attacked
+		if = {
+			limit = {
+				is_commanding_army = yes
+			}
+			multiply = 2.5
+		}
+	}
+
+	can_infect_character = {
+		can_contract_disease_trigger = { DISEASE = immolation }
+		immune_to_epidemic = { EPIDEMIC = scope:epidemic }
+	}
+
+	on_character_infected = {
+		contract_disease_notify_effect = { DISEASE = immolation }
+		if = {
+			limit = {
+				is_commanding_army = yes
+			}
+			trigger_event = epidemic_events.0001 #we infect your army
+		}
+	}
+
+	infection_levels = {
+		10 = {
+			province_modifier = {
+				county_opinion_add = -2
+				epidemic_travel_danger = 15
+				development_decline = -1
+				build_speed = @construction_decrease_min
+				tax_mult = @tax_decrease_min
+			}	
+		}
+		50 = {
+			province_modifier = {
+				county_opinion_add = -3
+				epidemic_travel_danger = 25
+				development_decline = -2
+				build_speed = @construction_decrease_mid
+				tax_mult = @tax_decrease_mid
+			}	
+		}
+		80 = {
+			province_modifier = {
+				monthly_county_control_decline_add = -0.1
+				supply_limit_mult = -0.2
+				county_opinion_add = -5
+				epidemic_travel_danger = 35
+				development_decline = -3
+				build_speed = @construction_decrease_max
+				tax_mult = @tax_decrease_max
+			}
+		}
+	}
+
+	outbreak_intensities = {
+		minor = {
+			outbreak_chance = {
+				value = dragon_attack_chance_low
+				multiply = 0.1 #shouldn't happen often
+				### NO DLC - We increase the chance to make up for the locked diseases ###
+				if = {
+					limit = {
+						NOT = { has_dlc_feature = legends_of_the_dead }
+					}
+					multiply = 2
+				}
+				if = {
+					limit = {
+						has_game_rule = epidemic_frequency_disabled
+					}
+					multiply = 0
+				}
+				if = {
+					limit = {
+						has_game_rule = no_fantasy_settings
+					}
+					multiply = 0
+				}
+			}
+			spread_chance = {
+				value = dragon_attack_spread_chance_default_value
+				#multiply = spread_chance_epidemics_mult_value
+			}
+			max_provinces = { 15 35} # {15 30}
+
+			infection_duration = {
+				months = { 3 5 } # 6 8
+			}
+
+			infection_progress_duration = {
+				days = { 35 90 }
+			}
+
+			infection_recovery_duration = {
+				days = { 15 22 }
+			}
+		}
+		major = {
+			outbreak_chance = {
+				value = dragon_attack_chance_low
+				multiply = 0.1 #shouldn't happen often
+				### NO DLC - We increase the chance to make up for the locked diseases ###
+				if = {
+					limit = {
+						NOT = { has_dlc_feature = legends_of_the_dead }
+					}
+					multiply = 2
+				}
+				if = {
+					limit = {
+						has_game_rule = epidemic_frequency_disabled
+					}
+					multiply = 0
+				}
+				if = {
+					limit = {
+						has_game_rule = no_fantasy_settings
+					}
+					multiply = 0
+				}
+			}
+			spread_chance = {
+				value = dragon_attack_spread_chance_default_value
+				#multiply = spread_chance_epidemics_mult_value
+			}
+			max_provinces = { 15 35} # {15 30}
+
+			infection_duration = {
+				months = { 3 5 } # 6 8
+			}
+
+			infection_progress_duration = {
+				days = { 35 90 }
+			}
+
+			infection_recovery_duration = {
+				days = { 15 22 }
+			}
+		}
+		apocalyptic = {
+			outbreak_chance = {
+				value = dragon_attack_chance_low
+				multiply = 0.1 #shouldn't happen often
+				### NO DLC - We increase the chance to make up for the locked diseases ###
+				if = {
+					limit = {
+						NOT = { has_dlc_feature = legends_of_the_dead }
+					}
+					multiply = 2
+				}
+				if = {
+					limit = {
+						has_game_rule = epidemic_frequency_disabled
+					}
+					multiply = 0
+				}
+				if = {
+					limit = {
+						has_game_rule = no_fantasy_settings
+					}
+					multiply = 0
+				}
+			}
+			spread_chance = {
+				value = dragon_attack_spread_chance_default_value
+				#multiply = spread_chance_epidemics_mult_value
+			}
+			max_provinces = { 15 35} # {15 30}
+
+			infection_duration = {
+				months = { 3 5 } # 6 8
+			}
+
+			infection_progress_duration = {
+				days = { 35 90 }
+			}
+
+			infection_recovery_duration = {
+				days = { 15 22 }
+			}
+		}
+
+	}
+	
+	on_province_infected = {
+		county = {
+			apply_infection_development_loss = { BASE = 5 }
+		}
+		cant_touch_this_achievement_effect = yes
+	}
+	
+	on_province_recovered = {
+		county = {
+			remove_isolated_capital_modifiers_effect = yes
+		}
+		add_to_variable_list = {
+			name = epidemic_cooldown
+			target = scope:epidemic.epidemic_type
+			years = 50
+		}
+		set_variable = {
+			name = epidemic_cooldown_general
+			years = 15
+		}
+		# Prosperity event
+		plague_recovery_event_effect = yes
+	}
+}

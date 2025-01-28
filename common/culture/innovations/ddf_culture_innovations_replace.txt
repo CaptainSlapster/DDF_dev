@@ -1,0 +1,23 @@
+﻿#
+#
+# This file's purpose is to allow me to unlock the buildings via innovation
+#
+#
+@civil_construction_2 = "gfx/interface/icons/culture_innovations/innovation_civil_construction_02.dds"
+
+
+innovation_city_planning = {
+	group = culture_group_civic
+	culture_era = culture_era_tribal
+	icon = @civil_construction_2
+
+	unlock_building = city_01
+	unlock_building = temple_01
+	unlock_building = monastic_schools_01
+	unlock_building = megalith_01
+	unlock_building = market_villages_01
+    unlock_building = city_market_01
+
+	flag = global_regular
+	flag = tribal_era_regular
+}

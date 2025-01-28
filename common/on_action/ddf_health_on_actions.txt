@@ -1,0 +1,185 @@
+﻿
+
+# On actions for health related to DDF
+
+ddf_yearly_health_pulse = {
+    on_actions = {
+        delay = { days = { 1 89 } }
+		check_health_modifiers
+		ddf_random_death_events
+		delay = { days = { 90 179 } }
+		check_health_modifiers
+		delay = { days = { 180 269 } }
+		check_health_modifiers
+		ddf_random_death_events
+		delay = { days = { 270 365 } }
+		check_health_modifiers
+    }
+    random_events = {
+        800 = 0
+
+        80 = ddf_harm.9999 #ddf_harm.9999
+    }
+}
+
+
+ddf_random_health_complications = {
+    random_events = {
+		chance_to_happen = 15
+        750 = 0 
+        15 = ddf_harm.0005 #Angry peasant
+        15 = ddf_harm.0004 #Fell down stairs
+        50 = ddf_harm.0002 # sudden heart attack 50
+    }
+}
+
+#Any and all 'sudden deaths' you can't control#
+#Checked twice a year to make it fair
+#
+ddf_random_death_events = {
+	random_events = {
+		chance_to_happen = 10
+		850 = 0
+		15 = ddf_harm.0003 
+	}
+}
+
+check_health_modifiers = {
+    random_events = {
+        200 = 0
+        45 = ddf_health.0002 # Coughing fit
+		45 = ddf_health.0008 # Plague boils
+		45 = ddf_health.0009 # Feverish
+		45 = ddf_health.0010 # Rashy
+    }
+}
+
+
+ddf_disease_outbreak_pulse = {
+	random_events = {
+		chance_to_happen = 15 # Was 10
+
+		chance_of_no_event = {
+			# Perk reduces chance of sickness for yourself and for Courtiers/Guests
+			if = {
+				limit = {
+					has_perk = wash_your_hands_perk
+				}
+				value = 50
+			}
+			else_if = {
+				limit = {
+					exists = host
+					host = { has_perk = wash_your_hands_perk }
+				}
+				value = 25
+			}
+			if = { #Wet Nurse reduces chance of sickness for children
+				limit = {
+					OR = {
+						liege ?= {
+							any_court_position_holder ?= {
+								type = wet_nurse_court_position
+								has_relation_nursed_child = root
+							}
+						}
+						root = {
+							any_court_position_holder ?= {
+								type = wet_nurse_court_position
+								has_relation_nursed_child = root
+							}
+						}
+					}
+					root = { is_adult = no }
+				}
+				value = 25
+			}
+			if = { # Difficulty
+				limit = {
+					is_ai = no
+					has_game_rule = easy_difficulty
+				}
+				value = 25
+			}
+			else_if = {
+				limit = {
+					is_ai = no
+					has_game_rule = very_easy_difficulty
+				}
+				value = 75
+			}
+			else_if = {
+				limit = {
+					ai_should_get_extreme_conqueror_bonuses = yes
+				}
+				value = 75
+			}
+			else_if = {
+				limit = {
+					is_ai = yes
+					has_game_rule = easy_difficulty
+					any_parent = {
+						is_ai = no
+					}
+				}
+				value = 15
+			}
+			else_if = {
+				limit = {
+					is_ai = no
+					has_game_rule = very_easy_difficulty
+					any_parent = {
+						is_ai = no
+					}
+				}
+				value = 50
+			}
+			if = { # Game Rule
+				limit = {
+					has_game_rule = fewer_minor_disease_frequency
+				}
+				value = 30
+			}
+		}
+		65 = ddf_health.0005 #typhoid
+		25 = ddf_health.0003 #malaria (Random mosquito bite), but x15 more likely with drained by mosquitos modifier
+		300 = ddf_health.0012 #influenza
+		65 = ddf_health.0015 #diphtheria
+	}
+}
+
+
+##ONLY FOR THE EVENT##
+ddf_event_disease_pulse = {
+	random_events = {
+	4000 = health.1001 	#Ill
+	80 = health.1002  	#Pneumonic, x35 as common when ill
+	100 = health.1006 	#Consumption
+	25 = ddf_health.0005 #typhoid
+	25 = ddf_health.0012 #influenza	
+	25 = ddf_health.0015 #diphtheria
+	}
+}
+
+
+
+
+
+
+
+ddf_dungeon_ongoing = {
+	trigger = {
+		exists = imprisoner #Don't fire if we've been released since the on_action was called.
+	}
+
+	random_events = {
+		chance_to_happen = 50
+		300 = 0
+		#Long-term imprisonment events:
+		100 = ddf_dungeon_ongoing.0001 ##Contract typhoid
+		100 = ddf_dungeon_ongoing.0002 ##Contract influenza
+		100 = ddf_dungeon_ongoing.0003 ##Contract diphtheria
+
+
+	}
+}

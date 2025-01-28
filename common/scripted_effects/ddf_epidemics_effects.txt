@@ -1,0 +1,70 @@
+﻿#grab_epidemic_disease_effect
+#remove_isolated_capital_modifiers_effect
+
+#grabs your most important epidemic disease and saves it as a scope
+#refer to it in loc as [disease_scope.GetNameNoTooltip( GetPlayer )|l]
+grab_epidemic_disease_effect = {
+	if = {
+		limit = { has_trait = typhus }
+		trait:typhus = { save_scope_as = disease_scope }
+	}
+	else_if = {
+		limit = { has_trait = measles }
+		trait:measles = { save_scope_as = disease_scope }
+	}
+	else_if = {
+		limit = { has_trait = bubonic_plague }
+		trait:bubonic_plague = { save_scope_as = disease_scope }
+	}
+	else_if = {
+		limit = { has_trait = dysentery }
+		trait:dysentery = { save_scope_as = disease_scope }
+	}
+	else_if = {
+		limit = { has_trait = consumption }
+		trait:consumption = { save_scope_as = disease_scope }
+	}
+	else_if = {
+		limit = { has_trait = smallpox }
+		trait:smallpox = { save_scope_as = disease_scope }
+	}
+	else_if = { 
+		limit = { has_trait = ergotism}
+		trait:ergotism = { save_scope_as = disease_scope } 
+	}
+	else_if ={
+		limit = {has_trait = malaria}
+		trait:malaria = {save_scope_as = disease_scope}
+	}
+	else_if ={
+		limit = {has_trait = typhoid}
+		trait:typhoid = {save_scope_as = disease_scope}
+	}
+	else_if ={
+		limit = {has_trait = flu}
+		trait:flu = {save_scope_as = disease_scope}
+	}
+	else_if ={
+		limit = {has_trait = immolation}
+		trait:immolation = {save_scope_as = disease_scope}
+	}
+}
+
+grant_random_immunity = {
+	random_list = {
+		10 = {
+			add_character_flag = {flag = disease_immunity_smallpox }
+		}
+		10 = {
+			add_character_flag = {flag = disease_immunity_measles}
+		}
+		10 = {
+			add_character_flag = {flag = disease_immunity_typhoid}
+		}
+		10 = {
+			add_character_flag = {flag = disease_immunity_flu}
+		}
+
+
+	}
+}

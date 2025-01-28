@@ -1,0 +1,691 @@
+﻿
+namespace = ddf_harm
+
+
+#Suffer a heart attack if you're old and weak and whatnot#
+ddf_harm.0002 = {
+	type = character_event
+	title = ddf_harm.0002.t
+	desc = ddf_harm.0002.desc
+	theme = physical_health
+	left_portrait = {
+		character = root
+		animation = pain
+	}
+	lower_right_portrait = scope:medic
+	override_background = { reference = study }
+
+	trigger = {
+		# Standard checks.
+		is_adult = yes
+		#Extra checks for the mod DDF#
+		potential_heart_attack_trigger = yes
+		
+		# Medicine checks.
+
+	}
+
+	weight_multiplier = {
+		base = 0
+		# Add the weightings.
+		modifier = { add = harm_game_rule_likelihood_value }
+		# Plus some other factors apply.
+		modifier = {
+			add = 15
+			potential_heart_attack_trigger = yes
+		}
+		modifier = {
+			add = 10
+			has_character_modifier = obese_modifier
+		}
+        modifier = {
+            add = 10
+            ddf_bad_genetic_health_trigger = yes
+        }
+		modifier = {
+			age > 35
+			add = 5
+		}
+		modifier = {
+			has_trait = paranoid
+			add = 10
+		}
+		modifier = {
+			age > 45
+			add = 10
+		}
+		
+		modifier = {
+			age > 55
+			add = 15
+		}
+		
+		modifier = {
+			age > 65
+			add = 25
+		}
+	}
+
+	immediate = {
+		# Unblocked the flag because you can most certainly have a heart attack again.
+		#add_character_flag = had_ddf_harm_0002
+		# Give a little protection against spam.
+		ddf_harm_0002_apply_dynastic_short_cooldowns_effect = yes
+		# Try to grab our court physician.
+		ddf_harm_0000_grab_available_court_physician_effect = { PERSONAL_SKILL = diplomacy }
+	}
+
+	option = {
+		name = ddf_harm.0002.a
+
+		random_list = {
+			# You survive.
+			0 = {
+				modifier = { add = harm_event_random_list_low_odd_success_value }
+                modifier = {
+                    add = 10
+                    has_trait = whole_of_body
+                }
+                modifier = {
+                    add = 10
+                    has_trait = athletic
+                }
+				modifier = {
+                    health >= excellent_health
+                    add = 20
+                }
+				modifier = {
+                    health >= good_health
+                    add = 15
+                }
+				modifier = {
+                    health >= fine_health
+                    add = 10
+                }
+				desc = ddf_harm.0002.a.tt.success
+				send_interface_toast = {
+					type = event_toast_effect_good
+					title = ddf_harm.0002.a.tt.success
+					left_icon = root
+					custom_tooltip = harm.0000.tt.spared_for_now
+					log_harm_event_spared_as_variable_effect = yes
+				}
+			}
+			# You perish.
+			0 = {
+				modifier = { add = harm_event_random_list_low_odd_failure_value }
+                modifier = {
+                    add = 20
+                    has_trait = inbred
+                }
+				modifier = {
+                    add = 20
+                    has_trait = weak
+                }
+                modifier = {
+                    health <= poor_health
+                    add = 15
+                }
+				modifier = {
+					age > 35
+					add = 5
+				}
+				modifier = {
+					age > 45
+					add = 10
+				}
+				modifier = {
+					age > 55
+					add = 20
+				}
+				
+				modifier = {
+					has_trait = paranoid
+					add = 10
+				}
+				modifier = {
+					age > 65
+					add = 25
+				}
+				desc = harm.1091.a.tt.failure
+				send_interface_toast = {
+					type = event_toast_effect_bad
+					title = harm.1091.a.tt.failure
+					left_icon = root
+					death = { death_reason = death_heart_attack_ddf }
+					log_harm_event_death_as_variable_effect = yes
+				}
+			}
+		}
+
+		if = {
+			limit = { is_alive = yes }
+			stress_impact = {
+				base = medium_stress_impact_gain
+				calm = minor_stress_impact_loss
+			}
+		}
+		ai_chance = {
+			# Unless they've got a special option, the AI should always choose this.
+			base = 1
+		}
+	}
+	
+
+}
+
+###
+#	SIDS 
+###
+ddf_harm.0003 = {
+	hidden = yes
+	type = character_event
+	title = ddf_harm.0003.t
+	#desc = ddf_harm.0003.desc
+	theme = physical_health
+	left_portrait = {
+		character = root
+		animation = pain
+	}
+	lower_right_portrait = scope:medic
+	override_background = { reference = study }
+
+	trigger = {
+		ddf_sids_trigger = yes
+		is_adult = no
+		# Medicine checks.
+		character_can_easily_self_treat_trigger = no
+
+	}
+
+	weight_multiplier = {
+		base = 0
+		# Add the weightings.
+		modifier = { add = harm_game_rule_likelihood_value }
+		# Plus some other factors apply.
+		modifier = {
+			add = 0.50
+			ddf_sids_trigger = yes
+		}
+        modifier = {
+            add = 0.30
+            ddf_bad_genetic_health_trigger = yes
+        }
+		modifier = {
+			has_trait = pure_blooded
+			add = -10
+		}
+	}
+
+	immediate = {
+		# Give a little protection against spam.
+		ddf_harm_0002_apply_dynastic_short_cooldowns_effect = yes
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = ddf_harm.0003.death_by_sids
+			left_icon = root
+			death = { death_reason = death_sids }
+			log_harm_event_death_as_variable_effect = yes
+		}
+	}
+
+}
+
+#fell down stairs
+ddf_harm.0004 = {
+	type = character_event
+	title = ddf_harm.0004.t
+	desc = ddf_harm.0004.desc
+	theme = physical_health
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+
+	override_background = { reference = study }
+
+	trigger = {
+		# Standard checks.
+		OR = {
+		is_available_adult = yes
+		is_available_child = yes
+		}
+	}
+
+	weight_multiplier = {
+		base = 0
+		# Add the weightings.
+		modifier = { add = harm_game_rule_likelihood_value }
+		modifier = {
+			OR = {
+			has_trait = infirm
+			has_trait = possessed
+			has_trait = one_legged
+			has_trait = one_eyed
+			}
+			add = 0.15
+		}
+		modifier = {
+			age > 55
+			add = 0.30
+		}
+	}
+
+	immediate = {
+		# Give a little protection against spam.
+		ddf_harm_0000_apply_dynastic_cooldowns_effect = yes
+
+	}
+
+	option = {
+		name = ddf_harm.0004.a
+
+		random_list = {
+			# You survive.
+
+			#This will be a bit higer because falling down stairs isn't really fatal
+			#Not unless you're old and fragile
+			25 = {
+				modifier = { add = harm_event_random_list_low_odd_success_value }
+                modifier = {
+                    add = 10
+                    has_trait = athletic
+                }
+				modifier = {
+					add = 20
+					has_trait = patient
+				}
+				modifier = {
+					add = 15
+					has_trait = lazy
+				}
+                modifier = {
+                    add = 5
+                    has_trait = strong
+                }		
+				modifier = {
+                    add = 10
+                    age <= 55
+                }		
+				desc = ddf_harm.0004.a.tt.success
+				send_interface_toast = {
+					type = event_toast_effect_good
+					title = ddf_harm.0004.a.tt.success
+					left_icon = root
+					custom_tooltip = harm.0000.tt.spared_for_now
+					log_harm_event_spared_as_variable_effect = yes
+				}
+			}
+			# You perish.
+			0 = {
+				modifier = { add = harm_event_random_list_low_odd_failure_value }
+				modifier = {
+					OR = {
+						has_trait = one_legged
+						has_trait = one_eyed
+					}
+					add = 5
+				}
+				modifier = {
+					add = 10
+					has_trait = impatient
+				}
+				modifier = {
+                    add = -10
+                    age <= 55
+                }		
+				modifier = {
+                    add = -15
+                    age <= 35
+                }		
+				modifier = {
+					age > 55
+					add = 10
+				}
+				modifier = {
+					age > 65
+					add = 15
+				}
+				desc = harm.1091.a.tt.failure
+				send_interface_toast = {
+					type = event_toast_effect_bad
+					title = harm.1091.a.tt.failure
+					left_icon = root
+					death = { death_reason = death_fell_to_death }
+					log_harm_event_death_as_variable_effect = yes
+				}
+			}
+		}
+
+		ai_chance = {
+			# Unless they've got a special option, the AI should always choose this.
+			base = 1
+		}
+	}
+
+	option = {
+		name = ddf_harm.0004.b
+		trigger = {
+			OR = {
+				has_trait = infirm
+				has_trait = zealous
+			AND = {
+				age >= 45
+				has_trait = incapable
+			}
+			}
+		}
+
+		send_interface_toast = {
+			type = event_toast_effect_bad
+			title = ddf_harm.0004.b.tt.death
+			left_icon = root
+			death = { death_reason = death_fell_to_death }
+			log_harm_event_death_as_variable_effect = yes
+		}
+		ai_chance = {
+			# Unless they've got a special option, the AI should always choose this.
+			base = 1
+			modifier = {
+				OR = {
+					has_trait = infirm
+					has_trait = zealous
+				}
+				add = 2.5
+			}
+			modifier ={
+				age >=45
+				add = 1
+			}
+			modifier ={
+				age >=55
+				add = 1.5
+			}
+		}
+	}
+}
+
+
+##Attacked by crazy peasant##
+#
+#	DO NOT USE YET
+#
+ddf_harm.0005 = {
+	type = character_event
+	title = ddf_harm.0005.t
+	desc = ddf_harm.0005.desc
+	theme = physical_health
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	right_portrait = {
+		character = scope:attacker
+		animation = threatening
+
+	}
+	override_background = { reference = alley_day }
+
+	trigger = {
+		# Standard checks.
+		is_available_adult = yes
+		highest_held_title_tier >= tier_county
+		is_ruler = yes
+		NOT = {
+			is_available_child = yes
+			is_lowborn = yes
+		}
+	}
+
+	weight_multiplier = {
+		base = 0
+		# Add the weightings.
+		modifier = { add = harm_game_rule_likelihood_value }
+		modifier = {
+			trigger = {
+				NOT = {
+					any_court_position_holder = {
+        				type = bodyguard_court_position
+        				count = 1
+        			}
+				}
+			}
+			add = 10
+		}
+
+		modifier = {
+			has_trait = weak
+			add = 5
+		}
+		modifier = {
+			has_trait = infirm
+			add = 10
+		}
+
+		modifier = {
+			highest_held_title_tier = tier_county
+			add = 5
+		}
+		modifier = {
+			highest_held_title_tier = tier_duchy
+			add = 10
+		}
+		modifier = {
+			highest_held_title_tier = tier_kingdom
+			add = 15
+		}
+		modifier = {
+			highest_held_title_tier = tier_empire
+			add = 20
+		}
+	}
+
+	immediate = {
+		# Give a little protection against spam.
+		ddf_harm_0000_apply_dynastic_cooldowns_effect = yes
+
+		create_character = {
+			location = this.location
+			template = ce1_hooded_figure_template
+			intrigue = {
+				min_template_very_high_skill
+				max_template_very_high_skill
+			}
+			martial = {
+				min_template_high_skill
+				max_template_high_skill
+			}
+			prowess = {
+				min_template_decent_skill
+				max_template_decent_skill
+			}
+			save_scope_as = attacker
+		}
+	}
+
+	#Fight back
+	option = {
+		name = ddf_harm.0005.a
+		trigger = {
+			can_start_single_combat_trigger = yes
+			# Tell the AI not to kill itself if it sucks.
+			trigger_if = {
+				limit = { is_ai = yes }
+				prowess >= 15
+			}
+		}		
+		skill = prowess
+
+		if = {
+			limit = {
+				is_ruler = yes
+				NOT = { government_has_flag = government_is_administrative }
+			}
+			add_legitimacy = 50
+		}
+		else_if = {
+			limit = {
+				AND = {
+					is_ruler = yes
+					government_has_flag = government_is_administrative 
+				}
+			}
+			change_influence = 50
+		}
+		save_scope_value_as = {
+			name = method
+			value = flag:prowess_sce
+		}
+		custom_tooltip = ddf_harm.0005.a.tt.duel_begins
+		if = {
+			limit = { is_ai = no }
+			configure_start_single_combat_effect = {
+				SC_INITIATOR = scope:attacker
+				SC_ATTACKER = scope:attacker
+				SC_DEFENDER = root
+				FATALITY = always
+				FIXED = no
+				LOCALE = alley_night
+				INVALIDATION_EVENT = single_combat.1006
+				OUTPUT_EVENT = single_combat.1006
+			}
+		}
+		else = {
+			configure_start_single_combat_effect = {
+				SC_INITIATOR = scope:attacker
+				SC_ATTACKER = scope:attacker
+				SC_DEFENDER = root
+				FATALITY = always
+				FIXED = no
+				LOCALE = alley_night
+				INVALIDATION_EVENT = single_combat.1006
+				OUTPUT_EVENT = single_combat.1006
+			}
+		}
+
+		stress_impact = {
+			brave = minor_stress_impact_loss
+			craven = medium_stress_impact_gain
+		}		
+		ai_chance = {
+			# Unless they've got a special option, the AI should always choose this.
+			base = 1
+		}
+	}
+	#Run away!
+	option = {
+		name = ddf_harm.0005.b
+		if = {
+			limit = {
+				is_ruler = yes
+				NOT = { government_has_flag = government_is_administrative }
+			}
+			add_legitimacy = -50
+		}
+		else_if = {
+			limit = {
+				AND = {
+					is_ruler = yes
+					government_has_flag = government_is_administrative 
+				}
+			}
+			change_influence = -50
+		}
+		random_list = {
+			# You survive.
+			0 = {
+				modifier = { add = harm_event_random_list_low_odd_success_value }
+                modifier = {
+                    add = 10
+                    has_trait = athletic
+                }
+				modifier = {
+					add = 20
+					has_trait = patient
+				}
+				modifier = {
+					add = 15
+					has_trait = lazy
+				}
+                modifier = {
+                    add = 5
+                    has_trait = strong
+                }		
+				modifier = {
+                    add = 10
+                    age <= 55
+                }		
+				desc = ddf_harm.0005.a.tt.success
+			#trigger_event = {id = ddf_harm.0006} I might do this idk
+			}
+			# You perish.
+			0 = {
+				modifier = { add = harm_event_random_list_low_odd_failure_value }
+				modifier = {
+					OR = {
+						has_trait = one_legged
+						has_trait = one_eyed
+					}
+					add = 5
+				}
+				modifier = {
+					add = 10
+					has_trait = impatient
+				}
+				modifier = {
+                    add = -10
+                    age <= 55
+                }		
+				modifier = {
+                    add = -15
+                    age <= 35
+                }		
+				modifier = {
+					age > 55
+					add = 10
+				}
+				modifier = {
+					age > 65
+					add = 15
+				}
+				desc = harm.1091.a.tt.failure
+				send_interface_toast = {
+					type = event_toast_effect_bad
+					title = harm.1091.a.tt.failure
+					left_icon = root
+					death = { death_reason = death_murdered_by_crazed_peasant }
+					log_harm_event_death_as_variable_effect = yes
+				}
+			}
+		}
+
+		ai_chance = {
+			# Unless they've got a special option, the AI should always choose this.
+			base = 1
+		}
+	}
+}
+
+
+
+
+#Just the maintenance like in vanilla :)#
+ddf_harm.9999 = {
+	hidden = yes
+	trigger = {
+		# Standard checks.
+		OR = {
+		is_ruler = yes 
+		is_ruler = no
+		}
+		OR = {
+			ddf_harm_0000_not_on_dynastic_cooldown_trigger = yes
+		}
+		harm_game_rule_enablement_trigger = yes
+	}
+
+	immediate = {
+		trigger_event = { on_action = ddf_random_health_complications }
+	}
+}

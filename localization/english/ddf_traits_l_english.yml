@@ -1,0 +1,23 @@
+﻿l_english:
+
+ trait_infertile_2: "Infertile"
+ trait_infertile_2_female: "Bound"
+ trait_infertile_2_male: "Dry"
+ trait_infertile_2_desc: "This character is doomed to never have an heir."
+ trait_infertile_2_female_desc: "[ROOT.GetCharacter.GetFirstNamePossessiveNoTooltip] womb is forever sworn to emptiness."
+ trait_infertile_2_male_desc: "[ROOT.GetCharacter.GetFirstNamePossessiveNoTooltip] sack is completely empty and dry."
+ trait_infertility_group: "Childless"
+
+ trait_malaria: "Malaria"
+ trait_malaria_desc: "Riddled by scars, rashes, and bumps, this character will never be the same again even if they survive their malady."
+
+ trait_typhoid: "Typhoid Fever"
+ trait_typhoid_desc: "Riddled by scars, rashes, and bumps, this character will never be the same again even if they survive their malady."
+
+ trait_flu: "Influenza"
+ trait_flu_desc: "Cold shivers, high temperature, my bones.. They ache with pain."
+
+ trait_diphtheria: "Diptheria"
+ trait_diphtheria_desc: "Riddled by scars, rashes, and bumps, this character will never be the same again even if they survive their malady."
+ trait_diphtheria_character_desc: "[ROOT.GetCharacter.GetFirstNamePossessiveNoTooltip] body is covered with lesions and has a throat full of rocks!  $epidemic_cureable$"
+

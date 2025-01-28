@@ -1,0 +1,39 @@
+﻿l_english:
+
+ epidemic_malaria: "Malaria"
+ epidemic_roman_plague: "Roman Plague"
+ epidemic_pharoh_curse: "Pharoh's Curse"
+ epidemic_bug_bite_fever: "Bug Bite Fever"
+ epidemic_satans_burning_blood: "$epidemic_devils_loc$ Burning Blood"
+ epidemic_fourth_plague: "Fourth Plague of Egypt"
+ epidemic_realm_bug_bite_plague: "$epidemic_realm_loc$ Bug Bite Plague"
+ epidemic_culture_bug_bite_plague: "$epidemic_culture_loc$ Bug Bite Plague"
+ epidemic_location_bug_bite_plague: "$epidemic_province_loc$ Bug Bite Plague"
+ epidemic_ruler_bug_bite_plague: "$epidemic_ruler_possessive_loc$ Bug Bite Plague"
+ epidemic_holder_bug_bite_plague: "$epidemic_holder_loc$ Bug Bite Plague"
+ epidemic_evil_god_bug_bite_plague: "$epidemic_devils_loc$ Bug Bite Plague"
+ trait_malaria_character_desc: "[ROOT.GetCharacter.GetFirstNamePossessiveNoTooltip] body is afflicted by painful seizures, fevers, headaches, nausea and diarrhea. $epidemic_uncureable$"
+
+ epidemic_rulers_typhoid: "$epidemic_ruler_possessive_loc$ "
+ epidemic_titled_rulers_typhoid: "$epidemic_titled_ruler_possessive_loc$ "
+ epidemic_realm_typhoid: "$epidemic_realm_loc$ "
+ epidemic_holder_typhoid: "$epidemic_holder_loc$  "
+ epidemic_culture_typhoid:  "$epidemic_culture_loc$  "
+ epidemic_location_typhoid: "$epidemic_province_loc$  "
+
+ trait_typhoid_character_desc: "[ROOT.GetCharacter.GetFirstNamePossessiveNoTooltip] body is afflicted by sweats, fever, and stomach cramps.  $epidemic_cureable$"
+
+ epidemic_typhoid: "Typhoid"
+
+ trait_flu_character_desc: "[ROOT.GetCharacter.GetFirstNamePossessiveNoTooltip] body is aching, hot, and yet cold."
+ epidemic_flu: "Influenza"
+ 
+
+ epidemic_uncureable: "#N Cannot be Cured! #!"
+ epidemic_cureable: "#P Can be Cured! #!"
+
+
+ disease_typhoid: "Typhoid"
+ disease_malaria: "Malaria"
+ disease_flu: "Flu"
+

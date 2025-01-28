@@ -1,0 +1,392 @@
+﻿
+
+potential_heart_attack_trigger = {
+        OR = {
+            age >= 60
+
+            AND = {
+                health <= good_health
+                age >= 55
+            }
+            AND = {
+                health <= medium_health
+                age >= 50
+            }
+            AND = {
+                health <= fine_health
+                age >= 45
+            }
+            AND = {
+                health <= poor_health
+                age >= 40
+            }
+            AND = {
+                health <= dying_health
+                age >= 35
+            }
+            AND = {
+                has_trait = infirm
+                age >= 25
+            }
+            AND = {
+                has_trait = gluttonous
+                age >= 40
+            }
+            AND = {
+                has_trait = lazy
+                has_trait = weak
+                age >= 30
+            }
+        }
+}
+ddf_bad_genetic_health_trigger = {
+    OR ={
+        has_trait = inbred
+        AND = {
+            age > 16
+            has_trait = inbred
+        }
+	
+    }
+}
+ddf_healthy_genetic_trigger = {
+    OR = {
+        has_trait = pure_blooded
+    }
+}
+ddf_healthy_traits_trigger = {
+    OR = {
+        has_trait = whole_of_body
+        has_trait = athletic
+        has_trait = strong
+    }
+}
+#Not diseases#
+ddf_unhealthy_traits_trigger = {
+	OR = {
+		has_trait = inbred
+		has_trait = infirm
+		has_trait = incapable
+		has_trait = weak
+		has_trait = intellect_bad_3
+		has_trait = physique_bad_1
+		has_trait = physique_bad_2
+		has_trait = physique_bad_3
+		has_trait = spindly
+		has_trait = wheezing
+	}
+}
+
+has_any_disease_trigger = {
+	OR = {
+		has_trait = ill
+ 		has_trait = lovers_pox
+ 		has_trait = great_pox
+ 		has_trait = early_great_pox
+		has_trait = bubonic_plague
+		has_trait = smallpox
+		has_trait = measles
+		has_trait = ergotism
+		has_trait = dysentery
+		has_trait = consumption
+		has_trait = typhus
+		has_trait = cancer
+		has_trait = pneumonic
+		has_trait = leper
+		has_trait = gout_ridden
+        has_trait = typhoid
+        has_trait = malaria
+		has_trait = flu
+		has_trait = diphtheria
+
+		has_trait = immolation
+ 	}
+}
+has_epidemic_disease_trigger = {
+	OR = {
+		has_trait = bubonic_plague
+		has_trait = smallpox
+		has_trait = measles
+		has_trait = ergotism
+		has_trait = dysentery
+		has_trait = consumption
+		has_trait = typhus
+		has_trait = malaria
+		has_trait = typhoid
+		has_trait = flu		
+		has_trait = diphtheria
+
+		has_trait = immolation
+	}
+}
+
+has_contagious_disease_trigger = {  #Only diseases handled by the disease_outbreak_pulse and the disease_recovery_pulse
+	OR = {
+		has_std_trigger = yes
+		has_trait = bubonic_plague
+		has_trait = smallpox
+		has_trait = measles
+		has_trait = dysentery
+		has_trait = consumption
+		has_trait = typhus
+		has_trait = typhoid
+		has_trait = malaria
+		has_trait = flu
+		has_trait = diphtheria
+
+		has_trait = immolation
+	}
+}
+
+has_yearly_recovery_disease_trigger = {
+	OR = {
+		has_trait = consumption
+		has_trait = cancer
+		has_trait = great_pox
+		has_trait = gout_ridden
+		has_trait = typhoid
+		has_trait = flu
+		has_trait = diphtheria
+	}
+}
+
+has_quarterly_recovery_disease_trigger = {
+	OR = {
+		
+		has_trait = ill
+		has_trait = pneumonic
+		has_trait = typhus
+		has_trait = smallpox
+		has_trait = bubonic_plague
+		has_trait = typhoid
+		has_trait = flu
+		has_trait = diphtheria
+	}
+}
+
+has_short_disease_trigger = {
+	OR = {
+		has_trait = ill
+		has_trait = typhus
+		has_trait = smallpox
+		has_trait = bubonic_plague
+		has_trait = ergotism
+		has_trait = measles
+		has_trait = dysentery
+		has_trait = typhoid
+	}
+}
+
+has_serious_disease_trigger = {
+	OR = {
+		has_trait = bubonic_plague
+		has_trait = great_pox
+		has_trait = leper
+		has_trait = typhus
+		has_trait = smallpox
+		has_trait = cancer
+		has_trait = pneumonic
+		has_trait = consumption
+		has_trait = measles
+		has_trait = dysentery
+		has_trait = ergotism
+        has_trait = malaria
+		has_trait = typhoid
+		has_trait = flu
+		has_trait = diphtheria
+	}
+}
+has_insect_carried_disease_trigger = {
+	OR = {
+		has_trait = bubonic_plague
+		has_trait = typhus
+        has_trait = malaria
+
+	}
+}
+
+
+has_treatable_disease_trigger = {
+	OR = {
+		has_trait = consumption
+		has_trait = cancer
+		has_trait = great_pox
+		has_trait = gout_ridden
+		has_trait = ill
+		has_trait = pneumonic
+		has_trait = typhus
+		has_trait = smallpox
+		has_trait = bubonic_plague
+		has_trait = leper
+		has_trait = measles
+		has_trait = dysentery
+		has_trait = ergotism
+		has_trait = typhoid
+		has_trait = flu
+		has_trait = diphtheria
+	}
+}
+
+
+##This trigger is only for the purposes of proper reporting :)##
+has_ddf_disease_trigger = {
+	OR = {
+		has_trait = typhoid
+		has_trait = malaria
+		has_trait = flu
+		has_trait = diphtheria
+
+		has_trait = immolation
+	}
+}
+
+ddf_harm_0000_not_on_dynastic_cooldown_trigger = {
+	# Are we a player?
+	trigger_if = {
+		limit = { is_ai = no }
+		NOT = {
+			# We structure it like this so that the variable registers as used by the game, avoiding the need for an error suppression event.
+			dynasty ?= { has_variable = player_random_harm_cooldown }
+		}
+	}
+	# No? Ok, then try our house.
+	trigger_if = {
+		limit = {
+			is_ai = yes
+			exists = house
+		}
+		NOT = {
+			# We structure it like this so that the variable registers as used by the game, avoiding the need for an error suppression event.
+			house ?= { has_variable = ai_random_harm_cooldown}
+		}
+	}
+}
+
+####
+
+ddf_can_contract_disease_trigger = {
+	save_temporary_scope_as = sick_character_check
+
+	# Is not immune to disease
+	NOT = { has_character_flag = immune_to_disease }
+
+	#Doesn't already have the trait
+	NOT = { has_trait = $DISEASE$ }
+
+	save_temporary_scope_value_as = {
+		name = disease_type_for_trigger
+		value = flag:$DISEASE$
+	}
+
+	#Secondary requirements (mutually exclusive diseases or immunity)
+	OR = {
+		NOR = { #No secondary requirement
+			scope:disease_type_for_trigger = flag:ill
+			scope:disease_type_for_trigger = flag:smallpox
+			scope:disease_type_for_trigger = flag:bubonic_plague
+		}
+		AND = {
+			scope:disease_type_for_trigger = flag:ill
+			NOT = { has_trait = pneumonic }
+		}
+		AND = {
+			scope:disease_type_for_trigger = flag:smallpox
+			NOT = { has_character_flag = disease_immunity_smallpox }
+		}
+		AND = {
+			scope:disease_type_for_trigger = flag:measles
+			NOT = { has_character_flag = disease_immunity_measles }
+		}
+		AND = {
+			scope:disease_type_for_trigger = flag:bubonic_plague
+			NOT = { has_character_flag = disease_immunity_bubonic_plague }
+		}
+		AND = {
+			scope:disease_type_for_trigger = flag:typhoid
+			NOT = { has_character_flag = disease_immunity_typhoid }
+		}
+		AND = {
+			scope:disease_type_for_trigger = flag:flu
+			NOT = { has_character_flag = disease_immunity_flu }
+		}
+		AND = {
+			scope:disease_type_for_trigger = flag:diphtheria
+			NOT = { has_character_flag = disease_immunity_diphtheria }
+		}
+	}
+
+	#No disease stacking
+	OR = {
+		can_get_non_epidemic_disease_trigger = yes
+		OR = {
+			scope:disease_type_for_trigger = flag:bubonic_plague
+			scope:disease_type_for_trigger = flag:smallpox
+		}
+		AND = {
+			scope:disease_type_for_trigger = flag:pneumonic
+			has_trait = ill
+		}	
+	}
+
+	#Cooldown is over
+	NOR = {
+		has_character_flag = contraction_cooldown_general #Haven't had a disease for 2 years
+		#No specific cooldowns:
+		#Ill, you can get it often
+		#Smallpox and bubonic plague, after one time you are immune
+		#Lover's pox and leper because you never recover
+		AND = {
+			has_character_flag = contraction_cooldown_pneumonic
+			scope:disease_type_for_trigger = flag:pneumonic
+		}
+		AND = {
+			has_character_flag = contraction_cooldown_gout_ridden
+			scope:disease_type_for_trigger = flag:gout_ridden
+		}
+		AND = {
+			has_character_flag = contraction_cooldown_typhus
+			scope:disease_type_for_trigger = flag:typhus
+		}
+		AND = {
+			has_character_flag = contraction_cooldown_consumption
+			scope:disease_type_for_trigger = flag:consumption
+		}
+		AND = {
+			has_character_flag = contraction_cooldown_cancer
+			scope:disease_type_for_trigger = flag:cancer
+		}
+		AND = {
+			has_character_flag = contraction_cooldown_great_pox
+			scope:disease_type_for_trigger = flag:great_pox
+		}
+		AND = {
+			has_character_flag = contraction_cooldown_dysentery
+			scope:disease_type_for_trigger = flag:dysentery
+		}
+		AND = {
+			has_character_flag = contraction_cooldown_ergotism
+			scope:disease_type_for_trigger = flag:ergotism
+		}
+
+	}
+}
+
+is_available_child = {
+	is_adult = no
+	is_available = yes
+}
+
+
+ddf_sids_trigger = {
+	OR = {
+		age < 3
+		AND = {
+			age < 3
+			OR = {
+				#They can die of sids if they are sick
+				has_any_disease_trigger = yes
+				ddf_unhealthy_traits_trigger = yes
+			}
+		}
+	}
+}

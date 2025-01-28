@@ -1,0 +1,39 @@
+﻿##
+#
+# ALL JUST FOR FANTASY ONLY
+##
+
+
+immolation = {
+	health = -1000 #Burning to death by a dragon = death
+	elderly_health = -1000
+	child_health = -1000
+	fertility = -1
+
+	category = health
+	
+	dread_baseline_add = -10
+	dread_loss_mult = 1
+
+	attraction_opinion = -10
+	
+	ruler_designer_cost = 0
+
+	flag = illness
+	flag = debilitating_illness
+	#flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_immolation_desc
+			}
+			desc = trait_immolation_character_desc
+		}
+	}
+
+	ai_energy = -75
+}

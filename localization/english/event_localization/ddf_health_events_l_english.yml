@@ -1,0 +1,65 @@
+﻿l_english:
+
+ #MODIFIER EVENTS#
+ ddf_health.0002.desc: "I can't stop coughing!"
+ ddf_health.0008.desc: "Liquid filled lumps in my skin!"
+ ddf_health.0009.desc: "I feel hot.."
+ ddf_health.0010.desc: "Why am I so itchy?"
+ ddf_health.0011.t: "Immunization!"
+ ddf_health.0011.desc: "The physician has tried a method of healing.. Hopefully it works!"
+
+
+
+##Contraction#
+ ddf_health.0003.t: "[SCOPE.Custom('EventTitleDisease')]: My Mortal Body"
+ ddf_health.0003.desc: "I've been feeling off lately after a bunch of bug bites appeared on my skin. Surely there can't be anything wrong with a couple bug bites!"
+ ddf_health.0003.nophysician.desc: "Surely there must be someone in the realm I can get to fix this cursed condition..."
+ ddf_health.0003.court_physician.desc: ""My [ROOT.Char.GetLadyLord] these bumps are red and cracking. I can't say what this is, but hopefully these herbs will help..""
+ ddf_health.0003.a: "All I want is to stay in bed..."
+ ddf_health.0003.b: "I must return home #EMP at once!#!"
+
+ ddf_health.0005.t: "[SCOPE.Custom('EventTitleDisease')]: My Sweaty Body"
+ ddf_health.0005.desc: "My body is aching, and my chest is pounding. It only seemed like yesterday I was fine.. I struggle to sleep and my head is pounding when I hear my courtiers traverse the grounds."
+ ddf_health.0005.nophysician.desc: "Surely there must be someone in the realm I can get to fix this cursed condition..."
+ ddf_health.0005.court_physician.desc: "\n\nMy physician [physician.GetFirstName] feels my body for a temperature. "It appears to be typhoid, my [ROOT.Char.GetLadyLord].  Not to be taken lightly. How shall we proceed?""
+ ddf_health.0005.a: "All I want is to stay in bed..."
+ ddf_health.0005.b: "I must return home #EMP at once!#!"
+
+ ddf_health.0015.t: "[SCOPE.Custom('EventTitleDisease')]: My Mortal Body"
+ ddf_health.0015.desc: "I've been feeling off lately after a bunch of bug bites appeared on my skin. Surely there can't be anything wrong with a couple bug bites!"
+ ddf_health.0015.nophysician.desc: "Surely there must be someone in the realm I can get to fix this cursed condition..."
+ ddf_health.0015.court_physician.desc: ""My [ROOT.Char.GetLadyLord] these bumps are red and cracking. I can't say what this is, but hopefully these herbs will help..""
+ ddf_health.0015.a: "All I want is to stay in bed..."
+ ddf_health.0015.b: "I must return home #EMP at once!#!"
+
+ ddf_health.0012.t: "[SCOPE.Custom('EventTitleDisease')]: My Mortal Body"
+ ddf_health.0012.desc: "I've been feeling off lately after a bunch of bug bites appeared on my skin. Surely there can't be anything wrong with a couple bug bites!"
+ ddf_health.0012.nophysician.desc: "Surely there must be someone in the realm I can get to fix this cursed condition..."
+ ddf_health.0012.court_physician.desc: ""My [ROOT.Char.GetLadyLord] these bumps are red and cracking. I can't say what this is, but hopefully these herbs will help..""
+ ddf_health.0012.a: "All I want is to stay in bed..."
+ ddf_health.0012.b: "I must return home #EMP at once!#!"
+
+
+
+ ##RECOVERY###
+ ddf_health.0006.t: "[SCOPE.Custom('EventTitleDisease')]: My Body is Regulating"
+ ddf_health.0006.desc: "It feels so wonderful to have my body temperature returning to normal. I no longer awake in the night in cold sweats."
+ ddf_health.0006.a: "Back to my realm!"
+ ddf_health.0004.t: "[SCOPE.Custom('EventTitleDisease')]: My Body is Returning"
+ ddf_health.0004.desc: "It feels so wonderful to have my body temperature returning to normal. I no longer awake in the night in cold sweats."
+ ddf_health.0004.a: "Back to my realm!"
+
+ ddf_health.0016.t: "[SCOPE.Custom('EventTitleDisease')]: My Body is Regulating"
+ ddf_health.0016.desc: "It feels so wonderful to have my body temperature returning to normal. I no longer awake in the night in cold sweats."
+ ddf_health.0016.a: "Back to my realm!"
+
+ ddf_health.0013.t: "[SCOPE.Custom('EventTitleDisease')]: My Body is Regulating"
+ ddf_health.0013.desc: "It feels so wonderful to have my body temperature returning to normal. I no longer awake in the night in cold sweats."
+ ddf_health.0013.a: "Back to my realm!"
+
+ ##TRAVEL LOCALIZATION##
+
+ contracted_malaria: "Contracted Malaria!"
+
+
+ 

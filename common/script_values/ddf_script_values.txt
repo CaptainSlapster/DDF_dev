@@ -1,0 +1,219 @@
+﻿#
+# This is for my generic script values
+#
+
+
+#####################################
+# Development Growth Flat DDF CUSTOM# 
+#####################################
+
+# Base
+@ddf_normal_development_growth_base = 0.02
+
+# Scaling Increase
+@ddf_normal_dev_growth_per_tier = 0.03
+
+@ddf_normal_development_growth_tier_1 = @[ddf_normal_development_growth_base]
+@ddf_normal_development_growth_tier_2 = @[ddf_normal_development_growth_tier_1 + ddf_normal_dev_growth_per_tier]
+@ddf_normal_development_growth_tier_3 = @[ddf_normal_development_growth_tier_2 + ddf_normal_dev_growth_per_tier]
+@ddf_normal_development_growth_tier_4 = @[ddf_normal_development_growth_tier_3 + ddf_normal_dev_growth_per_tier]
+@ddf_normal_development_growth_tier_5 = @[ddf_normal_development_growth_tier_4 + ddf_normal_dev_growth_per_tier]
+@ddf_normal_development_growth_tier_6 = @[ddf_normal_development_growth_tier_5 + ddf_normal_dev_growth_per_tier]
+@ddf_normal_development_growth_tier_7 = @[ddf_normal_development_growth_tier_6 + ddf_normal_dev_growth_per_tier]
+@ddf_normal_development_growth_tier_8 = @[ddf_normal_development_growth_tier_7 + ddf_normal_dev_growth_per_tier]
+
+ddf_normal_building_development_growth_tier_1 = @[ddf_normal_development_growth_tier_1]
+ddf_normal_building_development_growth_tier_2 = @[ddf_normal_development_growth_tier_2]
+ddf_normal_building_development_growth_tier_3 = @[ddf_normal_development_growth_tier_3]
+ddf_normal_building_development_growth_tier_4 = @[ddf_normal_development_growth_tier_4]
+ddf_normal_building_development_growth_tier_5 = @[ddf_normal_development_growth_tier_5]
+ddf_normal_building_development_growth_tier_6 = @[ddf_normal_development_growth_tier_6]
+ddf_normal_building_development_growth_tier_7 = @[ddf_normal_development_growth_tier_7]
+ddf_normal_building_development_growth_tier_8 = @[ddf_normal_development_growth_tier_8]
+
+
+
+#######
+#
+#	PLAGUE_RESIST_VALUES
+#
+#
+######
+
+##
+#   Base Values
+##
+
+#Economic buildings such as tradeports, etc
+@ddf_base_plague_resist_economic_add = 2
+@ddf_base_plague_resist_economic_subtract = -2
+
+##Holdings such as cities,castles,etc
+@ddf_base_plague_resist_holding_add = 5
+@ddf_base_plague_resist_holding_subtract = -5
+
+#Military buildings such as camps, barracks, etc
+@ddf_base_plague_resist_military_add = 2
+@ddf_base_plague_resist_military_subtract = -2
+
+#Special buildings such as hagia sophia, etc
+@ddf_base_plague_resist_special_building_add = 10
+@ddf_base_plague_resist_special_building_subtract = -10
+
+@ddf_plague_resist_economic_scale_per_tier = 2
+@ddf_plague_resist_holding_scale_per_tier = 5
+@ddf_plague_resist_military_scale_per_tier = 2
+@ddf_plague_resist_special_building_scale_per_tier = 10
+
+
+#Economic buildings such as tradeports, etc
+@ddf_plague_resist_economic_gain_tier_1 = @[ddf_base_plague_resist_economic_add]
+@ddf_plague_resist_economic_gain_tier_2 = @[ddf_plague_resist_economic_gain_tier_1 + ddf_plague_resist_economic_scale_per_tier]
+@ddf_plague_resist_economic_gain_tier_3 = @[ddf_plague_resist_economic_gain_tier_2 + ddf_plague_resist_economic_scale_per_tier]
+@ddf_plague_resist_economic_gain_tier_4 = @[ddf_plague_resist_economic_gain_tier_3 + ddf_plague_resist_economic_scale_per_tier]
+@ddf_plague_resist_economic_gain_tier_5 = @[ddf_plague_resist_economic_gain_tier_4 + ddf_plague_resist_economic_scale_per_tier]
+@ddf_plague_resist_economic_gain_tier_6 = @[ddf_plague_resist_economic_gain_tier_5 + ddf_plague_resist_economic_scale_per_tier]
+@ddf_plague_resist_economic_gain_tier_7 = @[ddf_plague_resist_economic_gain_tier_6 + ddf_plague_resist_economic_scale_per_tier]
+@ddf_plague_resist_economic_gain_tier_8 = @[ddf_plague_resist_economic_gain_tier_7 + ddf_plague_resist_economic_scale_per_tier]
+
+@ddf_plague_resist_economic_loss_tier_1 = @[ddf_base_plague_resist_economic_subtract]
+@ddf_plague_resist_economic_loss_tier_2 = @[ddf_plague_resist_economic_loss_tier_1 - ddf_plague_resist_economic_scale_per_tier]
+@ddf_plague_resist_economic_loss_tier_3 = @[ddf_plague_resist_economic_loss_tier_2 - ddf_plague_resist_economic_scale_per_tier]
+@ddf_plague_resist_economic_loss_tier_4 = @[ddf_plague_resist_economic_loss_tier_3 - ddf_plague_resist_economic_scale_per_tier]
+@ddf_plague_resist_economic_loss_tier_5 = @[ddf_plague_resist_economic_loss_tier_4 - ddf_plague_resist_economic_scale_per_tier]
+@ddf_plague_resist_economic_loss_tier_6 = @[ddf_plague_resist_economic_loss_tier_5 - ddf_plague_resist_economic_scale_per_tier]
+@ddf_plague_resist_economic_loss_tier_7 = @[ddf_plague_resist_economic_loss_tier_6 - ddf_plague_resist_economic_scale_per_tier]
+@ddf_plague_resist_economic_loss_tier_8 = @[ddf_plague_resist_economic_loss_tier_7 - ddf_plague_resist_economic_scale_per_tier]
+
+ddf_plague_resist_building_economic_gain_tier_1 = @[ddf_plague_resist_economic_gain_tier_1]
+ddf_plague_resist_building_economic_gain_tier_2 = @[ddf_plague_resist_economic_gain_tier_2]
+ddf_plague_resist_building_economic_gain_tier_3 = @[ddf_plague_resist_economic_gain_tier_3]
+ddf_plague_resist_building_economic_gain_tier_4 = @[ddf_plague_resist_economic_gain_tier_4]
+ddf_plague_resist_building_economic_gain_tier_5 = @[ddf_plague_resist_economic_gain_tier_5]
+ddf_plague_resist_building_economic_gain_tier_6 = @[ddf_plague_resist_economic_gain_tier_6]
+ddf_plague_resist_building_economic_gain_tier_7 = @[ddf_plague_resist_economic_gain_tier_7]
+ddf_plague_resist_building_economic_gain_tier_8 = @[ddf_plague_resist_economic_gain_tier_8]
+
+ddf_plague_resist_building_economic_loss_tier_1 = @[ddf_plague_resist_economic_loss_tier_1]
+ddf_plague_resist_building_economic_loss_tier_2 = @[ddf_plague_resist_economic_loss_tier_2]
+ddf_plague_resist_building_economic_loss_tier_3 = @[ddf_plague_resist_economic_loss_tier_3]
+ddf_plague_resist_building_economic_loss_tier_4 = @[ddf_plague_resist_economic_loss_tier_4]
+ddf_plague_resist_building_economic_loss_tier_5 = @[ddf_plague_resist_economic_loss_tier_5]
+ddf_plague_resist_building_economic_loss_tier_6 = @[ddf_plague_resist_economic_loss_tier_6]
+ddf_plague_resist_building_economic_loss_tier_7 = @[ddf_plague_resist_economic_loss_tier_7]
+ddf_plague_resist_building_economic_loss_tier_8 = @[ddf_plague_resist_economic_loss_tier_8]
+
+
+
+##Holdings such as cities,castles,etc
+@ddf_plague_resist_holding_gain_tier_1 = @[ddf_base_plague_resist_holding_add]
+@ddf_plague_resist_holding_gain_tier_2 = @[ddf_plague_resist_holding_gain_tier_1 + ddf_plague_resist_holding_scale_per_tier]
+@ddf_plague_resist_holding_gain_tier_3 = @[ddf_plague_resist_holding_gain_tier_2 + ddf_plague_resist_holding_scale_per_tier]
+@ddf_plague_resist_holding_gain_tier_4 = @[ddf_plague_resist_holding_gain_tier_3 + ddf_plague_resist_holding_scale_per_tier]
+@ddf_plague_resist_holding_gain_tier_5 = @[ddf_plague_resist_holding_gain_tier_4 + ddf_plague_resist_holding_scale_per_tier]
+@ddf_plague_resist_holding_gain_tier_6 = @[ddf_plague_resist_holding_gain_tier_5 + ddf_plague_resist_holding_scale_per_tier]
+@ddf_plague_resist_holding_gain_tier_7 = @[ddf_plague_resist_holding_gain_tier_6 + ddf_plague_resist_holding_scale_per_tier]
+@ddf_plague_resist_holding_gain_tier_8 = @[ddf_plague_resist_holding_gain_tier_7 + ddf_plague_resist_holding_scale_per_tier]
+
+@ddf_plague_resist_holding_loss_tier_1 = @[ddf_base_plague_resist_holding_subtract]
+@ddf_plague_resist_holding_loss_tier_2 = @[ddf_plague_resist_holding_loss_tier_1 - ddf_plague_resist_holding_scale_per_tier]
+@ddf_plague_resist_holding_loss_tier_3 = @[ddf_plague_resist_holding_loss_tier_2 - ddf_plague_resist_holding_scale_per_tier]
+@ddf_plague_resist_holding_loss_tier_4 = @[ddf_plague_resist_holding_loss_tier_3 - ddf_plague_resist_holding_scale_per_tier]
+@ddf_plague_resist_holding_loss_tier_5 = @[ddf_plague_resist_holding_loss_tier_4 - ddf_plague_resist_holding_scale_per_tier]
+@ddf_plague_resist_holding_loss_tier_6 = @[ddf_plague_resist_holding_loss_tier_5 - ddf_plague_resist_holding_scale_per_tier]
+@ddf_plague_resist_holding_loss_tier_7 = @[ddf_plague_resist_holding_loss_tier_6 - ddf_plague_resist_holding_scale_per_tier]
+@ddf_plague_resist_holding_loss_tier_8 = @[ddf_plague_resist_holding_loss_tier_7 - ddf_plague_resist_holding_scale_per_tier]
+
+ddf_plague_resist_building_holding_gain_tier_1 = @[ddf_plague_resist_holding_gain_tier_1]
+ddf_plague_resist_building_holding_gain_tier_2 = @[ddf_plague_resist_holding_gain_tier_2]
+ddf_plague_resist_building_holding_gain_tier_3 = @[ddf_plague_resist_holding_gain_tier_3]
+ddf_plague_resist_building_holding_gain_tier_4 = @[ddf_plague_resist_holding_gain_tier_4]
+ddf_plague_resist_building_holding_gain_tier_5 = @[ddf_plague_resist_holding_gain_tier_5]
+ddf_plague_resist_building_holding_gain_tier_6 = @[ddf_plague_resist_holding_gain_tier_6]
+ddf_plague_resist_building_holding_gain_tier_7 = @[ddf_plague_resist_holding_gain_tier_7]
+ddf_plague_resist_building_holding_gain_tier_8 = @[ddf_plague_resist_holding_gain_tier_8]
+
+ddf_plague_resist_building_holding_loss_tier_1 = @[ddf_plague_resist_holding_loss_tier_1]
+ddf_plague_resist_building_holding_loss_tier_2 = @[ddf_plague_resist_holding_loss_tier_2]
+ddf_plague_resist_building_holding_loss_tier_3 = @[ddf_plague_resist_holding_loss_tier_3]
+ddf_plague_resist_building_holding_loss_tier_4 = @[ddf_plague_resist_holding_loss_tier_4]
+ddf_plague_resist_building_holding_loss_tier_5 = @[ddf_plague_resist_holding_loss_tier_5]
+ddf_plague_resist_building_holding_loss_tier_6 = @[ddf_plague_resist_holding_loss_tier_6]
+ddf_plague_resist_building_holding_loss_tier_7 = @[ddf_plague_resist_holding_loss_tier_7]
+ddf_plague_resist_building_holding_loss_tier_8 = @[ddf_plague_resist_holding_loss_tier_8]
+
+#Military buildings such as camps, barracks, etc
+@ddf_plague_resist_military_gain_tier_1 = @[ddf_base_plague_resist_military_add]
+@ddf_plague_resist_military_gain_tier_2 = @[ddf_plague_resist_military_gain_tier_1 + ddf_plague_resist_military_scale_per_tier]
+@ddf_plague_resist_military_gain_tier_3 = @[ddf_plague_resist_military_gain_tier_2 + ddf_plague_resist_military_scale_per_tier]
+@ddf_plague_resist_military_gain_tier_4 = @[ddf_plague_resist_military_gain_tier_3 + ddf_plague_resist_military_scale_per_tier]
+@ddf_plague_resist_military_gain_tier_5 = @[ddf_plague_resist_military_gain_tier_4 + ddf_plague_resist_military_scale_per_tier]
+@ddf_plague_resist_military_gain_tier_6 = @[ddf_plague_resist_military_gain_tier_5 + ddf_plague_resist_military_scale_per_tier]
+@ddf_plague_resist_military_gain_tier_7 = @[ddf_plague_resist_military_gain_tier_6 + ddf_plague_resist_military_scale_per_tier]
+@ddf_plague_resist_military_gain_tier_8 = @[ddf_plague_resist_military_gain_tier_7 + ddf_plague_resist_military_scale_per_tier]
+
+@ddf_plague_resist_military_loss_tier_1 = @[ddf_base_plague_resist_military_subtract]
+@ddf_plague_resist_military_loss_tier_2 = @[ddf_plague_resist_military_loss_tier_1 - ddf_plague_resist_military_scale_per_tier]
+@ddf_plague_resist_military_loss_tier_3 = @[ddf_plague_resist_military_loss_tier_2 - ddf_plague_resist_military_scale_per_tier]
+@ddf_plague_resist_military_loss_tier_4 = @[ddf_plague_resist_military_loss_tier_3 - ddf_plague_resist_military_scale_per_tier]
+@ddf_plague_resist_military_loss_tier_5 = @[ddf_plague_resist_military_loss_tier_4 - ddf_plague_resist_military_scale_per_tier]
+@ddf_plague_resist_military_loss_tier_6 = @[ddf_plague_resist_military_loss_tier_5 - ddf_plague_resist_military_scale_per_tier]
+@ddf_plague_resist_military_loss_tier_7 = @[ddf_plague_resist_military_loss_tier_6 - ddf_plague_resist_military_scale_per_tier]
+@ddf_plague_resist_military_loss_tier_8 = @[ddf_plague_resist_military_loss_tier_7 - ddf_plague_resist_military_scale_per_tier]
+
+ddf_plague_resist_building_military_gain_tier_1 = @[ddf_plague_resist_military_gain_tier_1]
+ddf_plague_resist_building_military_gain_tier_2 = @[ddf_plague_resist_military_gain_tier_2]
+ddf_plague_resist_building_military_gain_tier_3 = @[ddf_plague_resist_military_gain_tier_3]
+ddf_plague_resist_building_military_gain_tier_4 = @[ddf_plague_resist_military_gain_tier_4]
+ddf_plague_resist_building_military_gain_tier_5 = @[ddf_plague_resist_military_gain_tier_5]
+ddf_plague_resist_building_military_gain_tier_6 = @[ddf_plague_resist_military_gain_tier_6]
+ddf_plague_resist_building_military_gain_tier_7 = @[ddf_plague_resist_military_gain_tier_7]
+ddf_plague_resist_building_military_gain_tier_8 = @[ddf_plague_resist_military_gain_tier_8]
+
+ddf_plague_resist_building_military_loss_tier_1 = @[ddf_plague_resist_military_loss_tier_1]
+ddf_plague_resist_building_military_loss_tier_2 = @[ddf_plague_resist_military_loss_tier_2]
+ddf_plague_resist_building_military_loss_tier_3 = @[ddf_plague_resist_military_loss_tier_3]
+ddf_plague_resist_building_military_loss_tier_4 = @[ddf_plague_resist_military_loss_tier_4]
+ddf_plague_resist_building_military_loss_tier_5 = @[ddf_plague_resist_military_loss_tier_5]
+ddf_plague_resist_building_military_loss_tier_6 = @[ddf_plague_resist_military_loss_tier_6]
+ddf_plague_resist_building_military_loss_tier_7 = @[ddf_plague_resist_military_loss_tier_7]
+ddf_plague_resist_building_military_loss_tier_8 = @[ddf_plague_resist_military_loss_tier_8]
+
+
+#Special buildings such as hagia sophia, etc
+@ddf_plague_resist_special_building_gain_tier_1 = @[ddf_base_plague_resist_special_building_add]
+@ddf_plague_resist_special_building_gain_tier_2 = @[ddf_plague_resist_special_building_gain_tier_1 + ddf_plague_resist_special_building_scale_per_tier]
+@ddf_plague_resist_special_building_gain_tier_3 = @[ddf_plague_resist_special_building_gain_tier_2 + ddf_plague_resist_special_building_scale_per_tier]
+@ddf_plague_resist_special_building_gain_tier_4 = @[ddf_plague_resist_special_building_gain_tier_3 + ddf_plague_resist_special_building_scale_per_tier]
+@ddf_plague_resist_special_building_gain_tier_5 = @[ddf_plague_resist_special_building_gain_tier_4 + ddf_plague_resist_special_building_scale_per_tier]
+@ddf_plague_resist_special_building_gain_tier_6 = @[ddf_plague_resist_special_building_gain_tier_5 + ddf_plague_resist_special_building_scale_per_tier]
+@ddf_plague_resist_special_building_gain_tier_7 = @[ddf_plague_resist_special_building_gain_tier_6 + ddf_plague_resist_special_building_scale_per_tier]
+@ddf_plague_resist_special_building_gain_tier_8 = @[ddf_plague_resist_special_building_gain_tier_7 + ddf_plague_resist_special_building_scale_per_tier]
+
+@ddf_plague_resist_special_building_loss_tier_1 = @[ddf_base_plague_resist_special_building_subtract]
+@ddf_plague_resist_special_building_loss_tier_2 = @[ddf_plague_resist_special_building_loss_tier_1 - ddf_plague_resist_special_building_scale_per_tier]
+@ddf_plague_resist_special_building_loss_tier_3 = @[ddf_plague_resist_special_building_loss_tier_2 - ddf_plague_resist_special_building_scale_per_tier]
+@ddf_plague_resist_special_building_loss_tier_4 = @[ddf_plague_resist_special_building_loss_tier_3 - ddf_plague_resist_special_building_scale_per_tier]
+@ddf_plague_resist_special_building_loss_tier_5 = @[ddf_plague_resist_special_building_loss_tier_4 - ddf_plague_resist_special_building_scale_per_tier]
+@ddf_plague_resist_special_building_loss_tier_6 = @[ddf_plague_resist_special_building_loss_tier_5 - ddf_plague_resist_special_building_scale_per_tier]
+@ddf_plague_resist_special_building_loss_tier_7 = @[ddf_plague_resist_special_building_loss_tier_6 - ddf_plague_resist_special_building_scale_per_tier]
+@ddf_plague_resist_special_building_loss_tier_8 = @[ddf_plague_resist_special_building_loss_tier_7 - ddf_plague_resist_special_building_scale_per_tier]
+
+ddf_plague_resist_building_special_building_gain_tier_1 = @[ddf_plague_resist_special_building_gain_tier_1]
+ddf_plague_resist_building_special_building_gain_tier_2 = @[ddf_plague_resist_special_building_gain_tier_2]
+ddf_plague_resist_building_special_building_gain_tier_3 = @[ddf_plague_resist_special_building_gain_tier_3]
+ddf_plague_resist_building_special_building_gain_tier_4 = @[ddf_plague_resist_special_building_gain_tier_4]
+ddf_plague_resist_building_special_building_gain_tier_5 = @[ddf_plague_resist_special_building_gain_tier_5]
+ddf_plague_resist_building_special_building_gain_tier_6 = @[ddf_plague_resist_special_building_gain_tier_6]
+ddf_plague_resist_building_special_building_gain_tier_7 = @[ddf_plague_resist_special_building_gain_tier_7]
+ddf_plague_resist_building_special_building_gain_tier_8 = @[ddf_plague_resist_special_building_gain_tier_8]
+
+ddf_plague_resist_building_special_building_loss_tier_1 = @[ddf_plague_resist_special_building_loss_tier_1]
+ddf_plague_resist_building_special_building_loss_tier_2 = @[ddf_plague_resist_special_building_loss_tier_2]
+ddf_plague_resist_building_special_building_loss_tier_3 = @[ddf_plague_resist_special_building_loss_tier_3]
+ddf_plague_resist_building_special_building_loss_tier_4 = @[ddf_plague_resist_special_building_loss_tier_4]
+ddf_plague_resist_building_special_building_loss_tier_5 = @[ddf_plague_resist_special_building_loss_tier_5]
+ddf_plague_resist_building_special_building_loss_tier_6 = @[ddf_plague_resist_special_building_loss_tier_6]
+ddf_plague_resist_building_special_building_loss_tier_7 = @[ddf_plague_resist_special_building_loss_tier_7]
+ddf_plague_resist_building_special_building_loss_tier_8 = @[ddf_plague_resist_special_building_loss_tier_8]
+

@@ -1,0 +1,323 @@
+﻿
+##This replaces the default one##
+#
+#Placed z in the name due to vanilla file overwriting this one.
+namespace = travel_danger_events
+
+
+travel_danger_events.9000 = { # Wetlands, Floodplains, Forest, Jungle: Blood-sucking Insect Swarm
+	type = character_event
+	title = travel_danger_events.9000.t
+	desc = travel_danger_events.9000.desc
+	theme = travel_danger
+
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+
+	right_portrait = {
+		character = scope:mosquito_victim
+		animation = wedding_objection_start
+	}
+	
+	trigger = {
+		is_available_travelling_adult = yes
+		is_location_valid_for_travel_event_on_land = yes
+
+		location = {
+			NOR = {
+				has_province_modifier = winter_normal_modifier
+				has_province_modifier = winter_harsh_modifier
+			}
+			OR = {
+				travel_danger_type = {
+					travel_plan = root.current_travel_plan
+					terrain = wetlands
+				}
+				travel_danger_type = {
+					travel_plan = root.current_travel_plan
+					terrain = floodplains
+				}
+				travel_danger_type = {
+					travel_plan = root.current_travel_plan
+					terrain = forest
+				}
+				travel_danger_type = {
+					travel_plan = root.current_travel_plan
+					terrain = taiga
+				}
+				travel_danger_type = {
+					travel_plan = root.current_travel_plan
+					terrain = jungle
+				}
+			}
+		}
+
+		current_travel_plan = {
+			any_entourage_character = {
+				is_physically_able_adult = yes
+			}
+		}
+	}
+
+	cooldown = { months = 1 }
+
+	immediate = {
+		mp_delay_travel_plan = { DAYS = 90 }
+		location = {
+			save_scope_as = location
+		}
+		current_travel_plan = {
+			random_entourage_character = {
+				limit = {
+					is_physically_able_adult = yes
+				}
+				weight = {
+					base = 1
+					modifier = {
+						add = 5
+						has_relation_rival = root
+					}
+					modifier = {
+						add = 5
+						has_trait = bleeder
+					}
+					modifier = {
+						add = 5
+						has_trait = physique_bad
+					}
+				}
+				save_scope_as = mosquito_victim
+			}
+		}
+		traveler_danger_xp_effect = {
+			MIN = 3
+			MAX = 7
+		}
+	}
+
+	option = {
+		name = travel_danger_events.9000.deviant
+		trigger = {
+			has_trait = deviant
+		}
+		trait = deviant
+		
+		stress_impact = {
+			base = massive_stress_impact_loss
+		}
+		
+		add_character_modifier = {
+			modifier = drained_by_mosquitoes_modifier
+			years = 3
+		}
+		add_character_modifier = {
+			modifier = diplomacy_majesty_4090_no_raiment_modifier
+			years = 1
+		}
+        random = {
+			chance = 15
+			send_interface_toast = {
+                title = contracted_malaria
+				left_icon = root
+                add_trait = malaria
+			}
+		}
+		current_travel_plan = {
+			every_entourage_character = {
+				custom = every_entourage_tt
+				add_opinion = {
+					target = root
+					modifier = cruelty_opinion
+					opinion = -25
+				}
+				add_character_modifier = {
+					modifier = drained_by_mosquitoes_modifier
+					years = 3
+				}
+				add_character_modifier = {
+					modifier = diplomacy_majesty_4090_no_raiment_modifier
+					years = 1
+				}
+			}
+		}
+	}
+
+	option = {
+		name = travel_danger_events.9000.herbalist
+		trigger = {
+			OR = {
+				has_trait = lifestyle_herbalist
+				has_trait = witch
+				has_trait = lifestyle_physician
+			}
+		}
+		trait = lifestyle_herbalist
+		trait = witch
+		trait = lifestyle_physician
+		
+		hidden_effect = {
+			traveler_danger_xp_effect = {
+				MIN = 3
+				MAX = 7
+			}
+		}
+		
+		random = {
+			chance = 10
+			send_interface_toast = {
+				title = drained_by_mosquitoes_modifier
+				left_icon = root
+				add_character_modifier = {
+					modifier = drained_by_mosquitoes_modifier
+					years = 3
+				}
+                add_trait = malaria
+			}
+		}
+		current_travel_plan = {
+			every_entourage_character = {
+				custom = every_entourage_tt
+				add_opinion = {
+					target = root
+					modifier = thankful_opinion
+					opinion = 25
+				}
+				random = {
+					chance = 10
+					add_character_modifier = {
+						modifier = drained_by_mosquitoes_modifier
+						years = 3
+					}
+				}
+			}
+		}
+
+		ai_chance = {
+			base = 1000
+		}
+	}
+
+	option = {
+		name = travel_danger_events.9000.a
+		
+		stress_impact = {
+			base = minor_stress_impact_gain
+			sadistic = medium_stress_impact_gain
+			callous = medium_stress_impact_gain
+		}
+		
+		random = {
+			chance = 75
+			send_interface_toast = {
+				title = drained_by_mosquitoes_modifier
+				left_icon = root
+				add_character_modifier = {
+					modifier = drained_by_mosquitoes_modifier
+					years = 3
+				}
+			}
+		}
+        random = {
+            chance = 5
+            send_interface_toast = {
+				title = drained_by_mosquitoes_modifier
+				left_icon = root
+				add_character_modifier = {
+					modifier = drained_by_mosquitoes_modifier
+					years = 3
+				}
+			}
+            add_trait = malaria
+        }
+		current_travel_plan = {
+			every_entourage_character = {
+				custom = every_entourage_tt
+				random = {
+					chance = 75
+					add_character_modifier = {
+						modifier = drained_by_mosquitoes_modifier
+						years = 3
+					}
+				}
+			}
+		}
+
+		ai_chance = {
+			base = 100
+			modifier = {
+				factor = 0
+				OR = {
+					has_trait = sadistic
+					has_trait = callous
+				}
+			}
+		}
+	}
+
+	option = {
+		name = travel_danger_events.9000.b
+		
+		stress_impact = {
+			base = medium_stress_impact_gain
+			compassionate = massive_stress_impact_gain
+			just = medium_stress_impact_gain
+			generous = medium_stress_impact_gain
+			content = minor_stress_impact_gain
+			trusting = minor_stress_impact_gain
+			sadistic = major_stress_impact_loss
+			callous = major_stress_impact_loss
+		}
+		
+		scope:mosquito_victim = {
+			add_opinion = {
+				target = root
+				modifier = cruelty_opinion
+				opinion = -40
+			}
+			add_character_modifier = {
+				modifier = drained_by_mosquitoes_modifier
+				years = 6
+			}
+			add_character_modifier = {
+				modifier = diplomacy_majesty_4090_no_raiment_modifier
+				years = 1
+			}
+            random = {
+                chance = 5
+                add_trait = malaria
+            }
+		}
+		current_travel_plan = {
+			every_entourage_character = {
+				custom = every_entourage_tt
+				limit = {
+					NOT = { this = scope:mosquito_victim }
+				}
+				random = {
+					chance = 50
+					add_character_modifier = {
+						modifier = drained_by_mosquitoes_modifier
+						years = 3
+					}
+				}
+			}
+		}
+
+		ai_chance = {
+			base = 100
+			modifier = {
+				factor = 0
+				NOR = {
+					has_trait = sadistic
+					has_trait = callous
+				}
+			}
+		}
+	}
+
+	after = {
+		mp_resume_travel_plan = yes
+	}
+}

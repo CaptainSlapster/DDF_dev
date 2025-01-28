@@ -1,0 +1,279 @@
+﻿##########################################
+# Hire for a specific Court Position
+# These used to be separate decisions, but are now combined into one
+# by Chad Uhl
+###########################################
+
+
+##Technically called Variolation at this time##
+take_vaccination_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_black_plague.dds"
+	}
+	decision_group_type = plague
+	sort_order = 10
+	title = take_vaccination_decision.t
+	desc = take_vaccination_decision.desc
+
+	cooldown = { years = 3 } # Can't do it all the time, Cheater
+
+	is_shown = {
+		exists = capital_county
+		highest_held_title_tier >= tier_county
+		trigger_if = {
+			limit = {
+				is_ai = yes
+			}
+			OR = {
+				any_held_title = {
+					tier = tier_county
+					any_county_province = {
+						any_province_epidemic = {
+							count >= 1
+						}
+					}
+				}
+				capital_county = { has_county_modifier = isolate_capital_decision_modifier }
+			}
+		}
+		trigger_else = {
+			OR = {
+				realm_has_any_epidemic = {
+					SIZE = 1
+					INTENSITY = minor
+				}
+				capital_county = { has_county_modifier = isolate_capital_decision_modifier }
+			}
+		}
+
+		#Kids can't do it
+		NOT = { has_trait = infirm }
+		always = yes
+	}
+
+
+	widget = {
+		gui = "decision_view_widget_option_list_generic"
+		controller = decision_option_list_controller
+		decision_to_second_step_button = "SELECT_ACTION"
+		show_from_start = yes
+
+		item = { # Protect yourself from smallpox
+			value = protection_from_smallpox
+
+			is_valid = {
+				NOT = {has_character_modifier = ddf_variolation}
+				custom_tooltip = {
+					text = take_vaccination_decision_smallpox_tt
+					any_realm_province = {
+						any_province_epidemic = {
+							epidemic_type.epidemic_trait = trait:smallpox
+						}
+					}
+				}
+
+			}
+			current_description = vaccine_desc
+			localization = smallpox_vaccine_decision
+			icon = "gfx/interface/icons/message_feed/plague.dds"
+			ai_chance = {
+				value = 100
+			}
+		}
+
+		item = { # Protect yourself from measles
+			value = protection_from_measles
+			is_valid = {
+				NOT = {has_character_modifier = ddf_variolation}
+				custom_tooltip = {
+					text = take_vaccination_decision_measles_tt
+					any_realm_province = {
+						any_province_epidemic = {
+							epidemic_type.epidemic_trait = trait:measles
+						}
+					}
+				}
+			}
+			current_description = vaccine_desc
+			localization = measles_vaccine_decision
+			icon = "gfx/interface/icons/court_position_types/cave_hermit_court_position.dds"
+			ai_chance = {
+				value = 100
+			}
+		}
+
+		item = { # Protect yourself from typhoid
+			value = protection_from_typhoid
+			is_valid = {
+				NOT = {has_character_modifier = ddf_variolation}
+				custom_tooltip = {
+					text = take_vaccination_decision_typhoid_tt
+					any_realm_province = {
+						any_province_epidemic = {
+							epidemic_type.epidemic_trait = trait:typhoid
+						}
+					}
+				}
+			}
+			current_description = vaccine_desc
+			localization = typhoid_vaccine_decision
+			icon = "gfx/interface/icons/court_position_types/cave_hermit_court_position.dds"
+			ai_chance = {
+				value = 100
+			}
+		}
+		item = { # Protect yourself from flu
+			value = protection_from_flu
+			is_valid = {
+				NOT = {has_character_modifier = ddf_variolation}
+				custom_tooltip = {
+					text = take_vaccination_decision_flu_tt
+					any_realm_province = {
+						any_province_epidemic = {
+							epidemic_type.epidemic_trait = trait:flu
+						}
+					}
+				}
+			}
+			current_description = vaccine_desc
+			localization = flu_vaccine_decision
+			icon = "gfx/interface/icons/court_position_types/cave_hermit_court_position.dds"
+			ai_chance = {
+				value = 100
+			}
+		}
+		item = { # Protect yourself from diphtheria
+		value = protection_from_diphtheria
+		is_valid = {
+			NOT = {has_character_modifier = ddf_variolation}
+			custom_tooltip = {
+				text = take_vaccination_decision_diphtheria_tt
+				any_realm_province = {
+					any_province_epidemic = {
+						epidemic_type.epidemic_trait = trait:diphtheria
+					}
+				}
+			}
+		}
+		current_description = vaccine_desc
+		localization = diphtheria_vaccine_decision
+		icon = "gfx/interface/icons/court_position_types/cave_hermit_court_position.dds"
+		ai_chance = {
+			value = 100
+		}
+	}
+}	
+
+
+	effect = {	
+
+		if = {
+			limit = {
+				scope:protection_from_smallpox = yes
+			}
+			random_list = {
+				20 = {
+					add_character_flag = disease_immunity_smallpox
+					add_character_modifier = {
+						modifier = ddf_variolation
+						months = 24
+					}
+				}
+				20 = {
+					custom_tooltip = {
+						text = take_vaccination_decision_tt
+	
+					}
+					trigger_event = {
+						on_action = ddf_event_disease_pulse
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:protection_from_measles = yes
+			}
+			random_list = {
+				20 = {
+					add_character_flag = disease_immunity_measles
+					add_character_modifier = {
+						modifier = ddf_variolation
+						months = 24
+					}
+				}
+				20 = {
+					custom_tooltip = {
+						text = take_vaccination_decision_tt
+	
+					}
+					trigger_event = {
+						on_action = ddf_event_disease_pulse
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:protection_from_typhoid = yes
+			}
+			random_list = {
+				20 = {
+					add_character_flag = disease_immunity_typhoid
+					add_character_modifier = {
+						modifier = ddf_variolation
+						months = 24
+					}
+				}
+				20 = {
+					custom_tooltip = {
+						text = take_vaccination_decision_tt
+	
+					}
+					trigger_event = {
+						on_action = ddf_event_disease_pulse
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:protection_from_flu = yes
+			}
+			random_list = {
+				20 = {
+					add_character_flag = disease_immunity_flu
+					add_character_modifier = {
+						modifier = ddf_variolation
+						months = 24
+					}
+				}
+				20 = {
+					custom_tooltip = {
+						text = take_vaccination_decision_tt
+	
+					}
+					trigger_event = {
+						on_action = ddf_event_disease_pulse
+					}
+				}
+			}
+		}
+
+
+
+		#custom_tooltip = stress_loss_drunkard_decision_effect_tooltip
+		#show_as_tooltip = { #The effect is actually applied in the event itself
+		#	add_character_modifier = {
+		#		modifier = ddf_variolation
+		#		years = 1.5
+		#	}
+		#}
+		#trigger_event = {
+		#	id = ddf_health.0011
+		#	days = {1 15}
+		#}
+
+	}
+
+}

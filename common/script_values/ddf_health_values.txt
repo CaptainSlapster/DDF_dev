@@ -1,0 +1,33 @@
+﻿
+typhoid_contagion_min = 15
+typhoid_contagion_max = 55
+
+flu_min_recovery_time = minimum_recovery_time
+flu_max_recovery_time = 150
+
+flu_contagion_min = 10
+flu_contagion_max = 45
+
+diphtheria_contagion_min = 15
+diphtheria_contagion_max = 60
+
+###DDF Additions ###
+malaria_min_recovery_time = minimum_recovery_time
+malaria_max_recovery_time = 150
+
+typhoid_min_recovery_time = minimum_recovery_time
+typhoid_max_recovery_time = 150
+
+diphtheria_min_recovery_time = minimum_recovery_time
+diphtheria_max_recovery_time = 150
+
+
+
+#Fantasy#
+immolation_min_recovery_time = minimum_recovery_time
+immolation_max_recovery_time = 100
+
+
+
+
+

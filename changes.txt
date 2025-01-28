@@ -1,0 +1,126 @@
+#''''''''''''''''''''''''''''''''''''''''''#
+#  DDF(Deadly Diseases & Fertility)        #
+#           CHANGELOG                      #
+#''''''''''''''''''''''''''''''''''''''''''#
+
+v1.0.0
+*Fertility*
+    -Some characters can be born with 0% fertility
+
+    -Increased base fertility to 0.6 from 0.5
+    -Increased likelyhood of pregnancy complications
+    -Mothers are more likely to have complications with their first child
+    -Sickly is a death sentence for children(They will die).
+
+
+*Diseases*
+
+    -Happen less, but are more impactful
+    -all diseases reduce construction time (Can't build if you're sick)
+    -all diseases reduce holding taxes (Can't tax people if they can't work/are dead)
+    -Bubonic plague is more devastating to the world/econ
+    -Added "Coughing fit" -> Increases infection rate for certain diseases.
+    -Hill farms and estates increase outbreak likelyhood
+
+*Traits*
+    -Typhoid
+    -Malaria 
+    -Dry/Bound -> Infertility 100%   
+
+    -Traits made deadlier
+        -Sickly
+        -ill
+        -pneumonia
+        -gout
+        -consumption
+        -cancer
+        -typhus
+        -bubonic plague
+        -smallpox
+        -measles
+        -dysentery
+        -holy fire
+        -leper(sorry baldwin)
+        -wounded
+
+    
+*Death Events*
+    -Chance of dying randomly from a heart attack
+    -Children under the age of 4 have a chance of dying from SIDs
+    -Chance of falling to your death
+*Genetics*
+    -Bad genetics such as weak,inbred, etc will increase your likelyhood of dying
+
+
+v1.1.0
+
+*Diseases*
+    -Added Malaria and Typhoid epidemics/outbreaks
+
+*Death Events*
+    -Increased the likelihood of mod harm events
+    -Added a crazed peasant attack event.
+
+*Misc*
+    -Allowed Typhoid & Malaria to make the character look sick.
+    
+*Bug Fixes*
+    -Corrected an issue where a vanilla event won't show correct options
+
+v1.2.0
+
+*Diseases*
+    -Added Feverish, Pus Boils, Itchy skin modifiers
+    -Adjusted Malaria to make it deadlier
+*Buildings*
+    -Added Plague Doctor office(Pest house) +15 plague resistance(County)
+    -Added Market for city holdings each level reduces plague resistance(Province)
+    -Majority of buildings now increase/decrease plague resistance(Province)
+    -Castle and City holdings reduce plague resistance(Province)
+    -Temple holdings increase plague resistance(Province)
+    -Some duchy buildings increase/decrease plague resistance
+    -Special buildings now increase/decrease plague resistance
+*Bug Fixes*
+    -Corrected localization issues
+    -Corrected some scripting errors
+    -Fixed an error with the black death's 100% province infection modifier
+
+v1.2.1
+
+*Diseases*
+    - Malaria stacks with other diseases.
+    - Reduced the outbreak frequency a small bit to prevent the later start dates from being absolutely bombarded with outbreaks.
+
+*Misc*
+    -Functions and works with CK3 v1.14.1
+
+*Note*
+    -Due to Malaria being a long term uncureable disease I decided for the sake of not exploiting the low health rate and obvious immunity from other plagues
+    with Malaria present, I decided to allow other diseases to stack on with Malaria to keep it less exploitey
+
+
+
+v1.3.0
+
+*Diseases*
+    -Plague resistance matters more. Before, the game would check in increments of 30, 50, and 80. Now it checks from 1, 10, 20, to 90
+    -Added influenza
+    -Added diphtheria(Non epidemic)
+    -Allowed more diseases to be caught while imprisoned
+    -Created 3 new gamerules ("Fantasy Epidemics","Plague Duration","Plague Frequency", "Eternal Bubonic Plague")
+*Fertility*
+    -Reduced chances of childbirth complication by a little bit
+    -Children are less likely to die by SIDS
+*Buildings*
+    -Added Animal pen tribal building to increase plague resistance!
+
+*Decisions*
+    -Added Variolation when a plague is present in your realm
+*Misc*
+    -Added fantasy epidemics setting
+    -Added 1 dragon attack epidemic.(Insta kill due to fire breathing dragons tend to murder you fast)
+
+v1.3.1
+
+*Misc*
+    -Hotfix for the variolation decision

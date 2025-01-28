@@ -1,0 +1,153 @@
+﻿
+@army_commander_vulnerable_to_health_problems_value = good_health
+@court_medic_able_to_help_value = very_high_skill_rating
+@random_harm_standard_skill_check_value = very_high_skill_rating
+@random_harm_easy_skill_check_value = mediocre_skill_rating
+
+ ##Heart issues shouldn't be on cooldown for 50ish years##
+ ddf_harm_0002_apply_dynastic_short_cooldowns_effect = {
+	# Are we a player?
+	if = {
+		limit = { is_ai = no }
+		# Right, then we want to set a cooldown on our dynasty.
+		dynasty = {
+			set_variable = {
+				name = player_random_harm_cooldown
+				value = yes
+				years = 2
+			}
+		}
+	}
+	else_if = {
+		limit = { exists = house }
+		house = {
+			set_variable = {
+				name = ai_random_harm_cooldown
+				value = yes
+				years = 1
+			}
+		}
+	}
+}
+ddf_harm_0000_grab_available_court_physician_effect = {
+	if = {
+		limit = {
+			# Check to see if we'd be better of treating ourselves.
+			$PERSONAL_SKILL$ < @random_harm_standard_skill_check_value
+			# Else, try to grab the physician.
+			any_court_position_holder = {
+				type = court_physician_court_position
+				is_available_adult = yes
+				location = root.location
+			}
+		}
+		random_court_position_holder = {
+			type = court_physician_court_position
+			limit = {
+				is_available_adult = yes
+				location = root.location
+			}
+			save_scope_as = medic
+		}
+	}
+}
+
+
+
+
+# Apply appropriate cooldowns so that we don't repeatedly kill/incapacitate the same people.
+###
+ddf_harm_0000_apply_dynastic_cooldowns_effect = {
+	# Are we a player?
+	if = {
+		limit = { is_ai = no }
+		# Right, then we want to set a cooldown on our dynasty.
+		dynasty = {
+			set_variable = {
+				name = player_random_harm_cooldown
+				value = yes
+				years = 25 #was 50
+			}
+		}
+	}
+	else_if = {
+		limit = { exists = house }
+		house = {
+			set_variable = {
+				name = ai_random_harm_cooldown
+				value = yes
+				years = 15 #was 30
+			}
+		}
+	}
+}
+
+ddf_harm_0000_physic_rescue_chance_incapable_effect = {
+	random_list = {
+		# You aren't permanently hurt.
+		0 = {
+			modifier = { add = harm_event_random_list_medium_odd_success_value }
+			desc = harm.0000.tt.incapable.success
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = harm.0000.tt.incapable.success
+				left_icon = root
+				custom_tooltip = harm.0000.tt.no_permanent_damage
+			}
+		}
+		# The experience leaves you feeble.
+		0 = {
+			modifier = { add = harm_event_random_list_medium_odd_failure_value }
+			desc = harm.0000.tt.incapable.failure
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = harm.0000.tt.incapable.failure
+				left_icon = root
+				upgrade_infirm_to_incapable_effect = yes
+				create_character_memory = { type = became_incapable_generic }
+			}
+		}
+	}
+
+	# Having someone to call on for this type of thing offloads the "what do I do?!" panic.
+	stress_impact = {
+		base = minor_stress_impact_gain
+		calm = minor_stress_impact_loss
+	}
+}
+
+# Run the chance of a court physician saving us if we're at risk of death.
+ddf_harm_0000_physic_rescue_chance_death_effect = {
+	random_list = {
+		# You live.
+		0 = {
+			modifier = { add = harm_event_random_list_medium_odd_success_value }
+			desc = harm.0000.tt.death.success
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = harm.0000.tt.death.success
+				left_icon = root
+				custom_tooltip = harm.0000.tt.spared_for_now
+				log_harm_event_spared_as_variable_effect = yes
+			}
+		}
+		# You die.
+		0 = {
+			modifier = { add = harm_event_random_list_medium_odd_failure_value }
+			desc = harm.0000.tt.death.failure
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = harm.0000.tt.death.failure
+				left_icon = root
+				death = { death_reason = $DEATH_REASON$ }
+				log_harm_event_death_as_variable_effect = yes
+			}
+		}
+	}
+
+	# Having someone to call on for this type of thing offloads the "what do I do?!" panic.
+	stress_impact = {
+		base = minor_stress_impact_gain
+		calm = minor_stress_impact_loss
+	}
+}

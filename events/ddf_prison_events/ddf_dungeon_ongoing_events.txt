@@ -1,0 +1,128 @@
+﻿namespace = ddf_dungeon_ongoing
+
+
+
+
+#Contract typhoid
+ddf_dungeon_ongoing.0001 = {
+	type = character_event
+	title = dungeon_ongoing.9001.t
+	desc = dungeon_ongoing.9001.desc
+	
+	theme = prison
+	soundeffect = in_the_dungeon_event
+	left_portrait = {
+		character = root
+		animation = sick
+		override_imprisonment_visuals = yes
+		outfit_tags = { beggar_rags }
+	}
+	
+	trigger = {
+		NOT = { has_trait = typhoid }
+		NOT = { has_character_flag = had_long_term_dungeon_stay_event }
+		time_in_prison_type = {
+			years > 5
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_illness"
+		imprisoner = { save_scope_as = bg_override_char }
+		add_character_flag = {
+			flag = had_long_term_dungeon_stay_event
+			days = 365
+		}
+		contract_disease_effect = { DISEASE = typhoid TREATMENT_EVENT = yes }
+	}
+
+	option = {
+		name = ddf_dungeon_ongoing.0001.a
+	}
+}
+#Contract influenza
+ddf_dungeon_ongoing.0002 = {
+	type = character_event
+	title = ddf_dungeon_ongoing.0002.t
+	desc = ddf_dungeon_ongoing.0002.desc
+	
+	theme = prison
+	soundeffect = in_the_dungeon_event
+	left_portrait = {
+		character = root
+		animation = sick
+		override_imprisonment_visuals = yes
+		outfit_tags = { beggar_rags }
+	}
+	
+	trigger = {
+		NOT = { has_trait = flu }
+		NOT = { has_character_flag = had_long_term_dungeon_stay_event }
+		time_in_prison_type = {
+			years > 5
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_illness"
+		imprisoner = { save_scope_as = bg_override_char }
+		add_character_flag = {
+			flag = had_long_term_dungeon_stay_event
+			days = 365
+		}
+		contract_disease_effect = { DISEASE = flu TREATMENT_EVENT = yes }
+	}
+
+	option = {
+		name = ddf_dungeon_ongoing.0002.a
+	}
+}
+#Contract diphtheria
+ddf_dungeon_ongoing.0003 = {
+	type = character_event
+	title = ddf_dungeon_ongoing.0003.t
+	desc = ddf_dungeon_ongoing.0003.desc
+	
+	theme = prison
+	soundeffect = in_the_dungeon_event
+	left_portrait = {
+		character = root
+		animation = sick
+		override_imprisonment_visuals = yes
+		outfit_tags = { beggar_rags }
+	}
+	
+	trigger = {
+		NOT = { has_trait = diphtheria }
+		NOT = { has_character_flag = had_long_term_dungeon_stay_event }
+		time_in_prison_type = {
+			years > 5
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_illness"
+		imprisoner = { save_scope_as = bg_override_char }
+		add_character_flag = {
+			flag = had_long_term_dungeon_stay_event
+			days = 365
+		}
+		contract_disease_effect = { DISEASE = diphtheria TREATMENT_EVENT = yes }
+	}
+
+	option = {
+		name = ddf_dungeon_ongoing.0003.a
+	}
+}

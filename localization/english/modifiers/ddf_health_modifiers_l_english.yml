@@ -1,0 +1,12 @@
+﻿l_english:
+ ddf_coughing_fit: "Coughing Fit"
+ ddf_coughing_fit_desc: "You're more likely to spread certain diseases!"
+ ddf_feverish: "Feverish"
+ ddf_feverish_desc: "You're feeling very hot"
+ ddf_itchy_scabby: "Itchy Skin"
+ ddf_itchy_scabby_desc: "Flakes of your skin are shredding off"
+ ddf_pus_boils: "Boils"
+ ddf_pus_boils_desc: "Boils filled with pus. They burst increasing infectivity!"
+
+ ddf_variolation: "Variolation"
+ ddf_variolation_desc: "A small amount of the sickness from others has been put under my skin."

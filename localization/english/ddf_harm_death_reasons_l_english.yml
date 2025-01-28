@@ -1,0 +1,11 @@
+﻿l_english:
+ 
+ death_sids: "died suddenly at a young age in [CHARACTER.GetHerHis] sleep"
+ death_typhoid: "died of [GetTrait('typhoid').GetName( CHARACTER.Self )]"
+ death_fell_to_death: "Fell to [CHARACTER.GetHerHis] death"
+ death_malaria: "died of [GetTrait('malaria').GetName( CHARACTER.Self )]"
+ death_murdered_by_crazed_peasant: "died from an attacking peasant"
+ death_heart_attack_ddf: "died of a sudden heart attack"
+
+ death_immolation: "died of a Red Dragon attack!"
+ death_flu: "died of [GetTrait('flu').GetName( CHARACTER.Self )]"
