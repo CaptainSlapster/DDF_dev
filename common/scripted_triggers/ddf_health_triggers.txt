@@ -235,6 +235,7 @@ has_ddf_disease_trigger = {
 		has_trait = malaria
 		has_trait = flu
 		has_trait = diphtheria
+		
 
 		has_trait = immolation
 	}
@@ -379,14 +380,22 @@ is_available_child = {
 
 ddf_sids_trigger = {
 	OR = {
-		age < 3
+		age <= 3
+
 		AND = {
-			age < 3
+			age <= 3
 			OR = {
 				#They can die of sids if they are sick
 				has_any_disease_trigger = yes
 				ddf_unhealthy_traits_trigger = yes
 			}
 		}
+	}
+}
+
+
+ddf_gamerule_enabled_events_trigger = {
+	OR = {
+		has_game_rule = ddf_events_on 
 	}
 }

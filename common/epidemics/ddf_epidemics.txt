@@ -617,6 +617,7 @@ bubonic_plague = {
 					}
 					value = 0
 				}
+
 				multiply = 0.1
 
 			}
@@ -2489,12 +2490,12 @@ malaria = {
 	}
 
 	can_infect_character = {
-		can_contract_disease_trigger = { DISEASE = malaria }
+		ddf_can_contract_disease_trigger = { DISEASE = malaria }
 		immune_to_epidemic = { EPIDEMIC = scope:epidemic }
 	}
 
 	on_character_infected = {
-		contract_disease_notify_effect = { DISEASE = malaria }
+		ddf_contract_disease_notify_effect = { DISEASE = malaria }
 	}
 
 	infection_levels = {
@@ -2784,12 +2785,12 @@ typhoid = {
 	}
 
 	can_infect_character = {
-		can_contract_disease_trigger = { DISEASE = typhoid }
+		ddf_can_contract_disease_trigger = { DISEASE = typhoid }
 		immune_to_epidemic = { EPIDEMIC = scope:epidemic }
 	}
 
 	on_character_infected = {
-		contract_disease_notify_effect = { DISEASE = typhoid }
+		ddf_contract_disease_notify_effect = { DISEASE = typhoid }
 		if = {
 			limit = {
 				is_commanding_army = yes
@@ -3098,12 +3099,12 @@ flu = { #Tuberculosis
 	}
 
 	can_infect_character = {
-		can_contract_disease_trigger = { DISEASE = flu }
+		ddf_can_contract_disease_trigger = { DISEASE = flu }
 		immune_to_epidemic = { EPIDEMIC = scope:epidemic }
 	}
 
 	on_character_infected = {
-		contract_disease_notify_effect = { DISEASE = flu }
+		ddf_contract_disease_notify_effect = { DISEASE = flu }
 	}
 
 	infection_levels = {

@@ -138,7 +138,7 @@ ddf_health.0003 = {
 	}
 
 	trigger = {
-		can_contract_disease_trigger = { DISEASE = malaria }
+		ddf_can_contract_disease_trigger = { DISEASE = malaria }
 	}
 	
 	weight_multiplier = {
@@ -197,7 +197,7 @@ ddf_health.0003 = {
 	immediate = {
 		play_music_cue = "mx_cue_illness"
 		save_court_physician_as_effect = { SCOPE_NAME = physician }
-		contract_disease_effect = { DISEASE = malaria TREATMENT_EVENT = no } #Adds the trait, sends event "health.2201" to those who care if health is brought too low
+		ddf_contract_disease_effect = { DISEASE = malaria TREATMENT_EVENT = no } #Adds the trait, sends event "health.2201" to those who care if health is brought too low
 	}
 	###NO COURT PHYSICIAN OPTIONS###
 	#Find physician
@@ -446,7 +446,7 @@ ddf_health.0005 = {
 	}
 
 	trigger = {
-		can_contract_disease_trigger = { DISEASE = typhoid }
+		ddf_can_contract_disease_trigger = { DISEASE = typhoid }
 	}
 	
 	weight_multiplier = {
@@ -501,7 +501,7 @@ ddf_health.0005 = {
 	immediate = {
 		play_music_cue = "mx_cue_illness"
 		save_court_physician_as_effect = { SCOPE_NAME = physician }
-		contract_disease_effect = { DISEASE = typhoid TREATMENT_EVENT = yes } #Adds the trait, sends event "health.2201" to those who care if health is brought too low
+		ddf_contract_disease_effect = { DISEASE = typhoid TREATMENT_EVENT = yes } #Adds the trait, sends event "health.2201" to those who care if health is brought too low
 	}
 	###NO COURT PHYSICIAN OPTIONS###
 	#Find physician
@@ -681,7 +681,7 @@ ddf_health.0006 = {
 	immediate = {
 		play_music_cue = "mx_cue_peace_ensues"
 		hidden_effect = {
-			recover_from_disease_effect = { DISEASE = typhoid } #Removes the trait, sends event "health.2202" to those who care & liege/host/imprisoner, adds immunity flag
+			ddf_recover_from_disease_effect = { DISEASE = typhoid } #Removes the trait, sends event "health.2202" to those who care & liege/host/imprisoner, adds immunity flag
 			remove_disease_treatment_effect = yes
 		}
 	}
@@ -691,6 +691,13 @@ ddf_health.0006 = {
 	#		custom_tooltip = ddf_health.0006.a.tt
 		show_as_tooltip = { #show the trait actually shows up in the tooltip
 			remove_trait_force_tooltip = typhoid
+		}
+	}
+
+	after = {
+		random = {
+			chance = 5
+			add_trait = blind
 		}
 	}
 
@@ -762,7 +769,7 @@ ddf_health.0007 = {
 								}
 							}
 						}
-						contract_disease_notify_effect = { DISEASE = typhoid }
+						ddf_contract_disease_notify_effect = { DISEASE = typhoid }
 					}
 				}
 				0 = { #Contagion prevented by physician
@@ -875,7 +882,7 @@ ddf_health.0015 = {
 	}
 
 	trigger = {
-		can_contract_disease_trigger = { DISEASE = diphtheria }
+		ddf_can_contract_disease_trigger = { DISEASE = diphtheria }
 	}
 	
 	weight_multiplier = {
@@ -930,7 +937,7 @@ ddf_health.0015 = {
 	immediate = {
 		play_music_cue = "mx_cue_illness"
 		save_court_physician_as_effect = { SCOPE_NAME = physician }
-		contract_disease_effect = { DISEASE = diphtheria TREATMENT_EVENT = yes } #Adds the trait, sends event "health.2201" to those who care if health is brought too low
+		ddf_contract_disease_effect = { DISEASE = diphtheria TREATMENT_EVENT = yes } #Adds the trait, sends event "health.2201" to those who care if health is brought too low
 	}
 	###NO COURT PHYSICIAN OPTIONS###
 	#Find physician
@@ -1110,7 +1117,7 @@ ddf_health.0016 = {
 	immediate = {
 		play_music_cue = "mx_cue_peace_ensues"
 		hidden_effect = {
-			recover_from_disease_effect = { DISEASE = diphtheria } #Removes the trait, sends event "health.2202" to those who care & liege/host/imprisoner, adds immunity flag
+			ddf_recover_from_disease_effect = { DISEASE = diphtheria } #Removes the trait, sends event "health.2202" to those who care & liege/host/imprisoner, adds immunity flag
 			remove_disease_treatment_effect = yes
 		}
 	}
@@ -1191,7 +1198,7 @@ ddf_health.0017 = {
 								}
 							}
 						}
-						contract_disease_notify_effect = { DISEASE = diphtheria }
+						ddf_contract_disease_notify_effect = { DISEASE = diphtheria }
 					}
 				}
 				0 = { #Contagion prevented by physician
@@ -1305,7 +1312,7 @@ ddf_health.0012 = {
 	}
 
 	trigger = {
-		can_contract_disease_trigger = { DISEASE = flu }
+		ddf_can_contract_disease_trigger = { DISEASE = flu }
 	}
 	
 	weight_multiplier = {
@@ -1360,7 +1367,7 @@ ddf_health.0012 = {
 	immediate = {
 		play_music_cue = "mx_cue_illness"
 		save_court_physician_as_effect = { SCOPE_NAME = physician }
-		contract_disease_effect = { DISEASE = flu TREATMENT_EVENT = yes } #Adds the trait, sends event "health.2201" to those who care if health is brought too low
+		ddf_contract_disease_effect = { DISEASE = flu TREATMENT_EVENT = yes } #Adds the trait, sends event "health.2201" to those who care if health is brought too low
 	}
 	###NO COURT PHYSICIAN OPTIONS###
 	#Find physician
@@ -1540,7 +1547,7 @@ ddf_health.0013 = {
 	immediate = {
 		play_music_cue = "mx_cue_peace_ensues"
 		hidden_effect = {
-			recover_from_disease_effect = { DISEASE = flu } #Removes the trait, sends event "health.2202" to those who care & liege/host/imprisoner, adds immunity flag
+			ddf_recover_from_disease_effect = { DISEASE = flu } #Removes the trait, sends event "health.2202" to those who care & liege/host/imprisoner, adds immunity flag
 			remove_disease_treatment_effect = yes
 		}
 	}
@@ -1621,7 +1628,7 @@ ddf_health.0014 = {
 								}
 							}
 						}
-						contract_disease_notify_effect = { DISEASE = flu }
+						ddf_contract_disease_notify_effect = { DISEASE = flu }
 					}
 				}
 				0 = { #Contagion prevented by physician
@@ -1766,14 +1773,111 @@ ddf_health.0011 = {
 	
 }
 
+##
+#
+# Copied over from health_events.txt for the sake of compatibility 
+#
+##
+#Events managing health concerns
+#
+#
+#DDF ADJUSTED FOR THIS STUFF TO WORK RIGHT
+#
+#
 
-##General DDF Disease notify##
+#DISEASE EVENTS: by Mathilda Bjarnehed
+#	1001-1099: Contract disease
+#	1101-1199: Recover from diseases
+#	1201-1299: Contagion handling events
+# 	2001-2099: STD events
+#	2101-2199: Contagious disease at court
+#	2201-2299: Important character has dangerous disease events
+
+#COURT PHYSICIAN DISEASE EVENTS: by Mathilda Bjarnehed, Milla Isaksson, and Linnéa Thimrén
+#	3100-3199: Disease treatment
+#	3201-3299: Punishment for mistreating important people
+
+#PULSE MANAGEMENT:
+#	9998-9999: Pulse management
+
+
+
+##################
+##################
+# WOUNDED EVENTS #
+##################
+##################
+
+scripted_trigger ddf_health_event_is_worried_trigger = {
+	OR = {
+		ai_compassion >= medium_positive_ai_value
+		dread_modified_ai_boldness = {
+			dreaded_character = $CHARACTER$
+			value <= medium_negative_ai_value
+		}
+		has_relation_friend = $CHARACTER$
+		has_relation_lover = $CHARACTER$
+		opinion = {
+			target = $CHARACTER$
+			value >= high_positive_opinion
+		}
+	}
+	$CHARACTER$.health < fine_health
+}
+
+##################
+##################
+# DISEASE EVENTS #
+##################
+
+
 ####################################
 # SOMEONE IMPORTANT TO YOU IS SICK # Mathilda Bjarnehed
 ####################################
 
-#Someone important to you is sick. If you're their liege and you have a court physician, you may chose their treatment.
-#Triggered by the contract_disease_effect
+scripted_trigger ddf_health_2202_happy_recovery_trigger = {
+	OR = {
+		has_relation_lover = scope:sick_character
+		has_relation_friend = scope:sick_character
+		has_relation_best_friend = scope:sick_character
+		has_relation_soulmate = scope:sick_character
+		AND = {
+			scope:sick_character = {
+				opinion = {
+					target = root
+					value > 0
+				}
+				is_of_major_interest_to_root_trigger = yes
+			}
+		}
+	}
+}
+
+scripted_trigger ddf_health_2202_angry_recovery_trigger = {
+	OR = {
+		has_relation_rival = scope:sick_character
+		has_relation_nemesis = scope:sick_character
+		scope:sick_character = {
+			opinion = {
+				target = root
+				value < -35
+			}
+		}
+	}
+}
+
+scripted_trigger ddf_health_2202_contagious_recovery_trigger = {
+	OR = {
+		any_courtier_or_guest = { this = scope:sick_character }
+		any_prisoner = { this = scope:sick_character }
+	}
+	OR = {
+		scope:disease_type = flag:smallpox
+		scope:disease_type = flag:bubonic_plague
+	}
+}
+
+
 ddf_health.2201 = {
 	type = character_event
 	title = health.2201.t
@@ -1785,49 +1889,43 @@ ddf_health.2201 = {
 		}
 		first_valid = { #Disease type
 			triggered_desc = {
-				trigger = { scope:disease_type = flag:typhoid }
-				desc = disease_ergotism
-			}
-			triggered_desc = {
-				trigger = { scope:disease_type = flag:malaria }
-				desc = disease_ergotism
-			}
-			triggered_desc = {
 				trigger = { scope:disease_type = flag:diphtheria }
-				desc = disease_ergotism
+				desc = disease_diphtheria
 			}
 			triggered_desc = {
 				trigger = { scope:disease_type = flag:flu }
-				desc = disease_ergotism
+				desc = disease_flu
 			}
-						
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:malaria }
+				desc = disease_malaria
+			}
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:typhoid }
+				desc = disease_typhoid
+			}
+			
 			desc = missing_illness
 		}
 		first_valid = {
-			#triggered_desc = { #Normally not bad, now worried
-			#	trigger = {
-			#		OR = {
-			#			scope:disease_type = flag:ill
-			#			scope:disease_type = flag:gout_ridden
-			#			scope:disease_type = flag:lovers_pox
-			#			scope:disease_type = flag:early_great_pox
-			#		}
-			#	}
-			#	desc = health.2201.minor_disease.desc
-			#}
-			#triggered_desc = { #Leprosy
-			#	trigger = { scope:disease_type = flag:leper }
-			#	desc = health.2201.leprosy.desc
-			#}
-			#triggered_desc = { #Lethal
-			#	trigger = {
-			#		OR = {
-			#			scope:disease_type = flag:cancer
-			#			scope:disease_type = flag:bubonic_plague
-			#		}
-			#	}
-			#	desc = health.2201.lethal_disease.desc
-			#}
+			triggered_desc = { #Normally not bad, now worried
+				trigger = {
+					scope:disease_type = flag:flu
+					scope:disease_type = flag:typhoid
+					scope:disease_type = flag:diphtheria
+					
+				}
+				desc = health.2201.minor_disease.desc
+			}
+			triggered_desc = { #Lethal
+				trigger = {
+					OR = {
+						scope:disease_type = flag:cancer
+						scope:disease_type = flag:bubonic_plague
+					}
+				}
+				desc = health.2201.lethal_disease.desc
+			}
 			desc = health.2201.major_disease.desc #Ther rest, dangerous stuff but with a ~50%+ chance of survival
 		}
 		triggered_desc = {
@@ -1888,21 +1986,22 @@ ddf_health.2201 = {
 	immediate = {
 		show_as_tooltip = {
 			if = {
-				limit = { scope:disease_type = flag:typhoid }
-				scope:sick_character = { add_trait_force_tooltip = typhoid }
-			}
-			else_if = {
-				limit = { scope:disease_type = flag:malaria }
-				scope:sick_character = { add_trait_force_tooltip = malaria }
+				limit = { scope:disease_type = flag:diphtheria }
+				scope:sick_character = { add_trait_force_tooltip = diphtheria }
 			}
 			else_if = {
 				limit = { scope:disease_type = flag:flu }
 				scope:sick_character = { add_trait_force_tooltip = flu }
 			}
 			else_if = {
-				limit = { scope:disease_type = flag:diphtheria }
-				scope:sick_character = { add_trait_force_tooltip = diphtheria }
+				limit = { scope:disease_type = flag:malaria }
+				scope:sick_character = { add_trait_force_tooltip = malaria }
 			}
+			else_if = {
+				limit = { scope:disease_type = flag:typhoid }
+				scope:sick_character = { add_trait_force_tooltip = typhoid }
+			}
+			
 		}
 
 		save_court_physician_as_effect = { SCOPE_NAME = physician }
@@ -1989,7 +2088,7 @@ ddf_health.2201 = {
 			}
 			text = health.3102.e_child
 		}
-		scope:sick_character = { pick_own_disease_treatment_effect = yes }	
+		scope:sick_character = { ddf_pick_own_disease_treatment_effect = yes }	
 		ai_chance = { base = 0 }
 	}
 
@@ -2051,6 +2150,196 @@ ddf_health.2201 = {
 }
 
 
+ddf_health.2202 = {
+	type = character_event
+	title = health.2202.t
+	desc = {
+		desc = health.2202.desc
+		triggered_desc = {
+			trigger = { scope:disease_type = flag:ill }
+			desc = disease_ill_article
+		}
+		first_valid = { #Disease type
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:diphtheria }
+				desc = disease_diphtheria
+			}
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:flu }
+				desc = disease_flu
+			}
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:malaria }
+				desc = disease_malaria
+			}
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:typhoid }
+				desc = disease_typhoid
+			}
+			desc = missing_illness
+		}
+		first_valid = { #Are you happy about this?
+			triggered_desc = {
+				trigger = {
+					ddf_health_2202_happy_recovery_trigger = yes
+				}
+				desc = health.2202.desc.happy
+			}
+			triggered_desc = {
+				trigger = {
+					ddf_health_2202_happy_recovery_trigger = no
+					ddf_health_2202_angry_recovery_trigger = yes
+				}
+				desc = health.2202.desc.angry
+			}
+			triggered_desc = {
+				trigger = {
+					ddf_health_2202_happy_recovery_trigger = no
+					ddf_health_2202_angry_recovery_trigger = no
+					ddf_health_2202_contagious_recovery_trigger = yes
+				}
+				desc = health.2202.desc.relieved
+			}
+			triggered_desc = {
+				trigger = {
+					ddf_health_2202_happy_recovery_trigger = no
+					ddf_health_2202_angry_recovery_trigger = no
+					ddf_health_2202_contagious_recovery_trigger = no
+				}
+				desc = health.2202.desc.neutral
+			}
+		}
+	}
+	theme = recovery
+	override_background = { reference = relaxing_room }
+	left_portrait = {
+		character = root
+		triggered_animation = {
+			trigger = {
+				ddf_health_2202_happy_recovery_trigger = no
+				ddf_health_2202_angry_recovery_trigger = yes
+			}
+			animation = rage
+		}
+		animation = personality_compassionate
+	}
+	right_portrait = {
+		character = scope:sick_character
+		animation = happiness
+	}
+
+	trigger = {
+		scope:sick_character = { is_alive = yes }
+	}
+
+	immediate = {
+		show_as_tooltip = {
+			if = {
+				limit = { scope:disease_type = flag:diphtheria }
+				scope:sick_character = { add_trait_force_tooltip = diphtheria }
+			}
+			else_if = {
+				limit = { scope:disease_type = flag:flu }
+				scope:sick_character = { add_trait_force_tooltip = flu }
+			}
+			else_if = {
+				limit = { scope:disease_type = flag:malaria }
+				scope:sick_character = { add_trait_force_tooltip = malaria }
+			}
+			else_if = {
+				limit = { scope:disease_type = flag:typhoid }
+				scope:sick_character = { add_trait_force_tooltip = typhoid }
+			}
+			
+		}
+	}
+
+	option = {
+		name = { #So happy!
+			trigger = { ddf_health_2202_happy_recovery_trigger = yes }
+			text = health.2202.a.happy
+		}
+
+		name = { #So angry!
+			trigger = {
+				ddf_health_2202_happy_recovery_trigger = no
+				ddf_health_2202_angry_recovery_trigger = yes
+			}
+			text = health.2202.a.angry
+		}
+
+		name = { #So relieved!
+			trigger = {
+				ddf_health_2202_happy_recovery_trigger = no
+				ddf_health_2202_angry_recovery_trigger = no
+				ddf_health_2202_contagious_recovery_trigger = yes
+			}
+			text = health.2202.a.relieved
+		}
+
+		name = { #So neutral...
+			trigger = {
+				ddf_health_2202_happy_recovery_trigger = no
+				ddf_health_2202_angry_recovery_trigger = no
+				ddf_health_2202_contagious_recovery_trigger = no
+			}
+			text = health.2202.a.neutral
+		}
+
+		if = {
+			limit = {
+				OR = {
+					scope:disease_type = flag:lovers_pox
+					scope:disease_type = flag:early_great_pox
+					scope:disease_type = flag:great_pox
+				}
+				scope:sick_character = {
+					has_std_trigger = no
+					has_character_modifier = rejected_from_marriage_bed_modifier
+				}
+			}
+			scope:sick_character = {
+				remove_character_modifier = rejected_from_marriage_bed_modifier
+			}
+		}
+	}
+}
+
+
+#####################
+# DISEASE TREATMENT # by Mathilda Bjarnehed & additional texts by Milla Isaksson
+#####################
+
+#Who should decide about my treatment?
+ddf_health.3100 = {
+	hidden = yes
+
+	trigger = {
+		has_treatable_disease_trigger = yes
+		has_recent_treatment_trigger = no
+		court_physician_available_trigger = yes
+	}
+
+	immediate = {
+		set_worst_disease_effect = yes
+		save_scope_as = sick_character
+		ddf_decide_who_picks_disease_treatment_effect = yes #Sends ddf_health.3101 to me or 3102 to liege
+	}
+
+	on_trigger_fail = {
+		#No disease/no physician: do nothing (if we hire a new physician, they will treat everyone upon being hired)
+		#Has a disease but treatment is still active? Try again
+		if = {
+			limit = {
+				has_treatable_disease_trigger = yes
+				has_recent_treatment_trigger = yes #Only difference
+				court_physician_available_trigger = yes
+			}
+			trigger_event = { id = ddf_health.3100 years = 1 }
+		}
+	}
+}
+
 ddf_health.3101 = {
 	type = character_event
 	title = health.3101.t
@@ -2058,13 +2347,22 @@ ddf_health.3101 = {
 		desc = health.3101.start.desc
 		first_valid = { #Disease type
 			triggered_desc = {
-				trigger = { scope:disease_type = flag:typhoid }
-				desc = disease_typhoid
+				trigger = { scope:disease_type = flag:diphtheria }
+				desc = disease_diphtheria
+			}
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:flu }
+				desc = disease_flu
 			}
 			triggered_desc = {
 				trigger = { scope:disease_type = flag:malaria }
 				desc = disease_malaria
 			}
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:typhoid }
+				desc = disease_typhoid
+			}
+			
 			desc = missing_illness
 		}
 		random_valid = {
@@ -2119,11 +2417,32 @@ ddf_health.3101 = {
 		triggered_animation = {
 			trigger = { 
 				OR = {
-					has_trait = typhoid
-					has_trait = malaria
+					has_trait = bubonic_plague
+					has_trait = dysentery
+				}
+			}
+			animation = sick_stomach
+		}
+		triggered_animation = {
+			trigger = { 
+				OR = {
+					has_trait = typhus
+					has_trait = measles
+					has_trait = diphtheria
+					has_trait = flu
 				}
 			}
 			animation = shiver
+		}
+		triggered_animation = {
+			trigger = { 
+				OR = {
+					has_trait = smallpox
+					has_trait = ill
+					has_trait = consumption
+				}
+			}
+			animation = cough
 		}
 		animation = worry
 	}
@@ -2196,4 +2515,147 @@ ddf_health.3101 = {
 	}
 }
 
+#Important courtier sick: I pick treatment for them (court physician was recently hired OR treating after last treatment ran out)
+ddf_health.3102 = {
+	type = character_event
+	title = health.3102.t
+	desc = {
+		desc = health.3102.preamble
+		first_valid = {
+			triggered_desc = {
+			    trigger = {
+					scope:sick_character = scope:physician
+			    }
+			    desc = health.3102.start.desc_sick_physician
+			}
+			desc = health.3102.start.desc
+		}
+		first_valid = { #Disease type
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:diphtheria }
+				desc = disease_diphtheria
+			}
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:flu }
+				desc = disease_flu
+			}
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:malaria }
+				desc = disease_malaria
+			}
+			triggered_desc = {
+				trigger = { scope:disease_type = flag:typhoid }
+				desc = disease_typhoid
+			}
+			
+			desc = missing_illness
+		}
+		desc = health.3102.treatment
+	}
+	theme = healthcare
+	override_background = {
+		trigger = { scope:sick_character ?= { is_travelling = yes } exists = scope:background_terrain_scope }
+		reference = terrain_scope
+	}
+	left_portrait = {
+		character = scope:sick_character
+		animation = sick
+	}
+	right_portrait = {
+		trigger = {
+			root_picks_treatment_for_sick_character_trigger = yes
+			NOT = { scope:sick_character = scope:physician }
+		}
+		character = scope:physician
+		triggered_animation = {
+			trigger = { scope:physician = { ddf_health_event_is_worried_trigger = { CHARACTER = scope:sick_character } } }
+			animation = worry
+		}
+		animation = physician
+	}
+	
+	trigger = {
+		scope:sick_character = {
+			has_treatable_disease_trigger = yes
+			is_alive = yes
+		}
+		court_physician_available_trigger = yes
+	}
 
+	weight_multiplier = {
+		base = 1
+	}
+
+	immediate = {
+		hidden_effect = {
+			save_court_physician_as_effect = { SCOPE_NAME = physician }
+			scope:sick_character = { set_worst_disease_effect = yes }
+		}
+		scope:sick_character.location ?= { save_scope_as = background_terrain_scope }
+	}
+
+	#Safe
+	option = {
+		name = health.3102.a
+		safe_disease_treatment_effect = { PATIENT = scope:sick_character TREATMENT_PICKER = root }
+		ai_chance = { base = 10 }
+	}
+
+	#Risky
+	option = {
+		name = health.3102.b
+		risky_disease_treatment_effect = { PATIENT = scope:sick_character TREATMENT_PICKER = root }
+		ai_chance = { base = 1 }
+	}
+	
+	#Mystic
+	option = {
+		trigger = {
+			scope:physician = { has_trait = lifestyle_mystic }
+		}
+		name = {
+			trigger = { scope:sick_character = scope:physician }
+			text = health.3102.c_sick_physician
+		}
+		name = health.3102.c
+		mystic_disease_treatment_effect = { PATIENT = scope:sick_character TREATMENT_PICKER = root }
+		ai_chance = {
+			base = 0.5
+			modifier = {
+				add = -0.5
+				ai_zeal >= 0
+			}
+		}
+	}
+
+	#No treatment
+	option = {
+		name = health.3102.d
+		deny_treatment_effect = { PATIENT = scope:sick_character TREATMENT_PICKER = root }
+		ai_chance = { base = 1 }
+	}
+
+	#Let them pick
+	option = {
+		name = {
+			trigger = {
+				OR = {
+					scope:sick_character = { is_adult = yes }
+					NOT = { scope:sick_character = scope:physician }
+				}
+			}
+			text = health.3102.e_adult
+		}
+		name = {
+			trigger = {
+				OR = {
+					scope:sick_character = { is_adult = no }
+					scope:sick_character = scope:physician
+				}
+			}
+			text = health.3102.e_child
+		}
+		scope:sick_character = { ddf_pick_own_disease_treatment_effect = yes }	
+		ai_chance = { base = 0 }
+	}
+}

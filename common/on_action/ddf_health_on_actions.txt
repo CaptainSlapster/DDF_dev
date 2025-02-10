@@ -17,19 +17,23 @@ ddf_yearly_health_pulse = {
     }
     random_events = {
         800 = 0
-
-        80 = ddf_harm.9999 #ddf_harm.9999
+        80 = ddf_harm.9999 #This controls the random health complications
     }
 }
 
 
+
+
+
+
+#Just the health complications
 ddf_random_health_complications = {
     random_events = {
 		chance_to_happen = 15
         750 = 0 
-        15 = ddf_harm.0005 #Angry peasant
-        15 = ddf_harm.0004 #Fell down stairs
         50 = ddf_harm.0002 # sudden heart attack 50
+		15 = ddf_harm.0005 #Angry peasant
+        20 = ddf_harm.0004 #Fell down stairs
     }
 }
 
@@ -39,14 +43,14 @@ ddf_random_health_complications = {
 ddf_random_death_events = {
 	random_events = {
 		chance_to_happen = 10
-		850 = 0
+		500 = 0
 		15 = ddf_harm.0003 
 	}
 }
 
 check_health_modifiers = {
     random_events = {
-        200 = 0
+        165 = 0
         45 = ddf_health.0002 # Coughing fit
 		45 = ddf_health.0008 # Plague boils
 		45 = ddf_health.0009 # Feverish
@@ -141,15 +145,26 @@ ddf_disease_outbreak_pulse = {
 				value = 30
 			}
 		}
-		65 = ddf_health.0005 #typhoid
+		75 = ddf_health.0005 #typhoid
 		25 = ddf_health.0003 #malaria (Random mosquito bite), but x15 more likely with drained by mosquitos modifier
-		300 = ddf_health.0012 #influenza
-		65 = ddf_health.0015 #diphtheria
+		350 = ddf_health.0012 #influenza
+		80 = ddf_health.0015 #diphtheria
+
+
+		#Added these, but reduced their values so it isn't too OP
+		100 = health.1001 	#Ill
+		55 = health.1002  	#Pneumonic, x35 as common when ill
+		125 = health.1003 	#Gout-ridden
+		40 = health.1004  	#Leprosy
+		65 = health.1006 	#Consumption
+		135 = health.1007 	#Cancer
+		75 = health.1008 	#Lover's Pox
+		25 = health.1009 	#Great pox
 	}
 }
 
 
-##ONLY FOR THE EVENT##
+##ONLY FOR THE VARIOLATION EVENT##
 ddf_event_disease_pulse = {
 	random_events = {
 	4000 = health.1001 	#Ill

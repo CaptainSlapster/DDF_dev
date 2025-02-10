@@ -12,7 +12,6 @@
  epidemic_ruler_bug_bite_plague: "$epidemic_ruler_possessive_loc$ Bug Bite Plague"
  epidemic_holder_bug_bite_plague: "$epidemic_holder_loc$ Bug Bite Plague"
  epidemic_evil_god_bug_bite_plague: "$epidemic_devils_loc$ Bug Bite Plague"
- trait_malaria_character_desc: "[ROOT.GetCharacter.GetFirstNamePossessiveNoTooltip] body is afflicted by painful seizures, fevers, headaches, nausea and diarrhea. $epidemic_uncureable$"
 
  epidemic_rulers_typhoid: "$epidemic_ruler_possessive_loc$ "
  epidemic_titled_rulers_typhoid: "$epidemic_titled_ruler_possessive_loc$ "
@@ -21,11 +20,14 @@
  epidemic_culture_typhoid:  "$epidemic_culture_loc$  "
  epidemic_location_typhoid: "$epidemic_province_loc$  "
 
- trait_typhoid_character_desc: "[ROOT.GetCharacter.GetFirstNamePossessiveNoTooltip] body is afflicted by sweats, fever, and stomach cramps.  $epidemic_cureable$"
 
  epidemic_typhoid: "Typhoid"
 
- trait_flu_character_desc: "[ROOT.GetCharacter.GetFirstNamePossessiveNoTooltip] body is aching, hot, and yet cold."
+ trait_flu_character_desc: "[ROOT.GetCharacter.GetFirstNamePossessiveNoTooltip] body is aching, hot, and yet cold. $epidemic_cureable$"
+ trait_diphtheria_character_desc: "[ROOT.GetCharacter.GetFirstNamePossessiveNoTooltip] body is covered with lesions and has a throat full of rocks!  $epidemic_cureable$"
+ trait_typhoid_character_desc: "[ROOT.GetCharacter.GetFirstNamePossessiveNoTooltip] body is afflicted by sweats, fever, and stomach cramps.  $epidemic_cureable$"
+ trait_malaria_character_desc: "[ROOT.GetCharacter.GetFirstNamePossessiveNoTooltip] body is afflicted by painful seizures, fevers, headaches, nausea and diarrhea. $epidemic_uncureable$"
+
  epidemic_flu: "Influenza"
  
 
@@ -33,7 +35,8 @@
  epidemic_cureable: "#P Can be Cured! #!"
 
 
- disease_typhoid: "Typhoid"
+ disease_typhoid: "Typhoid Fever"
  disease_malaria: "Malaria"
  disease_flu: "Flu"
+ disease_diphtheria: "Diphtheria"
 

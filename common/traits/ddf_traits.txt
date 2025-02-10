@@ -67,42 +67,6 @@ ill = {
 	ai_energy = -25
 }
 
-flu = {
-	opposites = {
-		pneumonic
-	}
-	
-	health = -2.3
-	elderly_health = -2.3
-	prowess = -4
-	fertility = -0.2
-	shown_in_ruler_designer = no
-	category = health
-
-	dread_baseline_add = -10
-	dread_loss_mult = 1
-	
-	ruler_designer_cost = 0
-
-	flag = illness
-	flag = debilitating_illness
-	flag = blocks_getting_non_epidemic_disease
-
-	desc = {
-		first_valid = {
-			triggered_desc = {
-				trigger = {
-					NOT = { exists = this }
-				}
-				desc = trait_flu_desc
-			}
-			desc = trait_flu_character_desc
-		}
-	}
-
-	ai_energy = -30
-}
-
 pneumonic = {
 	##
 	#This would be bad 
@@ -507,6 +471,46 @@ leper = {
 
 
 ##Newly added traits for the epidemics##
+
+
+flu = {
+	opposites = {
+		pneumonic
+	}
+	
+	health = -2.3
+	elderly_health = -2.3
+	prowess = -4
+	fertility = -0.2
+	shown_in_ruler_designer = no
+	category = health
+
+	dread_baseline_add = -10
+	dread_loss_mult = 1
+	
+	ruler_designer_cost = 0
+
+	flag = illness
+	flag = debilitating_illness
+	flag = blocks_getting_non_epidemic_disease
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_flu_desc
+			}
+			desc = trait_flu_character_desc
+		}
+	}
+
+	ai_energy = -30
+}
+
+
+
 malaria = {
 	diplomacy = -1
 	stewardship = -1
@@ -773,6 +777,7 @@ infertile = {
 	birth = 0.5
 	random_creation = 0.5
 }
+
 infertile_2 = {
 	physical = yes
 	fertility = -1.0
@@ -816,6 +821,14 @@ infertile_2 = {
 	#inherit_chance = 50
 	genetic = yes
 	enables_inbred = yes
-	birth = 0.10
-	random_creation = 0.10
+	birth = 0.15
+	random_creation = 0.15
 }
+
+
+
+
+
+##Other generalized traits##
+
+

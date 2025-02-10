@@ -124,3 +124,13 @@ v1.3.1
 
 *Misc*
     -Hotfix for the variolation decision
+
+
+v1.3.2
+
+*Misc*
+    - Added Korean localization
+    - Fixed some issues with "missing disease text"
+    - Increased base fertility
+
+

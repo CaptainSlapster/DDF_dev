@@ -4,7 +4,7 @@ rule_fantasy_settings: "DDF: Fantasy Epidemics (Experimental)"
 rule_ddf_extra_plague_frequency: "DDF: Plague Frequency"
 rule_ddf_longer_lasting_plagues: "DDF: Plague Duration"
 rule_ddf_forever_black_death: "DDF: Eternal Black Death"
-
+rule_ddf_allow_mortality_events: "DDF: Mortality Events Settings:"
 
 #Plague Frequency
 setting_normal_plague_frequency: "Vanilla Frequency"
@@ -27,7 +27,11 @@ setting_normal_black_death_desc: "Vanilla style Bubonic Plague"
 setting_eternal_black_death: "Eternal Black Death"
 setting_eternal_black_death_desc: "Start the game with the Bubonic Plague and have it stay forever!"
 
-
+#Enable events
+setting_ddf_events_on: "Enabled"
+setting_ddf_events_on_desc: "Events added such as Falling down the stairs and Attacked by a peasant are enabled"
+setting_ddf_events_off: "Disabled"
+setting_ddf_events_off_desc: "Events added such as Falling down the stairs and Attacked by a peasant are disabled"
 ##FANTASY#
 setting_no_fantasy_settings: "No Fantasy Epidemics"
 setting_no_fantasy_settings_desc: "You will not have any fantasy epidemics"

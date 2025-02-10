@@ -1483,13 +1483,13 @@ bubonic_plague_min_infection_minor_duration = {
 		}
 		multiply = max_infection_duration_multi
 	}
-	else_if = {
-		limit = {
-			#This is the eternal black death. Honestly the math will make it last at minimum 2400 years so kinda eternal yea.
-			has_game_rule = eternal_black_death
-		}
-		multiply = 100
-	}
+	#else_if = { #Disabled for RN
+	#	limit = {
+	#		#This is the eternal black death. Honestly the math will make it last at minimum 2400 years so kinda eternal yea.
+	#		has_game_rule = eternal_black_death
+	#	}
+	#	multiply = 100
+	#}
 	#Then add the appropriate value#
 	add = {
 		if = {
@@ -1561,13 +1561,13 @@ bubonic_plague_max_infection_minor_duration = {
 		}
 		multiply = max_infection_duration_multi
 	}
-	else_if = {
-		limit = {
-			#This is the eternal black death. Honestly the math will make it last at minimum 2400 years so kinda eternal yea.
-			has_game_rule = eternal_black_death
-		}
-		multiply = 100
-	}
+	#else_if = { Disabled for RN
+	#	limit = {
+	#		#This is the eternal black death. Honestly the math will make it last at minimum 2400 years so kinda eternal yea.
+	#		has_game_rule = eternal_black_death
+	#	}
+	#	multiply = 100
+	#}
 	#Then add the appropriate value#
 	add = {
 		if = {
@@ -3147,19 +3147,19 @@ outbreak_chance_dysentery_mult_value = {
 outbreak_chance_black_plague_default_value = {
 	value = outbreak_chance_base_extra_low
 
-	#Game rule setting Good luck
-	if = {
-		limit = {
-			has_game_rule = eternal_black_death
-		}
-		add = 1000 # Basically should start the game with it.
-	}
-	else_if = {
-		limit = {
-			has_game_rule = normal_black_death
-		}
-		add = 0 # doesn't add anything so vanilla :)
-	}
+	#Disabled for rn 
+	#if = {
+	#	limit = {
+	#		has_game_rule = eternal_black_death
+	#	}
+	#	add = 1000 # Basically should start the game with it.
+	#}
+	#else_if = {
+	#	limit = {
+	#		has_game_rule = normal_black_death
+	#	}
+	#	add = 0 # doesn't add anything so vanilla :)
+	#}
 	#Buildings
 	if = {
 		limit = {

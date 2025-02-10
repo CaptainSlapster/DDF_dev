@@ -21,7 +21,8 @@ ddf_harm.0002 = {
 		#Extra checks for the mod DDF#
 		potential_heart_attack_trigger = yes
 		
-		# Medicine checks.
+		#Gamerule check
+		ddf_gamerule_enabled_events_trigger = yes # Checks to see if the gamerule is enabled
 
 	}
 
@@ -194,7 +195,6 @@ ddf_harm.0003 = {
 		ddf_sids_trigger = yes
 		is_adult = no
 		# Medicine checks.
-		character_can_easily_self_treat_trigger = no
 
 	}
 
@@ -204,13 +204,17 @@ ddf_harm.0003 = {
 		modifier = { add = harm_game_rule_likelihood_value }
 		# Plus some other factors apply.
 		modifier = {
-			add = 0.50
+			add = 1
 			ddf_sids_trigger = yes
 		}
         modifier = {
-            add = 0.30
+            add = 5
             ddf_bad_genetic_health_trigger = yes
         }
+		modifier = {
+			add = 5
+			ddf_unhealthy_traits_trigger = yes
+		}
 		modifier = {
 			has_trait = pure_blooded
 			add = -10
@@ -247,9 +251,12 @@ ddf_harm.0004 = {
 
 	trigger = {
 		# Standard checks.
-		OR = {
-		is_available_adult = yes
-		is_available_child = yes
+		AND = {
+			OR = {
+			is_available_adult = yes
+			is_available_child = yes
+			}
+		ddf_gamerule_enabled_events_trigger = yes
 		}
 	}
 
@@ -430,8 +437,8 @@ ddf_harm.0005 = {
 	trigger = {
 		# Standard checks.
 		is_available_adult = yes
-		highest_held_title_tier >= tier_county
-		is_ruler = yes
+		is_landed_or_landless_administrative = yes
+		ddf_gamerule_enabled_events_trigger = yes
 		NOT = {
 			is_available_child = yes
 			is_lowborn = yes
@@ -676,13 +683,12 @@ ddf_harm.9999 = {
 	trigger = {
 		# Standard checks.
 		OR = {
-		is_ruler = yes 
-		is_ruler = no
+			is_ruler = yes 
+			is_ruler = no
 		}
 		OR = {
 			ddf_harm_0000_not_on_dynastic_cooldown_trigger = yes
 		}
-		harm_game_rule_enablement_trigger = yes
 	}
 
 	immediate = {

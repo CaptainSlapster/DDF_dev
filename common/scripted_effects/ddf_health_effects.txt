@@ -1,5 +1,5 @@
 ﻿
-contract_disease_effect = {
+ddf_contract_disease_effect = {
 	if = { #Is the disease valid?
 		limit = { can_contract_disease_trigger = { DISEASE = $DISEASE$ } }
 
@@ -426,21 +426,11 @@ contract_disease_effect = {
 						}
 					}
 				}
-				if = {
-					limit ={
-						has_ddf_disease_trigger = yes
-					}
-					trigger_event = {
-						id = ddf_health.2201
-						days = 3
-					}
+				trigger_event = {
+					id = ddf_health.2201 #Important character is sick
+					days = 3
 				}
-				else = {
-					trigger_event = {
-						id = health.2201 #Important character is sick
-						days = 3
-					}
-				}
+				
 				#set a variable, so you are sure to get a follow-up
 				if = {
 					limit = { is_ai = no }
@@ -529,70 +519,13 @@ contract_disease_effect = {
 }
 
 
-contract_disease_notify_effect = {
+ddf_contract_disease_notify_effect = {
 	save_scope_value_as = {
 		name = disease_type
 		value = flag:$DISEASE$
 	}
 	
-	#Ill
 	if = {
-		limit = { scope:disease_type = flag:ill }
-		trigger_event = { id = health.1001 days = { 5 15 } }
-	}
-	else_if = {
-		limit = { scope:disease_type = flag:pneumonic }
-		trigger_event = { id = health.1002 days = { 5 15 } }
-	}
-	else_if = {
-		limit = { scope:disease_type = flag:gout_ridden }
-		trigger_event = { id = health.1003 days = { 5 15 } }
-	}
-	else_if = {
-		limit = { scope:disease_type = flag:leper }
-		trigger_event = { id = health.1004 days = { 5 15 } }
-	}
-	else_if = {
-		limit = { scope:disease_type = flag:typhus }
-		trigger_event = { id = health.1005 days = { 5 15 } }
-	}
-	else_if = {
-		limit = { scope:disease_type = flag:consumption }
-		trigger_event = { id = health.1006 days = { 5 15 } }
-	}
-	else_if = {
-		limit = { scope:disease_type = flag:cancer }
-		trigger_event = { id = health.1007 days = { 5 15 } }
-	}
-	else_if = {
-		limit = { scope:disease_type = flag:lovers_pox }
-		trigger_event = { id = health.1008 days = { 5 15 } }
-	}
-	else_if = {
-		limit = { scope:disease_type = flag:great_pox }
-		trigger_event = { id = health.1009 days = { 5 15 } }
-	}
-	else_if = {
-		limit = { scope:disease_type = flag:smallpox }
-		trigger_event = { id = health.1010 days = { 5 15 } }
-	}
-	else_if = {
-		limit = { scope:disease_type = flag:measles }
-		trigger_event = { id = health.1015 days = { 5 15 } }
-	}
-	else_if = {
-		limit = { scope:disease_type = flag:dysentery }
-		trigger_event = { id = health.1016 days = { 5 15 } }
-	}
-	else_if = {
-		limit = { scope:disease_type = flag:ergotism }
-		trigger_event = { id = health.1017 days = { 5 15 } }
-	}
-	else_if = {
-		limit = { scope:disease_type = flag:bubonic_plague }
-		trigger_event = { id = health.1011 days = { 5 15 } }
-	}
-	else_if = {
 		limit = { scope:disease_type = flag:typhoid }
 		trigger_event = { id = ddf_health.0005 days = { 5 15 } }
 	}
@@ -615,7 +548,7 @@ contract_disease_notify_effect = {
 	}
 }
 
-recover_from_disease_effect = {
+ddf_recover_from_disease_effect = {
 	hidden_effect = {
 		save_scope_value_as = {
 			name = disease_type
@@ -769,7 +702,7 @@ recover_from_disease_effect = {
 							}
 						}
 					}
-					trigger_event = health.2202
+					trigger_event = ddf_health.2202
 				}
 				else = {
 					save_scope_as = message_receiver
@@ -1242,7 +1175,7 @@ add_disease_treatment_modifier_effect = {
 	}
 }
 
-pick_own_disease_treatment_effect = {
+ddf_pick_own_disease_treatment_effect = {
 	if = {
 		limit = { is_adult = yes }
 		custom_tooltip = pick_own_treatment_effect.adult.tt
@@ -1252,50 +1185,28 @@ pick_own_disease_treatment_effect = {
 	}
 
 	hidden_effect = {
-		if = {
-			limit = {
-				has_ddf_disease_trigger = yes
-			}
 			trigger_event = {
 				id = ddf_health.3101
 				days = { 5 10 }
-			}
-		}
-		else = {
-			trigger_event = {
-				id = health.3101
-				days = { 5 10 }
 			}	
-		}
 	}
 }
-decide_who_picks_disease_treatment_effect = {
+ddf_decide_who_picks_disease_treatment_effect = {
 	if = {
 		limit = {
 			liege_picks_treatment_trigger = yes
 		}
 		liege = {
 			trigger_event = {
-				id = health.3102 #Liege decides
+				id = ddf_health.3102 #Liege decides
 				days = { physician_treatment_delay_subject_min physician_treatment_delay_subject_max }
 			}
 		}
 	}
 	else = {
-		if = {
-			limit = {
-				has_ddf_disease_trigger = yes
-			}
-			trigger_event = {
-				id = ddf_health.3101 #I decide
-				days = { physician_treatment_delay_ruler_min physician_treatment_delay_ruler_max }
-			}
-		}
-		else = {
-			trigger_event = {
-				id = health.3101 #I decide
-				days = { physician_treatment_delay_ruler_min physician_treatment_delay_ruler_max }
-			}
+		trigger_event = {
+			id = ddf_health.3101 #I decide
+			days = { physician_treatment_delay_ruler_min physician_treatment_delay_ruler_max }
 		}
 	}
 }
@@ -1362,20 +1273,9 @@ set_court_physician_effect = {
 					has_recent_treatment_trigger = no
 				}
 				save_scope_as = sick_character
-				if = {
-					limit = {
-						has_ddf_disease_trigger = yes
-					}
-					trigger_event = {
-						id = ddf_health.3101
-						days = { physician_treatment_delay_ruler_min physician_treatment_delay_ruler_max }
-					}
-				}
-				else = {
-					trigger_event = {
-						id = health.3101
-						days = { physician_treatment_delay_ruler_min physician_treatment_delay_ruler_max }
-					}
+				trigger_event = {
+					id = health.3101
+					days = { physician_treatment_delay_ruler_min physician_treatment_delay_ruler_max }
 				}
 			}
 			else_if = {

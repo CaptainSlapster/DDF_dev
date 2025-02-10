@@ -23,14 +23,14 @@ ddf_extra_plague_frequency = {
     super_plague_frequency = {}
 }
 
-ddf_forever_black_death = {
-    default = normal_black_death
-	categories = {
-		difficulty health historicity
-	}
-    normal_black_death = {}
-    eternal_black_death = {}
-}
+#ddf_forever_black_death = { Unfortunately disabled for RN
+#    default = normal_black_death
+#	categories = {
+#		difficulty health historicity
+#	}
+#    normal_black_death = {}
+#    eternal_black_death = {}
+#}
 
 ddf_longer_lasting_plagues = {
     default = normal_lasting_plagues
@@ -40,4 +40,14 @@ ddf_longer_lasting_plagues = {
     normal_lasting_plagues = {}
     increased_plague_duration = {}
     extreme_plague_duration = {}
+}
+
+ddf_allow_mortality_events = {
+    default = ddf_events_on
+
+    categories = {
+        difficulty health
+    }
+    ddf_events_on = {}
+    ddf_events_off = {}
 }
