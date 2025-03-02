@@ -22,8 +22,17 @@ ddf_yearly_health_pulse = {
 }
 
 
+on_birth_child = {
+	on_actions = {
+		ddf_blind_child_birth_defect
+	}
+}
 
-
+ddf_blind_child_birth_defect = {
+	effect = {
+		trigger_event = ddf_health.4100
+	}
+}
 
 
 #Just the health complications
@@ -152,14 +161,14 @@ ddf_disease_outbreak_pulse = {
 
 
 		#Added these, but reduced their values so it isn't too OP
-		100 = health.1001 	#Ill
-		55 = health.1002  	#Pneumonic, x35 as common when ill
-		125 = health.1003 	#Gout-ridden
-		40 = health.1004  	#Leprosy
-		65 = health.1006 	#Consumption
-		135 = health.1007 	#Cancer
-		75 = health.1008 	#Lover's Pox
-		25 = health.1009 	#Great pox
+		#100 = health.1001 	#Ill
+		#55 = health.1002  	#Pneumonic, x35 as common when ill
+		#125 = health.1003 	#Gout-ridden
+		#40 = health.1004  	#Leprosy
+		#65 = health.1006 	#Consumption
+		#135 = health.1007 	#Cancer
+		#75 = health.1008 	#Lover's Pox
+		#25 = health.1009 	#Great pox
 	}
 }
 

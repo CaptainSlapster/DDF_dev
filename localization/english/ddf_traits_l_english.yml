@@ -20,4 +20,6 @@
  trait_diphtheria: "Diptheria"
  trait_diphtheria_desc: "Riddled by scars, rashes, and bumps, this character will never be the same again even if they survive their malady."
 
-
+ trait_sickle_cell: "Sickle Cell"
+ trait_sickle_cell_desc: "Your blood.. Shaped like a sickle. Provides you protection from $disease_malaria$, but at a cost of health complications.."
+ trait_sickle_cell_character_desc: "[ROOT.GetCharacter.GetFirstNamePossessiveNoTooltip] blood is different... At least it will offer protection from $disease_malaria$.  $epidemic_uncureable$"

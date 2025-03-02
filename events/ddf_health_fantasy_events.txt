@@ -1,6 +1,6 @@
 ﻿namespace = ddf_fantasy_health
 
-scripted_trigger ddf_health_event_is_worried_trigger = {
+scripted_trigger ddf_fantasy_health_is_worried_trigger = {
 	OR = {
 		ai_compassion >= medium_positive_ai_value
 		dread_modified_ai_boldness = {
@@ -97,7 +97,7 @@ ddf_fantasy_health.0001 = {
 		}
 		character = scope:physician
 		triggered_animation = {
-			trigger = { scope:physician = { ddf_health_event_is_worried_trigger = { CHARACTER = root } } }
+			trigger = { scope:physician = { ddf_fantasy_health_is_worried_trigger = { CHARACTER = root } } }
 			animation = worry
 		}
 		triggered_animation = {
@@ -123,43 +123,6 @@ ddf_fantasy_health.0001 = {
 			factor = 1.8 # was 1.5
 		}
 
-			
-		# Difficulty and Game Rules make the generic 'Ill' slightly more common
-		modifier = { # Difficulty
-			is_ai = no
-			has_game_rule = easy_difficulty
-			factor = 1.1
-		}
-		modifier = {
-			is_ai = no
-			has_game_rule = very_easy_difficulty
-			factor = 1.5
-		}
-		modifier = {
-			is_ai = yes
-			has_game_rule = easy_difficulty
-			any_parent = {
-				is_ai = no
-			}
-			factor = 1.1
-		}
-		modifier = {
-			is_ai = no
-			has_game_rule = very_easy_difficulty
-			any_parent = {
-				is_ai = no
-			}
-			factor = 1.5
-		}
-		modifier = { # Game Rule
-			has_game_rule = fewer_minor_disease_frequency
-			factor = 1.2
-		}
-
-		modifier = { # Game Rule
-			has_game_rule = no_fantasy_settings
-			factor = 0 
-		}
 	}
 
 	immediate = {

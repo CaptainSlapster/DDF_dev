@@ -317,6 +317,7 @@ birth.0001 = {
 				days = { 10 30 }
 			}
 		}
+
 		if = {
 			limit = {
 				has_character_flag = birth_mother_will_become_ill

@@ -128,9 +128,25 @@ v1.3.1
 
 v1.3.2
 
+*Diseases*
+    - temporarily removed eternal black death
+
+
 *Misc*
     - Added Korean localization
     - Fixed some issues with "missing disease text"
+    - Added game rule to enable/disable mortality events
+
+
+*fertility*
     - Increased base fertility
 
 
+
+v1.3.3
+
+*Traits*
+    -Sickle Cell (Applies a tiny health penalty, but gives a reduced chance of Malaria being contracted)
+    -Made Blind have a chance of randomly occuring at birth, just like other traits (intelligent, feeble, etc)
+*Misc*
+    -Sickle Cell at the start of a game has a chance of being applied to rulers with the Niger Delta, Akan, and Guinean Uplander heritages

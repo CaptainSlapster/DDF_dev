@@ -157,6 +157,7 @@ pregnancy.0001 = {
 					days = { 180 200 }
 				}
 			}
+
 			50 = { #Sickly child (all other events happen as usual)
 				modifier = {
 					factor = 0.5 # Religious doctrine focusing on providing a sanitary birthing chamber and supplies should have a substantial impact on birth complications.
@@ -167,7 +168,7 @@ pregnancy.0001 = {
 				##If the mother's health is not that good then the child's won't either surprisingly##
 				modifier = {
 					health <= fine_health
-					subtract = 5
+					add = -5
 				}
 				modifier = {
 					health <= poor_health

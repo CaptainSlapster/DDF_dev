@@ -469,7 +469,7 @@ leper = {
 	ai_energy = -15
 }
 
-
+#Adjusting#
 ##Newly added traits for the epidemics##
 
 
@@ -826,8 +826,36 @@ infertile_2 = {
 }
 
 
+#Trait given to those that are within the south western points of Africa" #
+#
+# Sickle cell does cause health issues however, it does protect against malaria
+#
+sickle_cell = {
 
+	#Slightly sick, but not like death sick.
+	health = -0.1
+	elderly_health = -0.1
 
+	category = health
+
+	genetic = yes
+	ruler_designer_cost = 0
+	inherit_chance = 25 # I read it's a 25% percent chance 
+	## Won't have flags since it's an inherited trait
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_sickle_cell_desc
+			}
+			desc = trait_sickle_cell_character_desc
+		}
+	}
+
+}
 
 ##Other generalized traits##
 

@@ -154,7 +154,7 @@ min_infection_duration_multi = 0.2
 
 max_infection_duration_multi = 0.4
 
-smallpox_min_infection_minor_duration = {
+smallpox_min_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -225,7 +225,7 @@ smallpox_min_infection_minor_duration = {
 	#Finally round up or down
 	round = yes
 }
-smallpox_max_infection_minor_duration = {
+smallpox_max_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -297,7 +297,7 @@ smallpox_max_infection_minor_duration = {
 	round = yes
 }
 
-typhus_min_infection_minor_duration = {
+typhus_min_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -368,7 +368,7 @@ typhus_min_infection_minor_duration = {
 	#Finally round up or down
 	round = yes
 }
-typhus_max_infection_minor_duration = {
+typhus_max_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -440,7 +440,7 @@ typhus_max_infection_minor_duration = {
 	round = yes
 }
 
-consumption_min_infection_minor_duration = {
+consumption_min_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -511,7 +511,7 @@ consumption_min_infection_minor_duration = {
 	#Finally round up or down
 	round = yes
 }
-consumption_max_infection_minor_duration = {
+consumption_max_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -583,7 +583,7 @@ consumption_max_infection_minor_duration = {
 	round = yes
 }
 
-measles_min_infection_minor_duration = {
+measles_min_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -654,7 +654,7 @@ measles_min_infection_minor_duration = {
 	#Finally round up or down
 	round = yes
 }
-measles_max_infection_minor_duration = {
+measles_max_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -726,7 +726,7 @@ measles_max_infection_minor_duration = {
 	round = yes
 }
 
-dysentery_min_infection_minor_duration = {
+dysentery_min_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -797,7 +797,7 @@ dysentery_min_infection_minor_duration = {
 	#Finally round up or down
 	round = yes
 }
-dysentery_max_infection_minor_duration = {
+dysentery_max_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -870,7 +870,7 @@ dysentery_max_infection_minor_duration = {
 }
 
 
-ergotism_min_infection_minor_duration = {
+ergotism_min_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -941,7 +941,7 @@ ergotism_min_infection_minor_duration = {
 	#Finally round up or down
 	round = yes
 }
-ergotism_max_infection_minor_duration = {
+ergotism_max_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -1013,7 +1013,7 @@ ergotism_max_infection_minor_duration = {
 	round = yes
 }
 
-malaria_min_infection_minor_duration = {
+malaria_min_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -1084,7 +1084,7 @@ malaria_min_infection_minor_duration = {
 	#Finally round up or down
 	round = yes
 }
-malaria_max_infection_minor_duration = {
+malaria_max_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -1156,7 +1156,7 @@ malaria_max_infection_minor_duration = {
 	round = yes
 }
 
-typhoid_min_infection_minor_duration = {
+typhoid_min_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -1227,7 +1227,7 @@ typhoid_min_infection_minor_duration = {
 	#Finally round up or down
 	round = yes
 }
-typhoid_max_infection_minor_duration = {
+typhoid_max_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -1299,7 +1299,7 @@ typhoid_max_infection_minor_duration = {
 	round = yes
 }
 
-flu_min_infection_minor_duration = {
+flu_min_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -1370,7 +1370,7 @@ flu_min_infection_minor_duration = {
 	#Finally round up or down
 	round = yes
 }
-flu_max_infection_minor_duration = {
+flu_max_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -1443,7 +1443,7 @@ flu_max_infection_minor_duration = {
 }
 
 #Bubonic will be special because of the extra gamerule#
-bubonic_plague_min_infection_minor_duration = {
+bubonic_plague_min_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {
@@ -1521,7 +1521,7 @@ bubonic_plague_min_infection_minor_duration = {
 	#Finally round up or down
 	round = yes
 }
-bubonic_plague_max_infection_minor_duration = {
+bubonic_plague_max_infection_duration = {
 	##Setup values#
 	if = {
 		limit = {

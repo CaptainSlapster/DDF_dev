@@ -496,16 +496,16 @@ ddf_harm.0005 = {
 			location = this.location
 			template = ce1_hooded_figure_template
 			intrigue = {
-				min_template_very_high_skill
-				max_template_very_high_skill
+				5
+				15
 			}
 			martial = {
-				min_template_high_skill
-				max_template_high_skill
+				5
+				15
 			}
 			prowess = {
-				min_template_decent_skill
-				max_template_decent_skill
+				5
+				15
 			}
 			save_scope_as = attacker
 		}
@@ -529,7 +529,7 @@ ddf_harm.0005 = {
 				is_ruler = yes
 				NOT = { government_has_flag = government_is_administrative }
 			}
-			add_legitimacy = 50
+			#add_legitimacy = 50
 		}
 		else_if = {
 			limit = {
@@ -538,7 +538,7 @@ ddf_harm.0005 = {
 					government_has_flag = government_is_administrative 
 				}
 			}
-			change_influence = 50
+			#change_influence = 50
 		}
 		save_scope_value_as = {
 			name = method
@@ -588,7 +588,7 @@ ddf_harm.0005 = {
 				is_ruler = yes
 				NOT = { government_has_flag = government_is_administrative }
 			}
-			add_legitimacy = -50
+			#add_legitimacy = -50
 		}
 		else_if = {
 			limit = {
@@ -597,7 +597,7 @@ ddf_harm.0005 = {
 					government_has_flag = government_is_administrative 
 				}
 			}
-			change_influence = -50
+			#change_influence = -50
 		}
 		random_list = {
 			# You survive.

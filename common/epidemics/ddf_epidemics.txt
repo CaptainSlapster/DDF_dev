@@ -511,7 +511,7 @@ bubonic_plague = {
 			max_provinces = { 100 200 }
 
 			infection_duration = {
-				months = { bubonic_plague_min_infection_minor_duration bubonic_plague_max_infection_minor_duration }
+				months = { bubonic_plague_min_infection_duration bubonic_plague_max_infection_duration }
 			}
 
 			infection_progress_duration = {
@@ -544,7 +544,7 @@ bubonic_plague = {
 			max_provinces = { 300 500 }
 
 			infection_duration = {
-				months = {  bubonic_plague_min_infection_minor_duration bubonic_plague_max_infection_minor_duration  }
+				months = {  bubonic_plague_min_infection_duration bubonic_plague_max_infection_duration  }
 			}
 
 			infection_progress_duration = {
@@ -645,7 +645,7 @@ bubonic_plague = {
 			max_provinces = { 6500 7250 }
 
 			infection_duration = {
-				months = {  bubonic_plague_min_infection_minor_duration bubonic_plague_max_infection_minor_duration  }
+				months = {  bubonic_plague_min_infection_duration bubonic_plague_max_infection_duration  }
 			}
 			
 			infection_progress_duration = {
@@ -907,7 +907,7 @@ typhus = {
 			max_provinces = { 15 20 } #highly localised
 
 			infection_duration = {
-				months = { typhus_min_infection_minor_duration typhus_max_infection_minor_duration }
+				months = { typhus_min_infection_duration typhus_max_infection_duration }
 			}
 
 			infection_progress_duration = {
@@ -947,7 +947,7 @@ typhus = {
 			max_provinces = { 20 30 }
 
 			infection_duration = {
-				months = { typhus_min_infection_minor_duration typhus_max_infection_minor_duration}
+				months = { typhus_min_infection_duration typhus_max_infection_duration}
 			}
 
 			infection_progress_duration = {
@@ -987,7 +987,7 @@ typhus = {
 			max_provinces = { 40 60 }
 
 			infection_duration = {
-				months = { typhus_min_infection_minor_duration typhus_max_infection_minor_duration }
+				months = { typhus_min_infection_duration typhus_max_infection_duration }
 			}
 			
 			infection_progress_duration = {
@@ -1241,7 +1241,7 @@ consumption = { #Tuberculosis
 			max_provinces = { 45 65} # {15 30}
 
 			infection_duration = {
-				months = { consumption_min_infection_minor_duration consumption_max_infection_minor_duration } #stays around for a long time
+				months = { consumption_min_infection_duration consumption_max_infection_duration } #stays around for a long time
 			}
 
 			infection_progress_duration = {
@@ -1297,7 +1297,7 @@ consumption = { #Tuberculosis
 			max_provinces = { 50 85 }
 
 			infection_duration = {
-				months = { consumption_min_infection_minor_duration consumption_max_infection_minor_duration }
+				months = { consumption_min_infection_duration consumption_max_infection_duration }
 			}
 
 			infection_progress_duration = {
@@ -1353,7 +1353,7 @@ consumption = { #Tuberculosis
 			max_provinces = { 90 145 }
 
 			infection_duration = {
-				months = { consumption_min_infection_minor_duration consumption_max_infection_minor_duration }
+				months = { consumption_min_infection_duration consumption_max_infection_duration }
 			}
 			
 			infection_progress_duration = {
@@ -1585,7 +1585,7 @@ measles = {
 			max_provinces = { 45 70} # 30 40
 
 			infection_duration = {
-				months = { measles_min_infection_minor_duration measles_max_infection_minor_duration }
+				months = { measles_min_infection_duration measles_max_infection_duration }
 			}
 
 			infection_progress_duration = {
@@ -1634,7 +1634,7 @@ measles = {
 			max_provinces = { 80 125} #70 100
 
 			infection_duration = {
-				months = { measles_min_infection_minor_duration measles_max_infection_minor_duration }
+				months = { measles_min_infection_duration measles_max_infection_duration }
 			}
 
 			infection_progress_duration = {
@@ -1682,7 +1682,7 @@ measles = {
 			max_provinces = { 150 225 }
 
 			infection_duration = {
-				months = { measles_min_infection_minor_duration measles_max_infection_minor_duration }
+				months = { measles_min_infection_duration measles_max_infection_duration }
 			}
 			
 			infection_progress_duration = {
@@ -1887,7 +1887,7 @@ dysentery = {
 			max_provinces = { 35 100 }
 			
 			infection_duration = {
-				months = { dysentery_min_infection_minor_duration dysentery_max_infection_minor_duration }
+				months = { dysentery_min_infection_duration dysentery_max_infection_duration }
 			}
 
 			infection_progress_duration = {
@@ -1927,7 +1927,7 @@ dysentery = {
 			max_provinces = { 85 150 }
 
 			infection_duration = {
-				months = { dysentery_min_infection_minor_duration dysentery_max_infection_minor_duration }
+				months = { dysentery_min_infection_duration dysentery_max_infection_duration }
 			}
 
 			infection_progress_duration = {
@@ -1967,7 +1967,7 @@ dysentery = {
 			max_provinces = { 130 210 }
 
 			infection_duration = {
-				months = { dysentery_min_infection_minor_duration dysentery_max_infection_minor_duration }
+				months = { dysentery_min_infection_duration dysentery_max_infection_duration }
 			}
 			
 			infection_progress_duration = {
@@ -2220,7 +2220,7 @@ ergotism = { #dancing plague - not contagious
 			max_provinces = { 30 45 }
 
 			infection_duration = {
-				months = { ergotism_min_infection_minor_duration ergotism_max_infection_minor_duration }
+				months = { ergotism_min_infection_duration ergotism_max_infection_duration }
 			}
 
 			infection_progress_duration = {
@@ -2278,7 +2278,7 @@ ergotism = { #dancing plague - not contagious
 			max_provinces = { 70 95 }
 
 			infection_duration = {
-				months = { ergotism_min_infection_minor_duration ergotism_max_infection_minor_duration }
+				months = { ergotism_min_infection_duration ergotism_max_infection_duration }
 			}
 
 			infection_progress_duration = {
@@ -2336,7 +2336,7 @@ ergotism = { #dancing plague - not contagious
 			max_provinces = { 80 165 }
 
 			infection_duration = {
-				months = { ergotism_min_infection_minor_duration ergotism_max_infection_minor_duration }
+				months = { ergotism_min_infection_duration ergotism_max_infection_duration }
 			}
 
 			infection_progress_duration = {
@@ -2583,7 +2583,7 @@ malaria = {
 			max_provinces = { 15 35 }
 
 			infection_duration = {
-				months = {malaria_min_infection_minor_duration malaria_max_infection_minor_duration }
+				months = {malaria_min_infection_duration malaria_max_infection_duration }
 			}
 
 			infection_progress_duration = {
@@ -2641,7 +2641,7 @@ malaria = {
 			max_provinces = { 50 80 }
 
 			infection_duration = {
-				months = { malaria_min_infection_minor_duration malaria_max_infection_minor_duration }
+				months = { malaria_min_infection_duration malaria_max_infection_duration }
 			}
 
 			infection_progress_duration = {
@@ -2699,7 +2699,7 @@ malaria = {
 			max_provinces = { 70 100 }
 
 			infection_duration = {
-				months = { malaria_min_infection_minor_duration malaria_max_infection_minor_duration }
+				months = { malaria_min_infection_duration malaria_max_infection_duration }
 			}
 
 			infection_progress_duration = {
@@ -2859,7 +2859,7 @@ typhoid = {
 			max_provinces = { 45 85} # {15 30}
 
 			infection_duration = {
-				months = { typhoid_min_infection_minor_duration typhoid_max_infection_minor_duration } # 6 8
+				months = { typhoid_min_infection_duration typhoid_max_infection_duration } # 6 8
 			}
 
 			infection_progress_duration = {
@@ -2898,7 +2898,7 @@ typhoid = {
 			max_provinces = { 60 105 } # 45 70
 
 			infection_duration = {
-				months = { typhoid_min_infection_minor_duration typhoid_max_infection_minor_duration } #10 20
+				months = { typhoid_min_infection_duration typhoid_max_infection_duration } #10 20
 			}
 
 			infection_progress_duration = {
@@ -2937,7 +2937,7 @@ typhoid = {
 			max_provinces = { 145 210 } # 120 180
 
 			infection_duration = {
-				months = { typhoid_min_infection_minor_duration typhoid_max_infection_minor_duration }
+				months = { typhoid_min_infection_duration typhoid_max_infection_duration }
 			}
 			
 			infection_progress_duration = {
@@ -3183,7 +3183,7 @@ flu = { #Tuberculosis
 			max_provinces = { 45 65} # {15 30}
 
 			infection_duration = {
-				months = { flu_min_infection_minor_duration flu_max_infection_minor_duration } #stays around for a long time
+				months = { flu_min_infection_duration flu_max_infection_duration } #stays around for a long time
 			}
 
 			infection_progress_duration = {
@@ -3239,7 +3239,7 @@ flu = { #Tuberculosis
 			max_provinces = { 50 85 }
 
 			infection_duration = {
-				months = { flu_min_infection_minor_duration flu_max_infection_minor_duration }
+				months = { flu_min_infection_duration flu_max_infection_duration }
 			}
 
 			infection_progress_duration = {
@@ -3295,7 +3295,7 @@ flu = { #Tuberculosis
 			max_provinces = { 90 145 }
 
 			infection_duration = {
-				months = {flu_min_infection_minor_duration flu_max_infection_minor_duration }
+				months = {flu_min_infection_duration flu_max_infection_duration }
 			}
 			
 			infection_progress_duration = {
