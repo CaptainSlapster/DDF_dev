@@ -144,11 +144,11 @@ typhoid_min_infection_apocalyptic_base = 22
 typhoid_max_infection_apocalyptic_base = 40
 
 flu_min_infection_minor_base = 9
-flu_max_infection_minor_base = 12
+flu_max_infection_minor_base = 13
 flu_min_infection_major_base = 13
 flu_max_infection_major_base = 16
-flu_min_infection_apocalyptic_base = 17
-flu_max_infection_apocalyptic_base = 25
+flu_min_infection_apocalyptic_base = 20
+flu_max_infection_apocalyptic_base = 35
 
 min_infection_duration_multi = 0.2
 
@@ -3956,7 +3956,7 @@ would_follow_social_distancing_value = {
 
 ##INCREASING THIS TO MAKE DISEASE A BIT MORE IMPACTFUL##
 character_infection_chance_default_value = {
-	value = 15
+	value = 20
 	#If you're already sick/weak you're screwed
 	if = { 
 		limit = { 
@@ -3966,6 +3966,18 @@ character_infection_chance_default_value = {
 				has_trait = inbred
 				health <= poor_health
 			}
+		}
+		add = 45
+	}
+	if = {
+		limit = {
+			has_character_modifier = ddf_coughing_fit
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			has_character_modifier = ddf_pus_boils
 		}
 		add = 45
 	}
@@ -4076,13 +4088,13 @@ character_infection_chance_default_value = {
 		limit = {
 			age <= 15
 		}
-		add = 25
+		add = 10
 	}
 	else_if = {
 		limit = {
 			age <= 5
 		}
-		add = 10
+		add = 25
 	}
 
 	# Camp resistance.

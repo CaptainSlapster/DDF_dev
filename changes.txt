@@ -147,6 +147,9 @@ v1.3.3
 
 *Traits*
     -Sickle Cell (Applies a tiny health penalty, but gives a reduced chance of Malaria being contracted)
-    -Made Blind have a chance of randomly occuring at birth, just like other traits (intelligent, feeble, etc)
+    -There is a 0.5% chance of children being born blind.
+
 *Misc*
     -Sickle Cell at the start of a game has a chance of being applied to rulers with the Niger Delta, Akan, and Guinean Uplander heritages
+*Bugs*
+    -Fixed an issue with diseases not spreading properly (I made a few typos T-T). Gamerule settings should work as intended.

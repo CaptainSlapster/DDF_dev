@@ -2974,7 +2974,7 @@ typhoid = {
 		plague_recovery_event_effect = yes
 	}
 }
-flu = { #Tuberculosis
+flu = { #Influenza
 	trait = flu
 	color = { 128 52 179 }
 	priority = 1
@@ -3093,7 +3093,7 @@ flu = { #Tuberculosis
 			limit = {
 				has_character_modifier = ddf_coughing_fit
 			}
-			multiply = 4
+			multiply = 5
 		}
 
 	}

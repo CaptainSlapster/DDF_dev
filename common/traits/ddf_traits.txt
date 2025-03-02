@@ -480,6 +480,7 @@ flu = {
 	
 	health = -2.3
 	elderly_health = -2.3
+	child_health = -2.3
 	prowess = -4
 	fertility = -0.2
 	shown_in_ruler_designer = no
@@ -838,9 +839,10 @@ sickle_cell = {
 
 	category = health
 
-	genetic = yes
+	#genetic = yes
 	ruler_designer_cost = 0
 	inherit_chance = 25 # I read it's a 25% percent chance 
+	both_parent_has_trait_inherit_chance = 50
 	## Won't have flags since it's an inherited trait
 
 	desc = {

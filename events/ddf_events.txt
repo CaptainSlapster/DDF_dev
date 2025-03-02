@@ -1,5 +1,0 @@
-﻿##THIS WILL BE EVENTS THAT CAN HARM/KILL##
-#
-#The harm events file is for things that just hurt you. This file will have
-#events that can lead to death, but not really. sorta like more flavor maybe.
-#WIP FOR RN
