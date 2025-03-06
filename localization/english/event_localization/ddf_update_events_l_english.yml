@@ -3,6 +3,6 @@
  ddf_update_ver_1_3_3desc: "#T v1.3.3 - Minor Changes/Fixes:#!\n\n #bold Traits:#!\n     -Sickle Cell (Applies a tiny health penalty, but gives a reduced chance of Malaria being contracted)\n     -There is a 0.5% chance of children being born blind.\n\n #bold Misc:#!\n     -Sickle Cell at the start of a game has a chance of being applied to rulers with the Niger Delta, Akan, Guinean Uplander, and East African heritages.\n\n #bold Bugfixes:#!\n     -Fixed an issue with diseases not spreading properly (I made a few typos T-T). Gamerule settings should work as intended.\n\n"
 
 
- ddf_update.0001.t: "Changelog: What's new?"
+ ddf_update.0001.t: "DDF: Changelog - What's new?"
  ddf_update.0001.desc: "Please take time to review the current changes to the mod!\nFor the complete changelog, please refer to the steam page or changes.txt file in the mod folder.\n\n $ddf_update_ver_1_3_3desc$ "
  ddf_update.0001.a: "Sounds good!"

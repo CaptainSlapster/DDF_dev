@@ -12,7 +12,7 @@
  take_vaccination_decision.tooltip: "Variolation is a method where a small amount of sickness is applied under the skin to try and provide immunity! Although it comes with its risks!"
  take_vaccination_decision_confirm: "Perform Variolation Procedure" 
 
- vaccine_desc: "With the plague looming over our land, We must attempt to protect ourselves!"
+ vaccine_desc: "With a plague looming over our land, We must attempt to protect ourselves!"
 
 
  take_vaccination_decision_smallpox_tt: "Smallpox must be present in your realm"
@@ -20,21 +20,28 @@
  take_vaccination_decision_typhoid_tt: "Typhoid must be present in your realm"
  take_vaccination_decision_flu_tt: "Influenza must be present in your realm"
  take_vaccination_decision_diphtheria_tt: "Diphtheria must be present in your realm"
+ take_vaccination_decision_black_death_tt: "The Bubonic Plague must be present in your realm"
+ take_vaccination_decision_consumption_tt: "Consumption must be present in your realm"
 
 
 
 
- protection_from_smallpox_tooltip: "Giving yourself a piece of the disease may help you become immune to it and you'll receive #P Var , but it comes with a high probability that you'll get sick from the procedure"
+ protection_from_smallpox_tooltip: "Giving yourself a piece of the disease may help you become immune to it, but it comes with a high probability that you'll get sick from the procedure"
  protection_from_measles_tooltip: "Giving yourself a piece of the disease may help you become immune to it, but it comes with a high probability that you'll get sick from the procedure"
  protection_from_typhoid_tooltip: "Giving yourself a piece of the disease may help you become immune to it, but it comes with a high probability that you'll get sick from the procedure"
  protection_from_flu_tooltip: "Giving yourself a piece of the disease may help you become immune to it, but it comes with a high probability that you'll get sick from the procedure"
  protection_from_diphtheria_tooltip: "Giving yourself a piece of the disease may help you become immune to it, but it comes with a high probability that you'll get sick from the procedure"
+ protection_from_black_death_tooltip: "Giving yourself a piece of the disease may help you become immune to it, but it comes with a high probability that you'll get sick from the procedure"
+ protection_from_consumption_tooltip: "Giving yourself a piece of the disease may help you become immune to it, but it comes with a high probability that you'll get sick from the procedure"
 
  smallpox_vaccine_decision: "Smallpox"
  measles_vaccine_decision: "Measles"
  typhoid_vaccine_decision: "Typhoid"
  flu_vaccine_decision: "Influenza"
  diphtheria_vaccine_decision: "Diphtheria"
+ black_death_vaccine_decision: "Bubonic Plague"
+ consumption_vaccine_decision: "Consumption"
 
 
 
+ take_vaccination_decision_tooltip: "Attempt to get immunity"

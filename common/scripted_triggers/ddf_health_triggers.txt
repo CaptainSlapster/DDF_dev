@@ -39,6 +39,29 @@ potential_heart_attack_trigger = {
             }
         }
 }
+
+##
+# Variolation Trigger
+##
+
+ddf_show_variolation_trigger = {
+	any_realm_province = {
+		any_province_epidemic = {
+			OR = {
+				epidemic_type.epidemic_trait = trait:smallpox
+				epidemic_type.epidemic_trait = trait:measles
+				epidemic_type.epidemic_trait = trait:flu
+				epidemic_type.epidemic_trait = trait:diphtheria
+				epidemic_type.epidemic_trait = trait:bubonic_plague
+				epidemic_type.epidemic_trait = trait:typhoid
+				epidemic_type.epidemic_trait = trait:consumption
+				
+			}
+		}
+	}
+}
+
+
 ddf_bad_genetic_health_trigger = {
     OR ={
         has_trait = inbred

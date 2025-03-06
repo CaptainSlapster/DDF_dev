@@ -20,30 +20,27 @@ take_vaccination_decision = {
 	is_shown = {
 		exists = capital_county
 		highest_held_title_tier >= tier_county
+		ddf_show_variolation_trigger = yes
 		trigger_if = {
 			limit = {
 				is_ai = yes
 			}
-			OR = {
-				any_held_title = {
-					tier = tier_county
-					any_county_province = {
-						any_province_epidemic = {
-							count >= 1
-						}
+
+			any_held_title = {
+				tier = tier_county
+				any_county_province = {
+					any_province_epidemic = {
+						count >= 1
 					}
 				}
-				capital_county = { has_county_modifier = isolate_capital_decision_modifier }
 			}
 		}
 		trigger_else = {
-			OR = {
-				realm_has_any_epidemic = {
-					SIZE = 1
-					INTENSITY = minor
-				}
-				capital_county = { has_county_modifier = isolate_capital_decision_modifier }
+			realm_has_any_epidemic = {
+				SIZE = 1
+				INTENSITY = minor
 			}
+
 		}
 
 		#Kids can't do it
@@ -73,9 +70,17 @@ take_vaccination_decision = {
 				}
 
 			}
+			is_shown = {
+				any_realm_province = {
+					any_province_epidemic = {
+						epidemic_type.epidemic_trait = trait:smallpox
+					}
+				}	
+			}
 			current_description = vaccine_desc
 			localization = smallpox_vaccine_decision
 			icon = "gfx/interface/icons/message_feed/plague.dds"
+
 			ai_chance = {
 				value = 100
 			}
@@ -94,9 +99,17 @@ take_vaccination_decision = {
 					}
 				}
 			}
+			is_shown = {
+				any_realm_province = {
+					any_province_epidemic = {
+						epidemic_type.epidemic_trait = trait:measles
+					}
+				}	
+			}
 			current_description = vaccine_desc
 			localization = measles_vaccine_decision
-			icon = "gfx/interface/icons/court_position_types/cave_hermit_court_position.dds"
+			icon = "gfx/interface/icons/message_feed/plague.dds"
+
 			ai_chance = {
 				value = 100
 			}
@@ -115,13 +128,22 @@ take_vaccination_decision = {
 					}
 				}
 			}
+			is_shown = {
+				any_realm_province = {
+					any_province_epidemic = {
+						epidemic_type.epidemic_trait = trait:typhoid
+					}
+				}	
+			}
 			current_description = vaccine_desc
 			localization = typhoid_vaccine_decision
-			icon = "gfx/interface/icons/court_position_types/cave_hermit_court_position.dds"
+			icon = "gfx/interface/icons/message_feed/plague.dds"
+
 			ai_chance = {
 				value = 100
 			}
 		}
+
 		item = { # Protect yourself from flu
 			value = protection_from_flu
 			is_valid = {
@@ -135,34 +157,108 @@ take_vaccination_decision = {
 					}
 				}
 			}
+			is_shown = {
+				any_realm_province = {
+					any_province_epidemic = {
+						epidemic_type.epidemic_trait = trait:flu
+					}
+				}	
+			}
 			current_description = vaccine_desc
 			localization = flu_vaccine_decision
-			icon = "gfx/interface/icons/court_position_types/cave_hermit_court_position.dds"
+			icon = "gfx/interface/icons/message_feed/plague.dds"
+
+			ai_chance = {
+				value = 100
+			}
+		}
+
+		item = { # Protect yourself from consumption (TB)
+			value = protection_from_consumption
+			is_valid = {
+				NOT = {has_character_modifier = ddf_variolation}
+				custom_tooltip = {
+					text = take_vaccination_decision_consumption_tt
+					any_realm_province = {
+						any_province_epidemic = {
+							epidemic_type.epidemic_trait = trait:consumption
+						}
+					}
+				}
+			}
+			is_shown = {
+				any_realm_province = {
+					any_province_epidemic = {
+						epidemic_type.epidemic_trait = trait:consumption
+					}
+				}	
+			}
+			current_description = vaccine_desc
+			localization = consumption_vaccine_decision
+			icon = "gfx/interface/icons/message_feed/plague.dds"
+
 			ai_chance = {
 				value = 100
 			}
 		}
 		item = { # Protect yourself from diphtheria
-		value = protection_from_diphtheria
-		is_valid = {
-			NOT = {has_character_modifier = ddf_variolation}
-			custom_tooltip = {
-				text = take_vaccination_decision_diphtheria_tt
+			value = protection_from_diphtheria
+			is_valid = {
+				NOT = {has_character_modifier = ddf_variolation}
+				custom_tooltip = {
+					text = take_vaccination_decision_diphtheria_tt
+					any_realm_province = {
+						any_province_epidemic = {
+							epidemic_type.epidemic_trait = trait:diphtheria
+						}
+					}
+				}
+			}
+			is_shown = {
 				any_realm_province = {
 					any_province_epidemic = {
 						epidemic_type.epidemic_trait = trait:diphtheria
 					}
+				}	
+			}
+			current_description = vaccine_desc
+			localization = diphtheria_vaccine_decision
+			icon = "gfx/interface/icons/message_feed/plague.dds"
+
+				ai_chance = {
+					value = 100
+				}
+		}
+
+		item = { # Protect yourself from black death
+			value = protection_from_black_death
+			is_valid = {
+				NOT = {has_character_modifier = ddf_variolation}
+				custom_tooltip = {
+					text = take_vaccination_decision_black_death_tt
+					any_realm_province = {
+						any_province_epidemic = {
+							epidemic_type.epidemic_trait = trait:bubonic_plague
+						}
+					}
 				}
 			}
+			is_shown = {
+				any_realm_province = {
+					any_province_epidemic = {
+						epidemic_type.epidemic_trait = trait:bubonic_plague
+					}
+				}	
+			}
+			current_description = vaccine_desc
+			localization = black_death_vaccine_decision
+			icon = "gfx/interface/icons/message_feed/plague.dds"
+
+				ai_chance = {
+					value = 100
+				}
 		}
-		current_description = vaccine_desc
-		localization = diphtheria_vaccine_decision
-		icon = "gfx/interface/icons/court_position_types/cave_hermit_court_position.dds"
-		ai_chance = {
-			value = 100
-		}
-	}
-}	
+	}	
 
 
 	effect = {	
@@ -275,5 +371,49 @@ take_vaccination_decision = {
 		#}
 
 	}
+
+
+	ai_check_interval = 2
+
+	ai_potential = {
+		NOT = { has_character_flag = has_character_modifier = ddf_variolation }
+	}
+
+	ai_will_do = {
+		#People would really like to do this for their own protection
+		base = 5
+
+		modifier = {
+			add = 5
+			ai_rationality >=10
+		}
+		modifier = {
+			add = 5
+			ai_rationality >=50
+		}
+		modifier = {
+			add = 5
+			ai_rationality >=90
+		}
+		modifier = {
+			add = -5
+			ai_rationality <=-25
+		}
+
+		modifier = {
+			add = -10
+			ai_zeal >=50
+		}
+
+		ai_value_modifier = {
+			ai_zeal = -0.85
+			ai_greed = 0.45
+			ai_boldness = 0.35 
+			ai_honor = 0.2
+
+		}
+		
+	}
+
 
 }

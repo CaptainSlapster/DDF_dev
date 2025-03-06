@@ -174,16 +174,16 @@ ddf_disease_outbreak_pulse = {
 
 
 ##ONLY FOR THE VARIOLATION EVENT##
-ddf_event_disease_pulse = {
-	random_events = {
-	4000 = health.1001 	#Ill
-	80 = health.1002  	#Pneumonic, x35 as common when ill
-	100 = health.1006 	#Consumption
-	25 = ddf_health.0005 #typhoid
-	25 = ddf_health.0012 #influenza	
-	25 = ddf_health.0015 #diphtheria
-	}
-}
+#ddf_event_disease_pulse = {
+#	random_events = {
+#	4000 = health.1001 	#Ill
+#	80 = health.1002  	#Pneumonic, x35 as common when ill
+#	100 = health.1006 	#Consumption
+#	25 = ddf_health.0005 #typhoid
+#	25 = ddf_health.0012 #influenza	
+#	25 = ddf_health.0015 #diphtheria
+#	}
+#}
 
 
 

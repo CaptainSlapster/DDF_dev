@@ -10,6 +10,15 @@ on_game_start = {
 on_game_start_after_lobby = { #This is just incase all characters weren't caught
 	on_actions = {
 		apply_sickle_cell ##Apply sickle cell trait to certain cultures
+		launch_intro_event
+	}
+}
+
+launch_intro_event = {
+	effect = {
+		every_player = {
+			trigger_event = ddf_update.0001
+		}
 	}
 }
 

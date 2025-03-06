@@ -9,6 +9,10 @@ ddf_update.0001 = {
 	desc = ddf_update.0001.desc
     theme = friendly
 
+	trigger = {
+		always = yes
+	}
+
     option = {
 		name = ddf_update.0001.a
 		ai_chance = { base = 1 }
