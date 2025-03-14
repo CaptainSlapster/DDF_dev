@@ -10,3 +10,5 @@
 
  ddf_variolation: "Variolation"
  ddf_variolation_desc: "A small amount of the sickness from others has been put under my skin."
+ ddf_variolation_fail: "Botched Variolation"
+ ddf_variolation_fail_desc: "Unfortunately, the variolation has failed and left you vulnerable"

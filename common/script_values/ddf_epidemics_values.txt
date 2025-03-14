@@ -3684,9 +3684,17 @@ spread_chance_epidemics_default_value = {
 	}
 }
 
-spread_chance_epidemics_mult_value = {
+spread_chance_epidemics_mult_value  = {
 	value = 1
 	min = 0.001
+
+		#calc the resistance
+	multiply = {
+		value = title_province.epidemic_resistance
+		multiply = 0.75
+	}
+
+
 	#Coastal Statistics Squash
 	if = {
 		limit = {
@@ -3734,7 +3742,8 @@ spread_chance_epidemics_mult_value = {
 	#Development
 	add = {
 		value = county.development_level
-		multiply = 0.025
+		#Decreased Slightly from 0.025#
+		multiply = 0.015
 	}
 
 
@@ -3864,6 +3873,7 @@ spread_chance_epidemics_mult_value = {
 		}
 		add = spread_increase_mult_medium
 	}
+
 }
 
 #### DAILY INFECTION RATE ###

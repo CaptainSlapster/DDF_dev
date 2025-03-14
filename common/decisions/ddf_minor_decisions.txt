@@ -303,6 +303,10 @@ take_vaccination_decision = {
 						text = take_vaccination_decision_tt
 	
 					}
+					add_character_modifier = {
+						modifier = ddf_variolation_fail
+						months = 24
+					}
 					trigger_event = {
 						on_action = ddf_event_disease_pulse
 					}
@@ -417,3 +421,10 @@ take_vaccination_decision = {
 
 
 }
+
+
+#
+# TEST
+#
+#
+

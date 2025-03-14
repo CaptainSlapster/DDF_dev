@@ -123,6 +123,16 @@ pregnancy.0001 = {
 				#	add = -2
 				#	is_ai = no
 				#}
+				#If mother is over 35, some health complications may occur
+				modifier = {
+					age > 35
+					add = 5
+				}
+				#Reduced chance because of health being better than or is fine
+				modifier = {
+					health >= fine_health
+					add = -5 	# -10
+				}
 				add_character_flag = { #Flags blocks other birth events
 					flag = birth_mother_will_die
 					days = 270

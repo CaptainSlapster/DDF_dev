@@ -29,6 +29,10 @@ ddf_variolation = {
 	negate_health_penalty_add = 0.5
 
 }
+ddf_variolation_fail = {
+    icon = health_negative
+	health = -0.75
+}
 
 
 ddf_smallpox_immune = {
