@@ -2,11 +2,6 @@
 # This is the master for the on_actions associated with DDF
 #
 
-on_game_start = {
-	on_actions = {
-		apply_sickle_cell ##Apply sickle cell trait to certain cultures
-	}
-}
 on_game_start_after_lobby = { #This is just incase all characters weren't caught
 	on_actions = {
 		apply_sickle_cell ##Apply sickle cell trait to certain cultures
@@ -23,25 +18,18 @@ launch_intro_event = {
 }
 
 apply_sickle_cell = {
+	trigger = {NOT = {has_global_variable = AGOT_is_loaded}}
 	effect = {
 		every_living_character = {
-			if = {
-				limit = {
-					AND = {
-						OR = {
-							culture = { has_cultural_pillar = heritage_akan }
-							culture = { has_cultural_pillar = heritage_yoruba }
-							culture = { has_cultural_pillar = heritage_west_african }
-							culture = { has_cultural_pillar = heritage_east_african }
-							
-						}
-						NOT = {
-							has_trait = sickle_cell
-						}
+			limit = {
+				AND = {
+					NOT = {
+						has_trait = sickle_cell
 					}
+					sickle_cell_culture_trigger = yes
 				}
-				trigger_event = ddf_health.0018
 			}
+			trigger_event = ddf_health.0018	
 		}
 	}
 }

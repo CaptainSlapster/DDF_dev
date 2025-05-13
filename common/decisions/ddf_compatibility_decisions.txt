@@ -1,0 +1,52 @@
+﻿##
+# This is only for fixing compatibility issues, so you don't have to start a new game!
+##
+
+
+remove_sickle_cell_from_all_characters = {
+    #AI cannot use this, this is for players only
+
+	decision_group_type = compatibility
+
+    picture = {
+        reference = "gfx/interface/illustrations/decisions/decision_legend.dds"
+    }
+
+	is_shown = {
+		has_global_variable = AGOT_is_loaded
+		any_living_character = {
+			has_trait = sickle_cell
+		}
+  		NOT = {  #Can only do it once.
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:flag_remove_sickle_cell_one_time
+			}
+		}
+	}
+
+
+    effect = {
+		custom_tooltip = {
+			text = remove_sickle_cell_tt
+        	every_living_character = {
+        	    limit = {
+        	        has_trait = sickle_cell
+        	    }       
+				remove_trait = sickle_cell
+        	}
+		}
+
+		hidden_effect = {
+
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:flag_remove_sickle_cell_one_time
+			}
+			set_global_variable = {
+				name = flag_remove_sickle_cell_one_time
+				value = root
+			}
+		}
+    }
+}

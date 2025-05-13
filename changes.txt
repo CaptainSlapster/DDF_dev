@@ -153,3 +153,22 @@ v1.3.3
     -Sickle Cell at the start of a game has a chance of being applied to rulers with the Niger Delta, Akan, and Guinean Uplander heritages
 *Bugs*
     -Fixed an issue with diseases not spreading properly (I made a few typos T-T). Gamerule settings should work as intended.
+
+
+v1.3.5
+    -Compatibility for Steppe DLC
+
+
+
+v1.3.6
+*Game rules*
+    -Mod compatibility gamerule added to better control some features.
+*Diseases*
+    -Increased the amount of negative modifiers for plagues being in your lands
+    -Levy sizes decrease due to the plagues in your land
+
+*Traits*
+    -Sickle Cell will not appear in AGOT with the DDF: Mod Compability gamerule
+
+*Decisions*
+    -Created a one time decision that will remove sickle cell from every living character, This is only to prevent players from restarting their AGOT gameplays

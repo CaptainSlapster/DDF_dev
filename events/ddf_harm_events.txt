@@ -188,7 +188,7 @@ ddf_harm.0003 = {
 		character = root
 		animation = pain
 	}
-	lower_right_portrait = scope:medic
+
 	override_background = { reference = study }
 
 	trigger = {

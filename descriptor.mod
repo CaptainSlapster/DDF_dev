@@ -1,4 +1,4 @@
-version="1.3.3"
+version="1.3.5"
 tags={
 	"Gameplay"
 	"Historical"
@@ -6,5 +6,5 @@ tags={
 	"Balance"
 }
 name="Deadly Diseases & Fertility"
-supported_version="1.14.3"
+supported_version="1.16.0.1"
 remote_file_id="3362511472"

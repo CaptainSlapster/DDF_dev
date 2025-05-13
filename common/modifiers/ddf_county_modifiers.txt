@@ -1,0 +1,42 @@
+﻿#
+# New modifiers :O
+#
+
+#Lowest to highest
+# This is more supposed to be recovering militarily
+# Since yk, people die during plagues
+#
+county_disease_recovery_01 = {
+	icon = county_modifier_opinion_negative
+	county_opinion_add = 5
+	levy_size = 0.1
+	travel_danger = -5
+}
+county_disease_recovery_02 = {
+	icon = county_modifier_opinion_negative
+	county_opinion_add = 0
+	levy_size = 0.1
+	travel_danger = -10
+	county_fertility_growth_mult = tiny_county_fertility_growth_loss
+}
+county_disease_recovery_03 = {
+	icon = county_modifier_opinion_negative
+	county_opinion_add = -15
+	levy_size = -0.1
+	travel_danger = -15
+	county_fertility_growth_mult = small_county_fertility_growth_loss
+}
+county_disease_recovery_04 = {
+	icon = county_modifier_opinion_negative
+	county_opinion_add = -20
+	levy_size = -0.15
+	travel_danger = -20
+	county_fertility_growth_mult = medium_county_fertility_growth_loss
+}
+county_disease_recovery_05 = {
+	icon = county_modifier_opinion_negative
+	county_opinion_add = -25
+	levy_size = -0.20
+	travel_danger = -25
+	county_fertility_growth_mult = large_county_fertility_growth_loss
+}

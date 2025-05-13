@@ -200,6 +200,16 @@ has_short_disease_trigger = {
 	}
 }
 
+has_disease_negative_modifier = {
+	OR = {
+		has_character_modifier = ddf_coughing_fit
+		has_character_modifier = ddf_pus_boils
+		has_character_modifier = ddf_feverish
+		has_character_modifier = ddf_itchy_scabby
+	}
+}
+
+
 has_serious_disease_trigger = {
 	OR = {
 		has_trait = bubonic_plague
@@ -413,12 +423,5 @@ ddf_sids_trigger = {
 				ddf_unhealthy_traits_trigger = yes
 			}
 		}
-	}
-}
-
-
-ddf_gamerule_enabled_events_trigger = {
-	OR = {
-		has_game_rule = ddf_events_on 
 	}
 }

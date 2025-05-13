@@ -100,7 +100,6 @@ tribe_01 = {
 		stationed_maa_toughness_mult = normal_maa_toughness_tier_1
 	}
 	
-	next_building = tribe_02
 
 	type_icon = "icon_building_longhouses.dds"
 

@@ -9,3 +9,5 @@
  ddf_pus_boils_desc: "종기가 고름으로 찼습니다. 터진다면 전염성이 증가합니다!"
  ddf_variolation: "인두 접종"
  ddf_variolation_desc: "다른 이로부터 온 소량의 질병이 내 피부 아래에 주입되었습니다."
+ ddf_variolation_fail: "서투른 인두 접종"
+ ddf_variolation_fail_desc: "불행하게도 인두 접종은 실패했고 당신은 취약해졌습니다"

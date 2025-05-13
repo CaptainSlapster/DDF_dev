@@ -19,23 +19,23 @@ outbreak_chance_base_medium = 0.008 #02
 outbreak_chance_base_high = 0.035 #04
 outbreak_chance_base_very_high = 0.09 #12
 
-outbreak_increase_add_extra_low = 0.0015
-outbreak_increase_add_low = 0.0035 #0.004
+outbreak_increase_add_extra_low = 0.002
+outbreak_increase_add_low = 0.003 #0.004
 outbreak_increase_add_medium = 0.0045 #0.008
-outbreak_increase_add_high = 0.012  #0.016
-outbreak_increase_add_very_high = 0.025 #0.032
-outbreak_increase_add_extra_high = 0.035 #0.064
+outbreak_increase_add_high = 0.011  #0.016
+outbreak_increase_add_very_high = 0.023 #0.032
+outbreak_increase_add_extra_high = 0.030 #0.064
 
-outbreak_decrease_add_low = -0.004
+outbreak_decrease_add_low = -0.003
 outbreak_decrease_add_medium = -0.008
 outbreak_decrease_add_high = -0.016
 outbreak_decrease_add_very_high = -0.032
 outbreak_decrease_add_unlikely = -0.064
 
 outbreak_increase_mult_low = 0.1
-outbreak_increase_mult_medium = 0.2
-outbreak_increase_mult_high = 0.4
-outbreak_increase_mult_very_high = 0.8
+outbreak_increase_mult_medium = 0.15
+outbreak_increase_mult_high = 0.35
+outbreak_increase_mult_very_high = 0.6
 
 outbreak_decrease_mult_very_low = -0.04
 outbreak_decrease_mult_low = -0.1
@@ -47,23 +47,23 @@ outbreak_decrease_mult_unlikely = -0.995
 # Spread
 
 
-spread_chance_base_low = 6 # 3.5
-spread_chance_base_medium = 8 # 5
-spread_chance_base_high = 12 # 9
+spread_chance_base_low = 3 # 3.5
+spread_chance_base_medium = 6 # 5
+spread_chance_base_high = 10 # 9
 
-spread_increase_add_low = 4 # 2
-spread_increase_add_medium = 5 # 3
-spread_increase_add_high = 6 # 4
+spread_increase_add_low = 2 # 2
+spread_increase_add_medium = 3 # 3
+spread_increase_add_high = 4 # 4
 
 spread_decrease_add_low = -0.3 # 0.4
 spread_decrease_add_medium = -0.6
 spread_decrease_add_high = -1.5
 spread_decrease_add_very_high = -2.3
 
-spread_increase_mult_low = 0.4 #0.25
-spread_increase_mult_medium = 0.9 #0.75
-spread_increase_mult_high = 1.50 # 1
-spread_increase_mult_very_high = 2 # 1.75
+spread_increase_mult_low = 0.25 #0.25
+spread_increase_mult_medium = 0.75 #0.75
+spread_increase_mult_high = 1.05 # 1
+spread_increase_mult_very_high = 1.25 # 1.75
 
 spread_decrease_mult_low = -0.22
 spread_decrease_mult_medium = -0.4
@@ -2102,7 +2102,15 @@ outbreak_chance_minor_mult_value = {
 		}
 		add = outbreak_increase_mult_low
 	}
-	
+	if = {
+		limit = {
+			OR = {
+				has_holding_type = herder_holding
+				has_holding_type = nomad_holding
+			}
+		}
+		add = outbreak_decrease_mult_high
+	}	
 	multiply = 0.8
 	min = 0.001
 }
@@ -2518,7 +2526,15 @@ outbreak_chance_major_mult_value = {
 		}
 		add = outbreak_increase_mult_low
 	}
-	
+	if = {
+		limit = {
+			OR = {
+				has_holding_type = herder_holding
+				has_holding_type = nomad_holding
+			}
+		}
+		add = outbreak_decrease_mult_high
+	}	
 	multiply = 1.05
 	
 	min = 0.001
@@ -2856,7 +2872,9 @@ outbreak_chance_apocalyptic_mult_value = {
 	#Development
 	add = {
 		value = county.development_level
-		multiply = 0.008
+		#nerfed a bit
+		multiply = 0.006
+		
 	}
 
 	#Era pacing
@@ -3744,6 +3762,12 @@ spread_chance_epidemics_mult_value  = {
 		value = county.development_level
 		#Decreased Slightly from 0.025#
 		multiply = 0.015
+		#This way some plague resist can help with the dev issue#
+		multiply = {
+			value = title_province.epidemic_resistance 
+			divide = 2
+			multiply = 0.005
+		}
 	}
 
 
@@ -3873,7 +3897,15 @@ spread_chance_epidemics_mult_value  = {
 		}
 		add = spread_increase_mult_medium
 	}
-
+	if = {
+		limit = {
+			OR = {
+				has_holding_type = herder_holding
+				has_holding_type = nomad_holding
+			}
+		}
+		add = outbreak_decrease_mult_unlikely
+	}
 }
 
 #### DAILY INFECTION RATE ###
@@ -4406,7 +4438,37 @@ epidemic_development_loss_value = {
 		add = 1
 	}
 }
+#How badly effected is a county's fertility?
+epidemic_fertility_loss_value = {
+	subtract = scope:base_loss
 
+	scope:epidemic = {
+		switch = {
+			trigger = outbreak_intensity
+			minor = { subtract = 2.5 }
+			major = { subtract = 5 }
+			apocalyptic = { subtract = 7.5 }
+		}
+	}
+
+	# Fertility
+	subtract = {
+		value = county_fertility
+		multiply = 0.3
+	}
+
+	multiply = {
+		value = 6
+		divide = num_county_holdings
+	}
+
+	multiply = {
+		value = 50
+		subtract = title_province.epidemic_resistance
+		multiply = 0.005
+		add = 1
+	}
+}
 epidemic_fromdust_value = {
 	value = minor_gold_value
 	multiply = former_infected_county_count

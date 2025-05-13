@@ -23,3 +23,8 @@
  setting_no_fantasy_settings_desc: "가상의 질병이 등장하지 않을 것입니다"
  setting_enable_fantasy_settings: "가상의 질병 가능"
  setting_enable_fantasy_settings_desc: "가상의 역병이 등장합니다 (실험중이니, 실제 세이브에서 사용하지 말아주세요.)\n유일한 가상의 역병은 \"용의 공격\"입니다."
+ rule_ddf_allow_mortality_events: "DDF: 반드시 죽는 이벤트 설정:"
+ setting_ddf_events_on: "활성"
+ setting_ddf_events_on_desc: "계단에서 구르거나 농노에게 공격받는 등의 이벤트들이 활성화됩니다"
+ setting_ddf_events_off: "비활성"
+ setting_ddf_events_off_desc: "계단에서 구르거나 농노에게 공격받는 등의 이벤트들이 비활성화됩니다"

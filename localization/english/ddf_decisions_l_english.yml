@@ -2,7 +2,7 @@
 
  #GROUP TYPES
  decision_group_type_plague: "Disease Decisions"
-
+ decision_group_type_compatibility: "Compatibility Decisions"
 
 
 
@@ -45,3 +45,12 @@
 
 
  take_vaccination_decision_tooltip: "Attempt to get immunity"
+
+
+
+
+ #COMPATIBILITY DECISIONS#
+ remove_sickle_cell_from_all_characters: "Removes Sickle Cell from All Characters"
+ remove_sickle_cell_from_all_characters_desc: "Sickle cell is such a horrible disease! At least you can remove it!"
+ remove_sickle_cell_from_all_characters_confirm: "Please, save my game!"
+ remove_sickle_cell_from_all_characters_tooltip: "Remove Sickle Cell from All Characters"

@@ -4,9 +4,13 @@
 @construction_decrease_mid = 0.15
 @construction_decrease_max = 0.25
 
-@tax_decrease_min = -0.1
-@tax_decrease_mid = -0.15
-@tax_decrease_max = -0.25
+@tax_decrease_min = -0.15
+@tax_decrease_mid = -0.35
+@tax_decrease_max = -0.65
+
+@levy_decrease_min = -0.25
+@levy_decrease_mid = -0.45
+@levy_decrease_max = -0.65
 
 
 
@@ -130,6 +134,7 @@ smallpox = {
 				development_decline = -1
 				build_speed = @construction_decrease_min
 				tax_mult = @tax_decrease_min
+				levy_size = @levy_decrease_min
 			}	
 		}
 		50 = {
@@ -139,6 +144,7 @@ smallpox = {
 				development_decline = -2
 				build_speed = @construction_decrease_mid
 				tax_mult = @tax_decrease_mid
+				levy_size = @levy_decrease_mid
 			}	
 		}
 		80 = {
@@ -150,6 +156,7 @@ smallpox = {
 				development_decline = -3
 				build_speed = @construction_decrease_max
 				tax_mult = @tax_decrease_max
+				levy_size = @levy_decrease_max
 			}
 		}
 	}
@@ -441,12 +448,13 @@ bubonic_plague = {
 				monthly_county_control_decline_add = -0.6
 				development_decline = -3
 				levy_reinforcement_rate = -0.3
-				levy_size = -0.25
+
 				supply_limit_mult = -0.2
 				county_opinion_add = -10
 				epidemic_travel_danger = 25
 				build_speed = @construction_decrease_min
 				tax_mult = @tax_decrease_min
+				levy_size = @levy_decrease_min			
 			}	
 		}
 		50 = {
@@ -454,12 +462,13 @@ bubonic_plague = {
 				monthly_county_control_decline_add = -0.8
 				development_decline = -6
 				levy_reinforcement_rate = -0.5
-				levy_size = -0.4
+
 				supply_limit_mult = -0.5
 				county_opinion_add = -25
 				epidemic_travel_danger = 40
 				build_speed = @construction_decrease_mid
 				tax_mult = @tax_decrease_mid
+				levy_size = @levy_decrease_mid
 			}	
 		}
 		80 = {
@@ -467,12 +476,13 @@ bubonic_plague = {
 				monthly_county_control_decline_add = -0.8
 				development_decline = -7.5
 				levy_reinforcement_rate = -1
-				levy_size = -0.5
+
 				supply_limit_mult = -1
 				county_opinion_add = -25
 				epidemic_travel_danger = 60
 				build_speed = @construction_decrease_max
 				tax_mult = @tax_decrease_max
+				levy_size = @levy_decrease_max
 			}
 		}
 		100 = {
@@ -480,7 +490,7 @@ bubonic_plague = {
 				monthly_county_control_decline_add = -0.8
 				development_decline = -8.5
 				levy_reinforcement_rate = -1
-				levy_size = -0.7
+				levy_size = -0.85
 				supply_limit_mult = -1.1
 				county_opinion_add = -30
 				epidemic_travel_danger = 90
@@ -851,6 +861,7 @@ typhus = {
 				epidemic_travel_danger = 20
 				build_speed = @construction_decrease_min
 				tax_mult = @tax_decrease_min
+				levy_size = @levy_decrease_min			
 			}	
 		}
 		50 = {
@@ -863,6 +874,7 @@ typhus = {
 				epidemic_travel_danger = 30
 				build_speed = @construction_decrease_mid
 				tax_mult = @tax_decrease_mid
+				levy_size = @levy_decrease_mid
 			}	
 		}
 		80 = {
@@ -875,6 +887,7 @@ typhus = {
 				epidemic_travel_danger = 40
 				build_speed = @construction_decrease_max
 				tax_mult = @tax_decrease_max
+				levy_size = @levy_decrease_max
 			}
 		}
 	}
@@ -1172,6 +1185,7 @@ consumption = { #Tuberculosis
 				epidemic_travel_danger = 20
 				build_speed = @construction_decrease_min
 				tax_mult = @tax_decrease_min
+				levy_size = @levy_decrease_min			
 			}
 		}
 		50 = {
@@ -1182,6 +1196,7 @@ consumption = { #Tuberculosis
 				epidemic_travel_danger = 40
 				build_speed = @construction_decrease_mid
 				tax_mult = @tax_decrease_mid
+				levy_size = @levy_decrease_mid
 			}	
 		}
 		80 = {
@@ -1192,6 +1207,7 @@ consumption = { #Tuberculosis
 				epidemic_travel_danger = 60
 				build_speed = @construction_decrease_max
 				tax_mult = @tax_decrease_max
+				levy_size = @levy_decrease_max
 			}
 		}
 	}
@@ -1525,6 +1541,7 @@ measles = {
 				epidemic_travel_danger = 5
 				build_speed = @construction_decrease_min
 				tax_mult = @tax_decrease_min
+				levy_size = @levy_decrease_min			
 			}	
 		}
 		50 = {
@@ -1535,6 +1552,7 @@ measles = {
 				epidemic_travel_danger = 15
 				build_speed = @construction_decrease_mid
 				tax_mult = @tax_decrease_mid
+				levy_size = @levy_decrease_mid
 			}	
 		}
 		80 = {
@@ -1545,6 +1563,7 @@ measles = {
 				epidemic_travel_danger = 30
 				build_speed = @construction_decrease_max
 				tax_mult = @tax_decrease_max
+				levy_size = @levy_decrease_max
 			}
 		}
 	}
@@ -1832,6 +1851,7 @@ dysentery = {
 				development_decline = -1.5
 				build_speed = @construction_decrease_min
 				tax_mult = @tax_decrease_min
+				levy_size = @levy_decrease_min			
 			}	
 		}
 		50 = {
@@ -1843,6 +1863,7 @@ dysentery = {
 				epidemic_travel_danger = 20
 				build_speed = @construction_decrease_mid
 				tax_mult = @tax_decrease_mid
+				levy_size = @levy_decrease_mid
 			}	
 		}
 		80 = {
@@ -1854,6 +1875,7 @@ dysentery = {
 				epidemic_travel_danger = 30
 				build_speed = @construction_decrease_max
 				tax_mult = @tax_decrease_max
+				levy_size = @levy_decrease_max
 			}
 		}
 	}
@@ -2145,6 +2167,7 @@ ergotism = { #dancing plague - not contagious
 				epidemic_travel_danger = 5
 				build_speed = @construction_decrease_min
 				tax_mult = @tax_decrease_min
+				levy_size = @levy_decrease_min			
 			}	
 		}
 		50 = {
@@ -2156,6 +2179,7 @@ ergotism = { #dancing plague - not contagious
 				epidemic_travel_danger = 10
 				build_speed = @construction_decrease_mid
 				tax_mult = @tax_decrease_mid
+				levy_size = @levy_decrease_mid
 			}	
 		}
 		80 = {
@@ -2168,6 +2192,7 @@ ergotism = { #dancing plague - not contagious
 				epidemic_travel_danger = 15
 				build_speed = @construction_decrease_max
 				tax_mult = @tax_decrease_max
+				levy_size = @levy_decrease_max
 			}
 		}
 	}
@@ -2508,6 +2533,7 @@ malaria = {
 				epidemic_travel_danger = 5
 				build_speed = @construction_decrease_min
 				tax_mult = @tax_decrease_min
+				levy_size = @levy_decrease_min			
 			}	
 		}
 		50 = {
@@ -2519,6 +2545,7 @@ malaria = {
 				epidemic_travel_danger = 10
 				build_speed = @construction_decrease_mid
 				tax_mult = @tax_decrease_mid
+				levy_size = @levy_decrease_mid
 			}	
 		}
 		80 = {
@@ -2531,6 +2558,7 @@ malaria = {
 				epidemic_travel_danger = 15
 				build_speed = @construction_decrease_max
 				tax_mult = @tax_decrease_max
+				levy_size = @levy_decrease_max
 			}
 		}
 	}
@@ -2807,6 +2835,7 @@ typhoid = {
 				development_decline = -1
 				build_speed = @construction_decrease_min
 				tax_mult = @tax_decrease_min
+				levy_size = @levy_decrease_min			
 			}	
 		}
 		50 = {
@@ -2816,6 +2845,7 @@ typhoid = {
 				development_decline = -2
 				build_speed = @construction_decrease_mid
 				tax_mult = @tax_decrease_mid
+				levy_size = @levy_decrease_mid
 			}	
 		}
 		80 = {
@@ -2827,6 +2857,7 @@ typhoid = {
 				development_decline = -3
 				build_speed = @construction_decrease_max
 				tax_mult = @tax_decrease_max
+				levy_size = @levy_decrease_max
 			}
 		}
 	}
@@ -3114,6 +3145,7 @@ flu = { #Influenza
 				epidemic_travel_danger = 20
 				build_speed = @construction_decrease_min
 				tax_mult = @tax_decrease_min
+				levy_size = @levy_decrease_min			
 			}
 		}
 		50 = {
@@ -3124,6 +3156,7 @@ flu = { #Influenza
 				epidemic_travel_danger = 40
 				build_speed = @construction_decrease_mid
 				tax_mult = @tax_decrease_mid
+				levy_size = @levy_decrease_mid
 			}	
 		}
 		80 = {
@@ -3134,6 +3167,7 @@ flu = { #Influenza
 				epidemic_travel_danger = 60
 				build_speed = @construction_decrease_max
 				tax_mult = @tax_decrease_max
+				levy_size = @levy_decrease_max
 			}
 		}
 	}

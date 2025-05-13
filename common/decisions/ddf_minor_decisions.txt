@@ -380,7 +380,7 @@ take_vaccination_decision = {
 	ai_check_interval = 2
 
 	ai_potential = {
-		NOT = { has_character_flag = has_character_modifier = ddf_variolation }
+		NOT = { has_character_modifier = ddf_variolation }
 	}
 
 	ai_will_do = {

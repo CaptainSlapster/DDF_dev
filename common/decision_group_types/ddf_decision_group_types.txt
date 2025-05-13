@@ -2,3 +2,7 @@
 plague = {
 	sort_order = 10
 }
+
+compatibility = {
+	sort_order = 100
+}

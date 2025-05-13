@@ -1,0 +1,11 @@
+﻿
+
+
+sickle_cell_culture_trigger = {
+	OR = {
+		culture = {has_cultural_pillar = heritage_akan }
+		culture = {has_cultural_pillar = heritage_yoruba }
+		culture = {has_cultural_pillar = heritage_west_african }
+		culture = {has_cultural_pillar = heritage_east_african}
+	}
+}

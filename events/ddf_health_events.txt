@@ -1661,7 +1661,10 @@ ddf_health.0018 = {
     hidden = yes
 
     trigger = {
-        NOT = {has_trait = sickle_cell}
+		AND = {
+        	NOT = {has_trait = sickle_cell}
+			sickle_cell_culture_trigger = yes
+		}
     }
     immediate = {
 		random = {
@@ -1700,28 +1703,6 @@ ddf_health.0018 = {
 
 
 
-##################
-##################
-# WOUNDED EVENTS #
-##################
-##################
-
-scripted_trigger ddf_health_event_is_worried_trigger = {
-	OR = {
-		ai_compassion >= medium_positive_ai_value
-		dread_modified_ai_boldness = {
-			dreaded_character = $CHARACTER$
-			value <= medium_negative_ai_value
-		}
-		has_relation_friend = $CHARACTER$
-		has_relation_lover = $CHARACTER$
-		opinion = {
-			target = $CHARACTER$
-			value >= high_positive_opinion
-		}
-	}
-	$CHARACTER$.health < fine_health
-}
 
 ##################
 ##################
