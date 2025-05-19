@@ -24,6 +24,8 @@ ddf_harm.0002 = {
 		#Gamerule check
 		ddf_gamerule_enabled_events_trigger = yes # Checks to see if the gamerule is enabled
 
+		#Compatibility check
+		NOT = {ddf_agot_is_dragon = yes}
 	}
 
 	weight_multiplier = {
@@ -195,7 +197,7 @@ ddf_harm.0003 = {
 		ddf_sids_trigger = yes
 		is_adult = no
 		# Medicine checks.
-
+		NOT = {ddf_agot_is_dragon = yes}
 	}
 
 	weight_multiplier = {
@@ -256,8 +258,9 @@ ddf_harm.0004 = {
 			is_available_adult = yes
 			is_available_child = yes
 			}
-		ddf_gamerule_enabled_events_trigger = yes
+			ddf_gamerule_enabled_events_trigger = yes
 		}
+		NOT = {ddf_agot_is_dragon = yes}
 	}
 
 	weight_multiplier = {
@@ -443,6 +446,7 @@ ddf_harm.0005 = {
 			is_available_child = yes
 			is_lowborn = yes
 		}
+		NOT = {ddf_agot_is_dragon = yes}
 	}
 
 	weight_multiplier = {

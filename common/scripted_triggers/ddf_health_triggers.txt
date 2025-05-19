@@ -1,6 +1,7 @@
 ﻿
 
 potential_heart_attack_trigger = {
+
         OR = {
             age >= 60
 
@@ -38,6 +39,7 @@ potential_heart_attack_trigger = {
                 age >= 30
             }
         }
+		
 }
 
 ##

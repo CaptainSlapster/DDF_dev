@@ -165,7 +165,7 @@ v1.3.6
     -Mod compatibility gamerule added to better control some features.
 *Diseases*
     -Increased the amount of negative modifiers for plagues being in your lands
-    -Levy sizes decrease due to the plagues in your land
+    -changed how Levy sizes decrease due to the plague levels
 
 *Traits*
     -Sickle Cell will not appear in AGOT with the DDF: Mod Compability gamerule

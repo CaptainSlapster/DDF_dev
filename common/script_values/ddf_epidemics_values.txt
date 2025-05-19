@@ -3708,7 +3708,8 @@ spread_chance_epidemics_mult_value  = {
 
 		#calc the resistance
 	multiply = {
-		value = title_province.epidemic_resistance
+		
+		value = epidemic_resistance
 		multiply = 0.75
 	}
 
@@ -3762,12 +3763,7 @@ spread_chance_epidemics_mult_value  = {
 		value = county.development_level
 		#Decreased Slightly from 0.025#
 		multiply = 0.015
-		#This way some plague resist can help with the dev issue#
-		multiply = {
-			value = title_province.epidemic_resistance 
-			divide = 2
-			multiply = 0.005
-		}
+
 	}
 
 

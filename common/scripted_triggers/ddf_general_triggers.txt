@@ -1,6 +1,4 @@
 ﻿ddf_gamerule_enabled_events_trigger = {
-	OR = {
-		has_game_rule = ddf_events_on 
-	}
+	has_game_rule = ddf_events_on 
 }
 
