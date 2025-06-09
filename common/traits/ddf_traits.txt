@@ -185,9 +185,14 @@ consumption = { # Tuberculosis
 }
 
 cancer = {
-	health = -3.2 # 3
-	elderly_health = -2.5 #2
-	fertility = -0.20
+	#Adjusted cancer
+	#
+	# Cancer IRL progresses, I thought to myself, "What would it be like to have progressive cancer in CK3?"
+	# I figure I'll give a chance to have it regress/progress. Cancer can on rare occasions regress and go away.
+	# Lower track level = less damage to body, Higher track = Terminal
+
+	health = -0.2 #Starts low, but compounds with each "Stage"
+	#fertility = -0.20 Replaced with tracks
 	category = health
 
 	dread_baseline_add = -15
@@ -197,7 +202,105 @@ cancer = {
 
 	flag = illness
 	flag = debilitating_illness
-	flag = blocks_getting_non_epidemic_disease
+	#flag = blocks_getting_non_epidemic_disease Cancer is long lasting, so we should still be able to get other diseases
+
+	tracks = {
+		brain = { #Cancer - Brain
+			25 = {
+				health = -0.5
+				diplomacy = -1
+				martial = -1
+				stewardship = -1
+				intrigue = -1	
+				learning = -1
+			}
+			50 = {
+				health = -1
+				diplomacy = -2
+				martial = -2
+				stewardship = -2
+				intrigue = -2	
+				learning = -2
+			}
+			75 = {
+				health = -2.0
+				diplomacy = -3
+				martial = -3
+				stewardship = -3
+				intrigue = -3	
+				learning = -3
+			}
+			100 = {
+				health = -3.0
+				diplomacy = -4
+				martial = -4
+				stewardship = -4
+				intrigue = -4	
+				learning = -4
+			}		
+		}
+		bone = { #Cancer Bone
+			25 = {
+				health = -0.5
+				prowess = -3
+				martial = -2
+
+			}
+			50 = {
+				health = -1
+				prowess = -6
+				martial = -4
+			}
+			75 = {
+				health = -2.0
+				prowess = -9
+				martial = -6
+			}
+			100 = {
+				health = -3.0
+				prowess = -12
+				martial = -8
+			}	
+		}
+		reproduction = { #Cancer (Testicular/ Ovarian)
+			25 = {
+				health = -0.5
+				fertility = -0.1
+			}
+			50 = {
+				health = -1
+				fertility = -0.25
+			}
+			75 = {
+				health = -2.0
+				fertility = -0.65
+			}
+			100 = {
+				health = -3.0
+				fertility = -1
+			}		
+		}
+		skin = { # Sun Exposure
+			25 = {
+				health = -0.5
+			}
+			50 = {
+				health = -1
+				dread_gain_mult = 0.25
+				dread_baseline_add = 15
+			}
+			75 = {
+				health = -2.0
+				dread_gain_mult = 0.25
+				dread_baseline_add = 25
+			}
+			100 = {
+				health = -3.0
+				dread_gain_mult = 0.5 
+				dread_baseline_add = 35
+			}	
+		}
+	}	
 
 	desc = {
 		first_valid = {

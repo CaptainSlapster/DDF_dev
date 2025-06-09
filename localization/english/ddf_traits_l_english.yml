@@ -23,3 +23,17 @@
  trait_sickle_cell: "Sickle Cell"
  trait_sickle_cell_desc: "Your blood.. Shaped like a sickle. Provides you protection from $disease_malaria$, but at a cost of health complications.."
  trait_sickle_cell_character_desc: "[ROOT.GetCharacter.GetFirstNamePossessiveNoTooltip] blood is different... At least it will offer protection from $disease_malaria$.  $epidemic_uncureable$"
+
+
+
+ #Illness tracks#
+
+ trait_track_brain: "Brain"
+ trait_track_brain_desc: "My mind... I feel it withering away.."
+ trait_track_bone: "Bone"
+ trait_track_bone_desc: "I feel so weak.."
+ trait_track_reproduction: "Reproductive System"
+ trait_track_reproduction_desc: "I'm shooting blanks.."
+ trait_track_skin: "Skin"
+ trait_track_skin_desc: "These marks.. They're ugly and painful."
+ 

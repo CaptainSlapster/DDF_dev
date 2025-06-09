@@ -7,5 +7,7 @@
  death_murdered_by_crazed_peasant: "died from an attacking peasant"
  death_heart_attack_ddf: "died of a sudden heart attack"
 
+ death_crushed: "was crushed to death"
+
  death_immolation: "died of a Red Dragon attack!"
  death_flu: "died of [GetTrait('flu').GetName( CHARACTER.Self )]"

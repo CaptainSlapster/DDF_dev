@@ -1,7 +1,11 @@
 ﻿
+##############################################
+# 
+#   DDF ON ACTIONS FOR HEALTH
+#
+##############################################
 
-# On actions for health related to DDF
-
+#Random deaths and health modifier checks
 ddf_yearly_health_pulse = {
     on_actions = {
         delay = { days = { 1 89 } }
@@ -22,12 +26,12 @@ ddf_yearly_health_pulse = {
 }
 
 
+#Apply blindness birth defect to children
 on_birth_child = {
 	on_actions = {
 		ddf_blind_child_birth_defect
 	}
 }
-
 ddf_blind_child_birth_defect = {
 	effect = {
 		trigger_event = ddf_health.4100

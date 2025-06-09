@@ -1,16 +1,16 @@
 ﻿
 
 
-fantasy_settings = {
-
-    default = no_fantasy_settings
-
-	categories = {
-		difficulty health historicity
-	}
-    no_fantasy_settings = {}
-    enable_fantasy_settings = {}
-}
+#fantasy_settings = {
+#
+#    default = no_fantasy_settings
+#
+#	categories = {
+#		difficulty health historicity
+#	}
+#    no_fantasy_settings = {}
+#    enable_fantasy_settings = {}
+#}
 
 
 ddf_extra_plague_frequency = {

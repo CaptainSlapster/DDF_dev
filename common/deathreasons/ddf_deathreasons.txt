@@ -33,6 +33,12 @@ death_heart_attack_ddf = {
 }
 
 
+death_crushed= {
+	public_knowledge = yes
+	icon = "death_natural_ddf.dds"
+}
+
+
 #Fantasy#
 
 

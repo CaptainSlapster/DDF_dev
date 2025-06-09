@@ -31,3 +31,165 @@ immolation_max_recovery_time = 100
 
 
 
+
+
+
+######
+#
+# PROGRESSIVE VALUES
+#
+######
+
+##
+# Higher cancer_progress_calc = higher chance of cancer progression per quarter.
+##
+
+##
+# Cancer progresses faster & slower based on a few factors
+# Age, Traits, and current progress
+#
+##
+
+cancer_progress_calc_base = 0 #Base is 0 to keep the base at 5
+cancer_progress_calc = {
+    min = cancer_progress_calc_base # Can't go less than 0
+    value = {
+        ##
+        # Add age calculations
+        ##
+        add = {
+            if = {
+                limit = {age < 12}
+                add = 20
+            }
+            else_if = {
+                limit = {AND = {age >= 12 age < 24}}
+                add = 2.5
+            }
+            else_if = {
+                limit = {AND = {age >= 24 age < 35}}
+                add = 2.5            
+            }
+            else_if = {
+                limit = {AND = {age >= 35 age < 55}}
+                add = 5            
+            }
+            else_if = {
+                limit = {AND = {age >= 55 age < 65}}
+                add = 10            
+            }
+            else_if = {
+                limit = {age >= 65}
+                add = 25            
+            }        
+        }
+        ##
+        # Calc with traits
+        ##
+        add = {
+            min = 0 # Prevent traits from zeroing out the whole calc
+            value = 0 # base trait calc
+            if = {
+                limit = {has_trait = inbred}
+                add = 20
+            }
+            if = {
+                limit = {has_trait = weak}
+                add = 5
+            }
+
+            if = {
+                limit = {has_trait = whole_of_body}
+                subtract = 15
+            }
+            if = {
+                limit = {has_trait = strong}
+                subtract = 5
+            }
+
+        }
+
+        ##
+        # Account for the cancer level
+        ##
+        add = {
+            #Brain cancer
+            if = {
+                limit = {
+                    has_trait_xp = {trait = cancer track = brain value >= 25}
+                }
+                add = 5
+            }
+            if = {
+                limit = {
+                    has_trait_xp = {trait = cancer track = brain value >= 50}
+                }
+                add = 5
+            }
+            if = {
+                limit = {
+                    has_trait_xp = {trait = cancer track = brain value >= 75}
+                }
+                add = 10
+            }
+            #Skin cancer
+            if = {
+                limit = {
+                    has_trait_xp = {trait = cancer track = skin value >= 25}
+                }
+                add = 5
+            }
+            if = {
+                limit = {
+                    has_trait_xp = {trait = cancer track = skin value >= 50}
+                }
+                add = 5
+            }
+            if = {
+                limit = {
+                    has_trait_xp = {trait = cancer track = skin value >= 75}
+                }
+                add = 10
+            }
+            #Reproductive System cancer
+            if = {
+                limit = {
+                    has_trait_xp = {trait = cancer track = reproduction value >= 25}
+                }
+                add = 5
+            }
+            if = {
+                limit = {
+                    has_trait_xp = {trait = cancer track = reproduction value >= 50}
+                }
+                add = 5
+            }
+            if = {
+                limit = {
+                    has_trait_xp = {trait = cancer track = reproduction value >= 75}
+                }
+                add = 10
+            }
+            #Bone cancer
+            if = {
+                limit = {
+                    has_trait_xp = {trait = cancer track = bone value >= 25}
+                }
+                add = 5
+            }
+            if = {
+                limit = {
+                    has_trait_xp = {trait = cancer track = bone value >= 50}
+                }
+                add = 5
+            }
+            if = {
+                limit = {
+                    has_trait_xp = {trait = cancer track = bone value >= 75}
+                }
+                add = 10
+            }
+        }
+
+    }
+}

@@ -1,8 +1,8 @@
 ﻿NCharacter = {
     #reduced slightly. It is possible to have up to 10 kids, but the average was around 5-7 per woman
     #not including the complications
-	RANDOM_CHARACTER_MIN_FERTILITY = 0.4
-	RANDOM_CHARACTER_MAX_FERTILITY = 0.7
+	RANDOM_CHARACTER_MIN_FERTILITY = 0.5
+	RANDOM_CHARACTER_MAX_FERTILITY = 0.75
 
 	RANDOM_CHARACTER_MIN_HEALTH = 3.6
 	RANDOM_CHARACTER_MAX_HEALTH = 4.8

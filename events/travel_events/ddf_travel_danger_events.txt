@@ -1,0 +1,122 @@
+﻿
+namespace = ddf_travel_danger_events
+
+##
+#
+## 1000 - 1099 #Mountain travel danger events
+#
+##
+
+
+
+
+ddf_travel_danger_events.1000 = { # Mountain Terrain - Big rock falls and hit entourage member ouch!
+	type = character_event
+	title = ddf_travel_danger_events.1000.t
+	desc = ddf_travel_danger_events.1000.desc
+
+
+	theme = travel_danger
+
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+
+	trigger = {
+		is_available_travelling_adult = yes
+		is_location_valid_for_travel_event_on_land = yes
+		location = {
+			OR = {
+				travel_danger_type = {
+					travel_plan = root.current_travel_plan
+					terrain = mountains
+				}
+				travel_danger_type = {
+					travel_plan = root.current_travel_plan
+					terrain = desert_mountains
+				}
+			}
+		}
+		NOT = {
+			has_character_flag = had_travel_event_1000_big_rock_recently
+        }
+		always = yes
+	}
+
+	cooldown = { months = 1 }
+
+	weight_multiplier = {
+		base = 1
+	}
+
+	immediate = {
+		debug_log = "Big rock event Triggered! "
+		mp_delay_travel_plan = { DAYS = 90 }
+		current_travel_plan = {
+			random_entourage_character = {
+				limit = {
+                    OR = {
+					    is_physically_able_adult = yes
+                        is_adult = no
+                    }
+				}
+				alternative_limit = { always = yes }
+				save_scope_as = rock_victim
+			}
+		}
+		#Save travel leader
+		if = {
+			limit = {
+				exists = travel_leader
+				NOT = { travel_leader ?= scope:rock_victim }
+			}
+			travel_leader ?= { save_scope_as = travel_leader }
+		}
+		#Save destination scope 
+		next_destination_province = { save_scope_as = destination }
+
+		traveler_danger_xp_effect = {
+			MIN = 3
+			MAX = 6
+		}
+		add_character_flag = {
+			flag = had_travel_event_1000_big_rock_recently
+			years = 3
+		}
+	}
+
+	option = { # that must hurt!
+		name = ddf_travel_danger_events.1000.a
+		custom_tooltip = ddf_travel_danger_events.1000.a.tt
+		trigger = {
+			this = root
+			trigger_if = {
+				exists = rock_victim
+				this = scope:rock_victim
+			}
+		}
+		scope:rock_victim = {
+			if = {
+				limit = {
+					NOT = {has_trait = incapable}
+				}
+				add_trait = incapable
+			}
+			else = {
+				death = {
+					death_reason = death_crushed
+				}				
+			}
+		}
+		ai_chance = {
+			base = 1000
+		}
+	}
+
+
+
+	after = {
+		mp_resume_travel_plan = yes
+	}
+}

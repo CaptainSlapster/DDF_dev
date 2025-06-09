@@ -1,0 +1,41 @@
+﻿##############################################
+# 
+#   DDF ON ACTIONS FOR PRISONERS
+#
+##############################################
+
+ddf_prison_maintenance_pulse = {
+	trigger = {
+		any_prisoner = { count >= 1 }
+	}
+	on_actions = {
+		#Set up quarterly pulses
+		delay = { days = 45 }
+		ddf_quarterly_prison_maintenance_pulse
+		delay = { days = 135 }
+		ddf_quarterly_prison_maintenance_pulse
+		delay = { days = 225 }
+		ddf_quarterly_prison_maintenance_pulse
+		delay = { days = 315 }
+		ddf_quarterly_prison_maintenance_pulse
+	}
+}
+
+
+ddf_quarterly_prison_maintenance_pulse = {
+	trigger = {
+		any_prisoner = { count >= 1 }
+	}
+	effect = { #Fire the correct events for all prisoners
+
+		every_prisoner = {
+			limit = {
+				is_in_prison_type = dungeon
+			}
+			trigger_event = {
+				days = 1 # Queued, so we can check the pulse in parallel
+				on_action = ddf_dungeon_ongoing
+			}
+		}
+	}
+}

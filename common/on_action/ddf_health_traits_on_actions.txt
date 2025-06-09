@@ -1,0 +1,175 @@
+﻿
+##############################################
+# 
+#   DDF ON ACTIONS FOR TRAITS
+#
+##############################################
+
+##
+# Harm events dealing with traits specifically.
+##
+
+
+ddf_quarterly_trait_check_pulse = {
+	on_actions = {
+        ddf_cancer_trait_init
+        ddf_cancer_trait_qrtrly_progression_pulse
+	}
+}
+
+
+#This on action is meant to add trait xp until it reaches 100.
+ddf_cancer_trait_init= {
+	trigger = {
+        AND = {
+		    has_trait = cancer
+            NOR = {
+		        has_character_flag = has_skin_cancer    	
+		        has_character_flag = has_bone_cancer	 
+		        has_character_flag = has_brain_cancer
+		        has_character_flag = has_reproduction_cancer		
+            }
+        }
+	}
+    effect = {
+        if = {
+            # Initial Cancer trait setup
+            # This should in theory not run if 
+            # cancer has atleast 1 in any track
+            limit = {
+                NOR = {
+                    has_character_flag = has_skin_cancer
+                    has_character_flag = has_bone_cancer
+                    has_character_flag = has_brain_cancer
+                    has_character_flag = has_reproduction_cancer
+                }
+			    has_trait_xp = {
+			    	trait = cancer
+			    	track = brain
+			    	value <= 0
+			    } 
+			    has_trait_xp = {
+			    	trait = cancer
+			    	track = skin
+			    	value <= 0
+			    }
+			    has_trait_xp = {
+			    	trait = cancer
+			    	track = reproduction
+			    	value <= 0
+			    }
+			    has_trait_xp = {
+			    	trait = cancer
+			    	track = bone
+			    	value <= 0
+			    }
+            }
+            random_list = {
+                10 = {
+		    		add_trait_xp = {
+		    			trait = cancer
+                        track = skin
+		    			value = 5
+		    		}            
+                    add_character_flag = has_skin_cancer           
+                }
+                10 = {
+		    		add_trait_xp = {
+		    			trait = cancer
+                        track = bone
+		    			value = 5
+		    		}     
+                    add_character_flag = has_bone_cancer                           
+                }
+                10 = {
+		    		add_trait_xp = {
+		    			trait = cancer
+                        track = brain
+		    			value = 5
+		    		}  
+                    add_character_flag = has_brain_cancer                              
+                }
+                10 = {
+		    		add_trait_xp = {
+		    			trait = cancer
+                        track = reproduction
+		    			value = 5
+		    		}  
+                    add_character_flag = has_reproduction_cancer                         
+                }
+            }
+        }
+
+
+    }
+}
+
+ddf_cancer_trait_qrtrly_progression_pulse = {
+    trigger = {
+		#Only will trigger on characters with cancer
+        AND = {
+		    has_trait = cancer
+            OR = {
+		        has_character_flag = has_skin_cancer    	
+		        has_character_flag = has_bone_cancer	 
+		        has_character_flag = has_brain_cancer
+		        has_character_flag = has_reproduction_cancer		
+            }
+        }
+	}
+    effect = {
+
+        #Cancer progression
+        #
+        #  Cancer progression in theory without modifiers should progress to death within 5 years.
+        #  Traits will reduce to progression of cancer, but not stop it completely.
+        #
+        if = {
+            limit ={has_cancer_trigger = yes}
+
+            random_list = {
+                5 = {
+                    trigger = {has_character_flag = has_skin_cancer}
+                    modifier = {add = cancer_progress_calc}
+                    add_trait_xp = {
+		    			trait = cancer
+                        track = skin
+		    			value = 5
+                    }
+                }
+                5 = {
+                    trigger = {has_character_flag = has_bone_cancer}
+                    modifier = {add = cancer_progress_calc}
+                    add_trait_xp = {
+		    			trait = cancer
+                        track = bone
+		    			value = 5
+                    }
+                }
+                5 = {
+                    trigger = {has_character_flag = has_reproduction_cancer}
+                    modifier = {add = cancer_progress_calc}
+                    add_trait_xp = {
+		    			trait = cancer
+                        track = reproduction
+		    			value = 5
+                    }
+                }
+                5 = {
+                    trigger = {has_character_flag = has_brain_cancer}
+                    modifier = {add = cancer_progress_calc}
+                    add_trait_xp = {
+		    			trait = cancer
+                        track = brain
+		    			value = 5
+                    }
+
+                }
+                50 = {}
+
+            }
+        }
+
+    }
+
+}

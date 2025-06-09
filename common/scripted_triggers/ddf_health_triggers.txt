@@ -75,9 +75,7 @@ ddf_bad_genetic_health_trigger = {
     }
 }
 ddf_healthy_genetic_trigger = {
-    OR = {
-        has_trait = pure_blooded
-    }
+    has_trait = pure_blooded
 }
 ddf_healthy_traits_trigger = {
     OR = {
@@ -424,6 +422,23 @@ ddf_sids_trigger = {
 				has_any_disease_trigger = yes
 				ddf_unhealthy_traits_trigger = yes
 			}
+		}
+	}
+}
+
+
+##
+# Cancer trigger
+##
+
+has_cancer_trigger = {
+	AND = {
+		has_trait = cancer
+		OR = {
+			has_character_flag = has_reproduction_cancer
+			has_character_flag = has_bone_cancer
+			has_character_flag = has_skin_cancer
+			has_character_flag = has_brain_cancer
 		}
 	}
 }

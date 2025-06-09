@@ -1670,6 +1670,9 @@ ddf_health.0018 = {
 		random = {
 			chance = 55
 			add_trait = sickle_cell
+			every_child = {
+				add_trait = sickle_cell
+			}
 		}		
     }
 }

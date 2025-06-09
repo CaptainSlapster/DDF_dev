@@ -3706,12 +3706,6 @@ spread_chance_epidemics_mult_value  = {
 	value = 1
 	min = 0.001
 
-		#calc the resistance
-	multiply = {
-		
-		value = epidemic_resistance
-		multiply = 0.75
-	}
 
 
 	#Coastal Statistics Squash
@@ -3902,6 +3896,15 @@ spread_chance_epidemics_mult_value  = {
 		}
 		add = outbreak_decrease_mult_unlikely
 	}
+
+
+	#calc the resistance
+	subtract = {
+		
+		value = epidemic_resistance
+		divide = 100 #convert to percentage value
+	}
+
 }
 
 #### DAILY INFECTION RATE ###

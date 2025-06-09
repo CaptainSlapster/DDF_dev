@@ -156,6 +156,27 @@ contract_disease_effect = {
 				}
 			}
 
+
+			#If cancer add a flag
+			if = {
+				limit = {
+					scope:disease_type = flag:cancer
+				}
+				random_list = {
+					10 = {
+						add_character_flag = {flag = has_reproduction_cancer }
+					}
+					10 = {
+						add_character_flag = {flag = has_brain_cancer}
+					}
+					10 = {
+						add_character_flag = {flag = has_bone_cancer}
+					}
+					10 = {
+						add_character_flag = {flag = has_skin_cancer}
+					}
+				}
+			}
 			#Data collection
 			disease_data_save_contraction_effect = { DISEASE = $DISEASE$ }
 
