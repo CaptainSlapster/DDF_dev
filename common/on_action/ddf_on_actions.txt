@@ -44,7 +44,6 @@ quarterly_playable_pulse = {
 random_yearly_everyone_pulse = {
     on_actions = {
         ddf_yearly_health_pulse #Health issue pulse
-
         ddf_prison_maintenance_pulse #Prison pulse
     }    
 }
