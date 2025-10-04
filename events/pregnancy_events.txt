@@ -25,6 +25,12 @@ pregnancy.0001 = {
 				}
 		
 				#More kids means less risk of complications!
+
+				# If you're a player you won't have as much complications, but it still happens
+				modifier = {
+					add = 35
+					is_ai = no
+				}
 				modifier = {
 					add = 10
 					any_child = {
